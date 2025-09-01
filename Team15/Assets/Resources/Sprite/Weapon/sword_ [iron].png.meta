@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4a05a8af08864234c92294fb8904b78d
+guid: eea27ea7b65a5d342a760d15eb13c2df
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -39,7 +39,7 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -81,33 +81,20 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -132,11 +119,45 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: machete_ [wood]_0
+      name: sword_ [iron]_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98b682707f43a944392261966f030dbf
+      internalID: 914275075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sword_ [iron]_1
       rect:
         serializedVersion: 2
         x: 0
@@ -144,20 +165,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8db9dee00994aa4882777c54f282593
-      internalID: 2137602903
+      spriteID: 02a686373ed8dd94f93309b4f9af5a85
+      internalID: -436340089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: machete_ [wood]_1
+      name: sword_ [iron]_5
       rect:
         serializedVersion: 2
         x: 0
@@ -165,20 +186,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d4da481d0642294394f566dd884fdcd
-      internalID: 1628214981
+      spriteID: dd28fa34348ceed4581dd37ea5f6ed8e
+      internalID: 229521425
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: machete_ [wood]_2
+      name: sword_ [iron]_6
       rect:
         serializedVersion: 2
         x: 32
@@ -186,20 +207,62 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af965969ec7c90d4dab4d4e795e7b13d
-      internalID: 445115060
+      spriteID: 7b0969bdff665e948b9e9e29a1801017
+      internalID: 598766454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: machete_ [wood]_3
+      name: sword_ [iron]_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8171d0547cfdb44183c8e5412778e66
+      internalID: 289517758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sword_ [iron]_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d68059efec1c24b9360b3b5f04254d
+      internalID: 206821764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sword_ [iron]_7
       rect:
         serializedVersion: 2
         x: 64
@@ -207,20 +270,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44cd294a9aab52749ab6aed6c73b226a
-      internalID: 1642066348
+      spriteID: 7d6348f53592ac44995aebe93a5222d5
+      internalID: 1022439534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: machete_ [wood]_4
+      name: sword_ [iron]_8
       rect:
         serializedVersion: 2
         x: 96
@@ -228,14 +291,35 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5bc260833367af4ea56e94413fc5a74
-      internalID: -2093921130
+      spriteID: 843dd390e2e6c0b418e5014f1df79816
+      internalID: 1380577362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sword_ [iron]_4
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b34f71629633667488c69165e92f6cc6
+      internalID: 1875107840
       vertices: []
       indices: 
       edges: []
@@ -243,7 +327,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ccf21bb067fe4044e864fb003a46b2a9
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -251,11 +335,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      machete_ [wood]_0: 2137602903
-      machete_ [wood]_1: 1628214981
-      machete_ [wood]_2: 445115060
-      machete_ [wood]_3: 1642066348
-      machete_ [wood]_4: -2093921130
+      sword_ [iron]_0: 914275075
+      sword_ [iron]_1: -436340089
+      sword_ [iron]_2: 1022439534
+      sword_ [iron]_3: 1875107840
+      sword_ [iron]_4: 229521425
+      sword_ [iron]_5: 598766454
+      sword_ [iron]_6: 1380577362
+      sword_ [iron]_7: 1022439534
+      sword_ [iron]_8: 1380577362
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
