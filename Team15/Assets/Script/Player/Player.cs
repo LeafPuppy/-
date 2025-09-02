@@ -6,7 +6,7 @@ public class Player : Entity
 {
     public PlayerController controller;
     public PlayerCondition condition;
-
+    public PlayerAnimationController animator;
     //public TalkScript talk;
 
     private void Awake()
@@ -15,5 +15,16 @@ public class Player : Entity
         controller = GetComponent<PlayerController>();
         condition = GetComponent<PlayerCondition>();
         //talk = GetComponent<TalkScript>();
+    }
+
+    private void Update()
+    {
+        animator.ChangeAnimation(condition.state);
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        condition.state = PlayerState.Damage;
     }
 }

@@ -34,9 +34,12 @@ public class PlayerController : MonoBehaviour
     private float dashTargetDistance = 0f;
     private Vector2 dashStartPos;
 
+    private PlayerCondition playerCondition;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerCondition = GetComponent<PlayerCondition>();
     }
 
     void Update()
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
             jumpTimeCounter = jumpHoldTime;
             jumpPressed = false;
+            playerCondition.state = PlayerState.Jump;
         }
 
         // 점프 유지
@@ -75,12 +79,13 @@ public class PlayerController : MonoBehaviour
         {
             dashTime += Time.deltaTime;
             float movedDistance = Vector2.Distance(rb.position, dashStartPos);
-
+            playerCondition.state = PlayerState.Jump;
             // 목표 거리만큼 이동했거나, 지속시간이 끝나면 대쉬 종료
             if (movedDistance >= dashTargetDistance || dashTime >= dashDuration)
             {
                 isDashing = false;
                 rb.velocity = Vector2.zero;
+                playerCondition.state = PlayerState.Idle;
             }
             else
             {
@@ -101,6 +106,15 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+
+        if (moveInput.x != 0 && isGrounded && !isDashing)
+        {
+            playerCondition.state = PlayerState.Move;
+        }
+        else if (isGrounded && !isDashing)
+        {
+            playerCondition.state = PlayerState.Idle;
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
