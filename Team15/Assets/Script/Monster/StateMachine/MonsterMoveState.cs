@@ -12,7 +12,7 @@ public class MonsterMoveState : MonsterBaseState
 
     public override void Enter()
     {
-        if(stateMachine.Monster.data.type != MonsterType.Range)
+        if (stateMachine.Monster.data.type != MonsterType.Range)
         {
             stateMachine.Monster.animationController.ChangeAnimation(AnimationState.Move);
         }
@@ -26,14 +26,17 @@ public class MonsterMoveState : MonsterBaseState
     public override void Update()
     {
 
-        if(stateMachine.Player != null)
+        if (stateMachine.Player != null)
         {
-            moveDir = (stateMachine.Player.transform.position - stateMachine.Monster.transform.position).normalized;
-            var pos = stateMachine.Monster.transform.position;
-            pos.x += moveDir.x * stateMachine.Monster.data.speed * Time.fixedDeltaTime;
-            stateMachine.Monster.transform.position = pos;
+            if (!stateMachine.Monster.inPattern)
+            {
+                moveDir = (stateMachine.Player.transform.position - stateMachine.Monster.transform.position).normalized;
+                var pos = stateMachine.Monster.transform.position;
+                pos.x += moveDir.x * stateMachine.Monster.data.speed * Time.fixedDeltaTime;
+                stateMachine.Monster.transform.position = pos;
+            }
 
-            if(moveDir.x < 0)
+            if (moveDir.x < 0)
             {
                 stateMachine.Monster.sprite.flipX = true;
             }

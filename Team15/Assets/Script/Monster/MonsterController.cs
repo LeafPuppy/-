@@ -14,4 +14,17 @@ public class MonsterController : MonoBehaviour
     {
         monster.stateMachine.Update();
     }
+
+    public Coroutine StartCo(IEnumerator coroutine)
+    {
+        var co = StartCoroutine(coroutine);
+
+        return co;
+    }
+
+    public void StopCo(Coroutine co)
+    {
+        if(co != null)
+            StopCoroutine(co);
+    }
 }

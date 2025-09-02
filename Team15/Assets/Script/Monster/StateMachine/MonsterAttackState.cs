@@ -20,8 +20,15 @@ public class MonsterAttackState : MonsterBaseState
 
     public override void Update()
     {
-        Debug.Log("АјАн");
-        if(Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) > stateMachine.Monster.attackRange)
+        if (stateMachine.Monster.patterns.Length != 0 && !stateMachine.Monster.inPattern)
+        {
+            for (int i = 0; i < stateMachine.Monster.patterns.Length; i++)
+            {
+                stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[i].Execute(stateMachine.Monster));
+            }
+        }
+
+        if (Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) > stateMachine.Monster.attackRange)
         {
             stateMachine.ChangeState(stateMachine.MoveState);
         }

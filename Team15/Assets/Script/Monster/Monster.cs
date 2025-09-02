@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Monster : Entity
@@ -12,6 +13,12 @@ public class Monster : Entity
     public MonsterStateMachine stateMachine;
     public MonsterController monsterController;
     public SpriteRenderer sprite;
+    public PatternDataSO[] patterns;
+    public BoxCollider2D _collider;
+
+    public float speed;
+    public bool inPattern;
+    public bool isMaintain;
 
     //임시 사거리
     public int attackRange;
@@ -19,10 +26,10 @@ public class Monster : Entity
     private void Awake()
     {
         monsterController = GetComponent<MonsterController>();
-
         animationController = GetComponent<EntityAnimationController>();
         stateMachine = new MonsterStateMachine(this);
-
+        _collider = GetComponent<BoxCollider2D>();
+        speed = data.speed;
     }
     protected override void Start()
     {
@@ -41,5 +48,11 @@ public class Monster : Entity
         }
 
         base.Die();
+    }
+
+    public IEnumerator CheckInPattern()
+    {
+        yield return new WaitForSeconds(1f);
+        inPattern = false;
     }
 }
