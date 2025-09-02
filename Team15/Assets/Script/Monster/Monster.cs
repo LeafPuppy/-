@@ -19,6 +19,7 @@ public class Monster : Entity
     public float speed;
     public bool inPattern;
     public bool isMaintain;
+    public bool canSpawn;
 
     //임시 사거리
     public int attackRange;

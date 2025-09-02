@@ -6,7 +6,7 @@ using UnityEngine;
 public class DashPatternSO : PatternDataSO
 {
     public float dashSpeed;
-    public float sturnTiem;
+    public float sturnTime;
     public Vector2 hitBox;
 
 
@@ -43,7 +43,7 @@ public class DashPatternSO : PatternDataSO
                         monster.speed = 0;
                         monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
                         monster._collider.isTrigger = false;
-                        yield return new WaitForSeconds(sturnTiem);
+                        yield return new WaitForSeconds(sturnTime);
                         monster.speed = monster.data.speed;
                         monster.StartCoroutine(monster.CheckInPattern());
                     }
@@ -79,7 +79,7 @@ public class DashPatternSO : PatternDataSO
                         monster.speed = 0;
                         monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
                         monster._collider.isTrigger = false;
-                        yield return new WaitForSeconds(sturnTiem);
+                        yield return new WaitForSeconds(sturnTime);
                         monster.speed = monster.data.speed;
                         monster.StartCoroutine(monster.CheckInPattern());
                     }
