@@ -11,6 +11,7 @@ public class Monster : Entity
     public EntityAnimationController animationController;
     public MonsterStateMachine stateMachine;
     public MonsterController monsterController;
+    public SpriteRenderer sprite;
 
     //임시 사거리
     public int attackRange;

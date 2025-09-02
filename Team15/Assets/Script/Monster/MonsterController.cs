@@ -10,7 +10,7 @@ public class MonsterController : MonoBehaviour
     {
         monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
     }
-    void Update()
+    void FixedUpdate()
     {
         monster.stateMachine.Update();
     }

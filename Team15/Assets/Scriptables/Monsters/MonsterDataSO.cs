@@ -15,4 +15,8 @@ public class MonsterDataSO : ScriptableObject
     public float maxHealth;
     public float speed;
     public MonsterType type;
+
+    //무기 추가되면 그 때 수정
+    //[Header("WeaponInfo")]
+    //무기정보
 }
