@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 500397807998801816}
   - component: {fileID: 7997307594809338603}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lancelot__0
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5621356377360683519}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 972412291
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: -1929018185, guid: c107a8d36dd241f419f2e014f5a09ca6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,9 +99,9 @@ GameObject:
   - component: {fileID: 6323004779429617322}
   - component: {fileID: 6528878772829607317}
   - component: {fileID: 3248471221112562395}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +158,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8322500923874945744}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ae6b296975299874ca6d6d2bd72033c0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
