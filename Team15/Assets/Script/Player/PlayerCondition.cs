@@ -8,6 +8,7 @@ public enum PlayerState
     Jump,
     Damage,
     Die,
+    Dash
 }
 
 public class PlayerCondition : MonoBehaviour

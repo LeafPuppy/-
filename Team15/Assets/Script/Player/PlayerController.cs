@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
+
+    private bool ismoving = false;
     private bool isGrounded;
     private bool jumpPressed;
     private bool isJumping;
@@ -44,42 +46,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // 점프 시작
-        if (jumpPressed && isGrounded && !isDashing)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            isJumping = true;
-            jumpTimeCounter = jumpHoldTime;
-            jumpPressed = false;
-            playerCondition.state = PlayerState.Jump;
-        }
-
-        // 점프 유지
-        if (isJumping && jumpHeld && !isDashing)
-        {
-            if (jumpTimeCounter > 0)
-            {
-                rb.AddForce(Vector2.up * jumpHoldForce, ForceMode2D.Force);
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                isJumping = false;
-            }
-        }
-
-        // 점프 버튼을 뗐을 때 점프 유지 종료
-        if (!jumpHeld)
-        {
-            isJumping = false;
-        }
-
-        // 대쉬 처리
+        // 대쉬 처리 (대쉬는 Update에서 유지)
         if (isDashing)
         {
             dashTime += Time.deltaTime;
             float movedDistance = Vector2.Distance(rb.position, dashStartPos);
-            playerCondition.state = PlayerState.Jump;
+            playerCondition.state = PlayerState.Dash;
             // 목표 거리만큼 이동했거나, 지속시간이 끝나면 대쉬 종료
             if (movedDistance >= dashTargetDistance || dashTime >= dashDuration)
             {
@@ -92,6 +64,22 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = dashDirection * dashSpeed;
             }
         }
+        // 마우스 위치에 따라 스프라이트 뒤집기
+        Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+        float mouseX = mouseWorldPos.x;
+        float playerX = transform.position.x;
+
+        if (mouseX < playerX)
+        {
+            // 왼쪽: x축을 -1로
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            // 오른쪽: x축을 +1로
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
     }
 
     void FixedUpdate()
@@ -99,8 +87,34 @@ public class PlayerController : MonoBehaviour
         if (!isDashing)
         {
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+
+            // 점프 시작
+            if (jumpPressed && isGrounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                isJumping = true;
+                jumpTimeCounter = jumpHoldTime;
+                jumpPressed = false;
+                playerCondition.state = PlayerState.Jump;
+            }
+
+            // 점프 유지
+            if (isJumping && jumpHeld)
+            {
+                if (jumpTimeCounter > 0)
+                {
+                    rb.AddForce(Vector2.up * jumpHoldForce, ForceMode2D.Force);
+                    jumpTimeCounter -= Time.fixedDeltaTime;
+                }
+                else
+                {
+                    isJumping = false;
+
+                    if(!ismoving)
+                        playerCondition.state = PlayerState.Idle;
+                }
+            }
         }
-        // 대쉬 중에는 rb.velocity를 Update에서 이미 설정하므로 FixedUpdate에서는 무시
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -110,10 +124,12 @@ public class PlayerController : MonoBehaviour
         if (moveInput.x != 0 && isGrounded && !isDashing)
         {
             playerCondition.state = PlayerState.Move;
+            ismoving = true;
         }
         else if (isGrounded && !isDashing)
         {
             playerCondition.state = PlayerState.Idle;
+            ismoving = false;
         }
     }
 

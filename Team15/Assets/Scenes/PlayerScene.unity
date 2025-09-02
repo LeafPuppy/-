@@ -1966,6 +1966,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1915497059}
+    - target: {fileID: 6528878772829607317, guid: 0f608880fb538d64da7cb0706f03d5f6, type: 3}
+      propertyPath: jumpHoldForce
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 8322500923874945744, guid: 0f608880fb538d64da7cb0706f03d5f6, type: 3}
       propertyPath: m_Name
       value: Player

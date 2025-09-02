@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class EntityAnimationController : MonoBehaviour
 {
     private readonly int isMove = Animator.StringToHash("Move");
     private readonly int isJump = Animator.StringToHash("Jump");
+    private readonly int isDash = Animator.StringToHash("Dash");
     private readonly int isDamage = Animator.StringToHash("Damage");
     private readonly int isDie = Animator.StringToHash("Die");
 
     [SerializeField] private Animator animator;
-    public virtual void ChangeAnimation(PlayerState state)
+
+    public void ChangeAnimation(PlayerState state)
     {
         switch (state)
         {
@@ -24,6 +22,9 @@ public class EntityAnimationController : MonoBehaviour
                 break;
             case PlayerState.Jump:
                 animator.SetTrigger(isJump);
+                break;
+            case PlayerState.Dash:
+                animator.SetTrigger(isDash);
                 break;
             case PlayerState.Damage:
                 animator.SetTrigger(isDamage);
