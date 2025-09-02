@@ -8,6 +8,7 @@ public enum AnimationState
     Idle,
     Move,
     Jump,
+    Dash,
     Damage,
     Die,
 }
@@ -16,6 +17,7 @@ public class EntityAnimationController : MonoBehaviour
 {
     private readonly int isMove = Animator.StringToHash("Move");
     private readonly int isJump = Animator.StringToHash("Jump");
+    private readonly int isDash = Animator.StringToHash("Dash");
     private readonly int isDamage = Animator.StringToHash("Damage");
     private readonly int isDie = Animator.StringToHash("Die");
 
@@ -31,8 +33,10 @@ public class EntityAnimationController : MonoBehaviour
         else if( Input.GetKeyDown(KeyCode.Alpha3))
             ChangeAnimation(AnimationState.Jump);
         else if(Input.GetKeyDown (KeyCode.Alpha4))
-            ChangeAnimation(AnimationState.Damage);
+            ChangeAnimation(AnimationState.Dash);
         else if(Input.GetKeyDown (KeyCode.Alpha5))
+            ChangeAnimation(AnimationState.Damage);
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
             ChangeAnimation(AnimationState.Die);
     }
 
@@ -48,6 +52,9 @@ public class EntityAnimationController : MonoBehaviour
                 break;
             case AnimationState.Jump:
                 animator.SetTrigger(isJump);
+                break;
+            case AnimationState.Dash:
+                animator.SetTrigger(isDash);
                 break;
             case AnimationState.Damage:
                 animator.SetTrigger(isDamage);
