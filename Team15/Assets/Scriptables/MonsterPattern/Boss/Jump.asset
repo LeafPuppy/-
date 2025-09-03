@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff5c27aec1515d4f974e0d145d586e3, type: 3}
-  m_Name: Jump1
+  m_Name: Jump
   m_EditorClassIdentifier: 
   damage: 10
   jumpPower: 150
-  hitBox: {x: 0.5, y: 1.5}
+  hitBox: {x: 0.5, y: 2.5}

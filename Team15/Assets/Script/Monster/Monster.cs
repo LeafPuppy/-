@@ -21,6 +21,7 @@ public class Monster : Entity
     public bool inPattern;
     public bool isMaintain;
     public bool canSpawn;
+    public Coroutine co;
 
     //임시 사거리
     public int attackRange;
@@ -55,7 +56,6 @@ public class Monster : Entity
 
     public IEnumerator CheckInPattern()
     {
-        Debug.Log("ㅋ");
         yield return new WaitForSeconds(1f);
         inPattern = false;
     }
