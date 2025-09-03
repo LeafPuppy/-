@@ -55,6 +55,7 @@ public class Monster : Entity
 
     public IEnumerator CheckInPattern()
     {
+        Debug.Log("¤»");
         yield return new WaitForSeconds(1f);
         inPattern = false;
     }
