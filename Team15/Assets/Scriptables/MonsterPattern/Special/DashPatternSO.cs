@@ -16,7 +16,7 @@ public class DashPatternSO : PatternDataSO
         monster.isMaintain = true;
         monster.inPattern = true;
         monster.rg.gravityScale = 0;
-        if (!monster.sprite.flipX)
+        if (monster.transform.localScale.x > 0)
         {
             while (monster.isMaintain)
             {

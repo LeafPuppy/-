@@ -1,19 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
-public class Monster : Entity
+public class Monster : MonoBehaviour
 {
     public MonsterDataSO data;
 
-    private Transform dropPosition;
-    public GameObject dropWeapon;
     public MonsterAnimationController animationController;
     public MonsterStateMachine stateMachine;
     public MonsterController monsterController;
     public SpriteRenderer sprite;
     public PatternDataSO[] patterns;
     public BoxCollider2D _collider;
+    public BoxCollider2D back;
     public Rigidbody2D rg;
+    public MonsterCondition condition;
 
     public float speed;
     public bool inPattern;
@@ -31,25 +31,8 @@ public class Monster : Entity
         stateMachine = new MonsterStateMachine(this);
         _collider = GetComponent<BoxCollider2D>();
         rg = GetComponent<Rigidbody2D>();
+        condition = GetComponent<MonsterCondition>();
         speed = data.speed;
-    }
-    protected override void Start()
-    {
-        currentHealth = data.maxHealth;
-
-    }
-
-    protected override void Die()
-    {
-        dropPosition = transform;
-
-        // 사망시 무기 드롭
-        if (dropWeapon != null)
-        {
-            Instantiate(dropWeapon, dropPosition);
-        }
-
-        base.Die();
     }
 
     public IEnumerator CheckInPattern()
