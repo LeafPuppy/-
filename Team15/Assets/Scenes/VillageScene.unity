@@ -655,6 +655,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 159117268}
     m_Modifications:
+    - target: {fileID: 2196640736646953069, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_text
+      value: "\uB5A0\uB3CC\uC774 \uC0C1\uC778"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196640736646953069, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ee2a1eb41c14734fa01b03efa8dadac, type: 2}
+    - target: {fileID: 2196640736646953069, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196640736646953069, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3650654909369986198, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -735,6 +751,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5635559441668877553, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_text
+      value: "\uB300\uD654\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635559441668877553, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635559441668877553, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ee2a1eb41c14734fa01b03efa8dadac, type: 2}
+    - target: {fileID: 5635559441668877553, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635559441668877553, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635559441668877553, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8939495987828397480, guid: a7545bdf30e31964181b0e539b8938cf, type: 3}
       propertyPath: m_Name
       value: NPCDialoguePanel
@@ -754,7 +794,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6490789735011113552, guid: 251e699de30ac6e458eed38207c29332, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.6
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6490789735011113552, guid: 251e699de30ac6e458eed38207c29332, type: 3}
       propertyPath: m_LocalPosition.y
@@ -811,7 +851,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6490789735011113552, guid: 251e699de30ac6e458eed38207c29332, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6490789735011113552, guid: 251e699de30ac6e458eed38207c29332, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1128,6 +1168,11 @@ PrefabInstance:
     - target: {fileID: 2748093227510451935, guid: 4ce9001e7a7c84e42a41969d8a0906a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2819154644803447495, guid: 4ce9001e7a7c84e42a41969d8a0906a6, type: 3}
+      propertyPath: lines.Array.data[0]
+      value: "\uC8FC\uBCC0\uC5D0\uC11C \uBCF4\uC9C0 \uBABB\uD558\uB358 \uC0AC\uB78C\uC778\uB370
+        \uC124\uB9C8 \uB358\uC804\uC744 \uB4E4\uC5B4\uAC00\uB824\uACE0?"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
