@@ -7,20 +7,20 @@ using UnityEngine;
 public class MobSpawnPatternSO : PatternDataSO
 {
     public int spawnCount;
+    public float spawnTime;
     public GameObject[] spawnPool;
     private GameObject[] monsters = new GameObject[2];
 
     public override IEnumerator Execute(Monster monster)
     {
-        for(int i = 0; i < monsters.Length; i++)
+        monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+        for (int i = 0; i < monsters.Length; i++)
         {
             monsters[i] = Instantiate(spawnPool[Random.Range(0, spawnPool.Length)], monster.transform.position + new Vector3(i, 0, 0), Quaternion.identity);
         }
-        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
-        monster.speed = 0;
         monster.canSpawn = false;
-        yield return new WaitForSeconds(1.5f);
-        monster.speed = monster.data.speed;
+        yield return new WaitForSeconds(spawnTime);
+        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
         monster.StartCoroutine(monster.CheckInPattern());
     }
 }

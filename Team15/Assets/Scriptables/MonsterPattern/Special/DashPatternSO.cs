@@ -15,6 +15,7 @@ public class DashPatternSO : PatternDataSO
         monster._collider.isTrigger = true;
         monster.isMaintain = true;
         monster.inPattern = true;
+        monster.rg.gravityScale = 0;
         if (!monster.sprite.flipX)
         {
             while (monster.isMaintain)
@@ -32,7 +33,6 @@ public class DashPatternSO : PatternDataSO
                         //damageable.TakeDamage(damage);
                     }
                 }
-
                 //부딪힌 오브젝트 태그가 MapEndWall이면 돌진 끝, 잠시 스턴 후 재개
                 Collider2D[] walls = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
                 foreach (var wall in walls)
@@ -40,10 +40,11 @@ public class DashPatternSO : PatternDataSO
                     if (wall.CompareTag("MapEndWall"))
                     {
                         monster.isMaintain = false;
-                        monster.speed = 0;
-                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
                         monster._collider.isTrigger = false;
+                        monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                        monster.rg.gravityScale = 1;
                         yield return new WaitForSeconds(sturnTime);
+                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
                         monster.speed = monster.data.speed;
                         monster.StartCoroutine(monster.CheckInPattern());
                     }
@@ -68,7 +69,6 @@ public class DashPatternSO : PatternDataSO
                         //damageable.TakeDamage(damage);
                     }
                 }
-
                 //부딪힌 오브젝트 태그가 MapEndWall이면 돌진 끝, 잠시 스턴 후 재개
                 Collider2D[] walls = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
                 foreach (var wall in walls)
@@ -76,10 +76,11 @@ public class DashPatternSO : PatternDataSO
                     if (wall.CompareTag("MapEndWall"))
                     {
                         monster.isMaintain = false;
-                        monster.speed = 0;
-                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
                         monster._collider.isTrigger = false;
+                        monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                        monster.rg.gravityScale = 1;
                         yield return new WaitForSeconds(sturnTime);
+                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
                         monster.speed = monster.data.speed;
                         monster.StartCoroutine(monster.CheckInPattern());
                     }

@@ -10,6 +10,7 @@ public class MonsterStateMachine : StateMachine
     public MonsterIdleState IdleState { get; private set; }
     public MonsterMoveState MoveState { get; private set; }
     public MonsterAttackState AttackState { get; private set; }
+    public MonsterSturnState SturnState { get; private set; }
 
 
     public MonsterStateMachine(Monster monster)
@@ -19,6 +20,7 @@ public class MonsterStateMachine : StateMachine
         IdleState = new MonsterIdleState(this);
         MoveState = new MonsterMoveState(this);
         AttackState = new MonsterAttackState(this);
+        SturnState = new MonsterSturnState(this);
     }
 
 
