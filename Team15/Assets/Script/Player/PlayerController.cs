@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
     public float dashCooldown = 1f;
     public float dashMaxDistance = 5f; // 최대 대쉬 거리
 
+    [Header("Interact Settings")]
+    [SerializeField] float interactRadius = 1f;
+    [SerializeField] LayerMask interactMask;
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
@@ -46,6 +50,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (DialogueUI.Instance && DialogueUI.Instance.IsOpen)
+        {
+            rb.velocity = new Vector2(0f, rb.velocity.y);
+            return;
+        }
+
         // 대쉬 처리 (대쉬는 Update에서 유지)
         if (isDashing)
         {
@@ -84,6 +94,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (DialogueUI.Instance && DialogueUI.Instance.IsOpen) return;
+
         if (!isDashing)
         {
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
@@ -119,6 +131,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (DialogueUI.Instance && DialogueUI.Instance.IsOpen) return;
+
         moveInput = context.ReadValue<Vector2>();
 
         if (moveInput.x != 0 && isGrounded && !isDashing)
@@ -135,6 +149,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (DialogueUI.Instance && DialogueUI.Instance.IsOpen) return;
+
         if (context.performed && isGrounded && !isDashing)
         {
             jumpPressed = true;
@@ -148,6 +164,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        if (DialogueUI.Instance && DialogueUI.Instance.IsOpen) return;
+
         if (context.performed && !isDashing && Time.time >= lastDashTime + dashCooldown)
         {
             Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
@@ -165,6 +183,43 @@ public class PlayerController : MonoBehaviour
             lastDashTime = Time.time;
         }
     }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        if (DialogueUI.Instance && DialogueUI.Instance.IsOpen)
+        {
+            DialogueUI.Instance.AdvanceOrClose();
+            return;
+        }
+
+        var target = GetNearestInteractable();
+        if (target != null)
+        {
+            var player = GetComponent<Player>();
+            target.Interact(player);
+        }
+    }
+
+    IInteractable GetNearestInteractable()
+    {
+        var hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, interactMask);
+        IInteractable best = null;
+        float bestDist = float.MaxValue;
+
+        foreach (var h in hits)
+        {
+            if (!h) continue;
+            var cand = h.GetComponent<IInteractable>() ?? h.GetComponentInParent<IInteractable>();
+            if (cand == null) continue;
+
+            float d = ((Vector2)h.transform.position - (Vector2)transform.position).sqrMagnitude;
+            if (d < bestDist) { bestDist = d; best = cand; }
+        }
+        return best;
+    }
+
 
     void OnCollisionStay2D(Collision2D collision)
     {

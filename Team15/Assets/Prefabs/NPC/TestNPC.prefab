@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8625612951379289222}
   - component: {fileID: 6874157983808670534}
   - component: {fileID: 2819154644803447495}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TestNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f768e37f1a5c15a4a87c27673b1ae9ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTag: Player
   lines:
   - "\uC8FC\uBCC0\uC5D0\uC11C \uBCF4\uC9C0 \uBABB\uD558\uB358 \uC0AC\uB78C\uC778\uB370
     \uC124\uB9C8 \uB358\uC804\uC744 \uB4E4\uC5B4\uAC00\uB824\uACE0?"
