@@ -47,6 +47,11 @@ public class MonsterMoveState : MonsterBaseState
             {
                 stateMachine.ChangeState(stateMachine.AttackState);
             }
+
+            if(Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) > stateMachine.Monster.data.chasingRange)
+            {
+                stateMachine.Player = null;
+            }
         }
         else
         {

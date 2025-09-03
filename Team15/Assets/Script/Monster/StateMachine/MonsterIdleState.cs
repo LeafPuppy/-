@@ -18,7 +18,7 @@ public class MonsterIdleState : MonsterBaseState
 
     public override void Update()
     {
-        Collider2D[] objects = Physics2D.OverlapCircleAll(stateMachine.Monster.transform.position, 100);
+        Collider2D[] objects = Physics2D.OverlapCircleAll(stateMachine.Monster.transform.position, stateMachine.Monster.data.chasingRange);
         foreach (var obj in objects)
         {
             if (obj.CompareTag("Player"))
