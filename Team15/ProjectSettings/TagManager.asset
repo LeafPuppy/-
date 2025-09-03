@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - sampletag
+  - MapEndWall
   layers:
   - Default
   - TransparentFX
@@ -13,9 +14,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - OneWay
   - 
   - 
   - 
@@ -57,6 +58,15 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 1934946595
+    locked: 0
+  - name: Props
+    uniqueID: 2813172771
+    locked: 0
+  - name: NPC
+    uniqueID: 930268131
+    locked: 0
+  - name: Player
+    uniqueID: 972412291
     locked: 0
   - name: FG
     uniqueID: 3562891997
