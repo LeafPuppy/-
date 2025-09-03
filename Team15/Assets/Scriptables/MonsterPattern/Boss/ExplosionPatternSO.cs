@@ -13,6 +13,7 @@ public class ExplosionPatternSO : PatternDataSO
 
     public override IEnumerator Execute(Monster monster)
     {
+        monster.inPattern = true;
         //랜덤 위치에 폭발지점 표시
         exPosX = Random.Range(-4f, 4f);
         var point = Instantiate(pointEffect, new Vector2(exPosX, -2), Quaternion.identity);
@@ -29,8 +30,8 @@ public class ExplosionPatternSO : PatternDataSO
             if(obj.CompareTag("Player"))
             {
                 Debug.Log("플레이어 데미지");
-                //obj.TryGetComponent<IDamageable>(out IDamageable damageable);
-                //damageable.TakeDamage(damage);
+                obj.TryGetComponent<IDamageable>(out IDamageable damageable);
+                damageable.TakeDamage(damage);
             }
         }
 

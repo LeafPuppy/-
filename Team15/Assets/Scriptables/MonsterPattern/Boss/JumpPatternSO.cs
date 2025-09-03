@@ -38,9 +38,9 @@ public class JumpPatternSO : PatternDataSO
                 {
                     if (monster.stateMachine.Player.transform.position.y < -1)
                     {
-                        monster.stateMachine.Player.TryGetComponent<IDamageable>(out IDamageable damageable);
                         Debug.Log("플레이어 데미지");
-                        //damageable.TakeDamage(damage);
+                        monster.stateMachine.Player.TryGetComponent<IDamageable>(out IDamageable damageable);
+                        damageable.TakeDamage(damage);
                     }
                     monster.isMaintain = false;
 

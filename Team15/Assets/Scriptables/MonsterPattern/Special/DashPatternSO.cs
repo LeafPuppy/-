@@ -29,8 +29,8 @@ public class DashPatternSO : PatternDataSO
                     if (obj.CompareTag("Player"))
                     {
                         Debug.Log("플레이어 데미지");
-                        //obj.TryGetComponent<IDamageable>(out IDamageable damageable);
-                        //damageable.TakeDamage(damage);
+                        obj.TryGetComponent<IDamageable>(out IDamageable damageable);
+                        damageable.TakeDamage(damage);
                     }
                 }
                 //부딪힌 오브젝트 태그가 MapEndWall이면 돌진 끝, 잠시 스턴 후 재개
@@ -65,8 +65,8 @@ public class DashPatternSO : PatternDataSO
                     if (obj.CompareTag("Player"))
                     {
                         Debug.Log("플레이어 데미지");
-                        //obj.TryGetComponent<IDamageable>(out IDamageable damageable);
-                        //damageable.TakeDamage(damage);
+                        obj.TryGetComponent<IDamageable>(out IDamageable damageable);
+                        damageable.TakeDamage(damage);
                     }
                 }
                 //부딪힌 오브젝트 태그가 MapEndWall이면 돌진 끝, 잠시 스턴 후 재개
