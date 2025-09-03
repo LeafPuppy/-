@@ -13,7 +13,6 @@ public class MonsterAnimationController : MonoBehaviour
 {
     private readonly int isMove = Animator.StringToHash("Move");
     private readonly int isJump = Animator.StringToHash("Jump");
-    private readonly int isDash = Animator.StringToHash("Dash");
     private readonly int isDamage = Animator.StringToHash("Damage");
     private readonly int isDie = Animator.StringToHash("Die");
 

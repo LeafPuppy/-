@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29bbec96f84b08440a22a2f0cbdf07f3, type: 3}
+  m_Name: Explosion
+  m_EditorClassIdentifier: 
+  damage: 25
+  pointEffect: {fileID: 4444227636730260403, guid: a14435e462d082c49982b8209e63f34e, type: 3}
+  exEffect: {fileID: 3240407186301682492, guid: 0faf35e9ce3638f4690e28640cf2e305, type: 3}
+  hitBox: {x: 2, y: 2}
+  delayTime: 0.5
