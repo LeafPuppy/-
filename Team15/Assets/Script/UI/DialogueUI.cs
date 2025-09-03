@@ -7,11 +7,15 @@ using UnityEngine.InputSystem;
 public class DialogueUI : MonoBehaviour
 {
     public static DialogueUI Instance;
+
     [SerializeField] GameObject panel;
     [SerializeField] TMP_Text bodyText;
 
     string[] lines;
     int index = -1;
+
+    float prevTimeScale = 1f;
+    bool pausedByDialogue = false;
 
     void Awake()
     {
@@ -30,6 +34,13 @@ public class DialogueUI : MonoBehaviour
 
         panel.SetActive(true);
         if (bodyText) bodyText.text = lines[index];
+
+        if (!pausedByDialogue)
+        {
+            prevTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
+            pausedByDialogue = true;
+        }
     }
 
     public void AdvanceOrClose()
@@ -47,6 +58,12 @@ public class DialogueUI : MonoBehaviour
         panel?.SetActive(false);
         lines = null;
         index = -1;
+
+        if (pausedByDialogue)
+        {
+            Time.timeScale = (prevTimeScale <= 0f) ? 1f : prevTimeScale;
+            pausedByDialogue = false;
+        }
     }
 
     private void Update()
