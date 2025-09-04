@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 500397807998801816}
   - component: {fileID: 7997307594809338603}
+  - component: {fileID: 7372932840566850433}
   m_Layer: 7
   m_Name: lancelot__0
   m_TagString: Player
@@ -84,6 +85,58 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7372932840566850433
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5621356377360683519}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 23d7fcf45da56f242802b925dcb15217, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &7242718232720762211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 320539183919960884}
+  m_Layer: 7
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &320539183919960884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7242718232720762211}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.276, y: 0.019, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4616377627677633813}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8322500923874945744
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,6 +151,7 @@ GameObject:
   - component: {fileID: 173609603607814094}
   - component: {fileID: 6323004779429617322}
   - component: {fileID: 6528878772829607317}
+  - component: {fileID: 581486726756339222}
   - component: {fileID: 3248471221112562395}
   m_Layer: 7
   m_Name: Player
@@ -115,11 +169,12 @@ Transform:
   m_GameObject: {fileID: 8322500923874945744}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.97, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 500397807998801816}
+  - {fileID: 320539183919960884}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7966141188802996127
@@ -288,11 +343,35 @@ MonoBehaviour:
     m_ActionId: 9e82bee3-75ae-40f7-9045-354513bc1d82
     m_ActionName: Player/Dash[/Mouse/rightButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6528878772829607317}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnPickWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 011d7b1c-e9c3-4f48-9145-5e2c91cee305
     m_ActionName: Player/EquipWeapon[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6528878772829607317}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnThrowWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: ee16ac16-e6b9-430d-a4c4-56b4bc369866
     m_ActionName: Player/ThrowWeapon[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
@@ -316,8 +395,8 @@ MonoBehaviour:
   currentHealth: 0
   controller: {fileID: 6528878772829607317}
   condition: {fileID: 3248471221112562395}
-  animator: {fileID: 0}
-  weaponHolder: {fileID: 0}
+  animator: {fileID: 581486726756339222}
+  weaponHolder: {fileID: 7242718232720762211}
 --- !u!114 &6528878772829607317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +412,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 5
   jumpHoldTime: 0.5
-  jumpHoldForce: 100
+  jumpHoldForce: 350
   dashSpeed: 15
   dashDuration: 0.2
   dashCooldown: 1
@@ -342,8 +421,21 @@ MonoBehaviour:
   interactMask:
     serializedVersion: 2
     m_Bits: 512
-  weaponHolder: {fileID: 0}
+  weaponHolder: {fileID: 320539183919960884}
   handRadius: 0.5
+--- !u!114 &581486726756339222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8322500923874945744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be75a755f20ab14585fab7cb8cc9ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7372932840566850433}
 --- !u!114 &3248471221112562395
 MonoBehaviour:
   m_ObjectHideFlags: 0
