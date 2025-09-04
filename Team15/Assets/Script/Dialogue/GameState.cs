@@ -9,19 +9,22 @@ public class GameState : MonoBehaviour
 {
     public static GameState Instance { get; private set; }
 
-    [Header("ºĞ±â")]
-    public bool hasMetMerchant;          // °ÔÀÓ ½ÃÀÛ ÈÄ »óÀÎ°ú Ã¹ ¸¸³² ´ëÈ­ Çß´Â°¡
-    public bool everEnteredDungeon;      // ´øÀü¿¡ ÇÑ ¹øÀÌ¶óµµ µé¾î°¬´Â°¡
-    public bool inDungeon;               // ÇöÀç ´øÀü ¾ÈÀÎ°¡
+    [Header("ë¶„ê¸°")]
+    public bool hasMetMerchant;          // ê²Œì„ ì‹œì‘ í›„ ìƒì¸ê³¼ ì²« ë§Œë‚¨ ëŒ€í™” í–ˆëŠ”ê°€
+    public bool everEnteredDungeon;      // ë˜ì „ì— í•œ ë²ˆì´ë¼ë„ ë“¤ì–´ê°”ëŠ”ê°€
+    public bool inDungeon;               // í˜„ì¬ ë˜ì „ ì•ˆì¸ê°€
 
-    [Header("½ÇÇà Áß ºĞ±â")]
-    public int totalRunsCompleted;       // ¸¶À»·Î µÇµ¹¾Æ¿Â ÇÃ·¹ÀÌ È½¼ö(Å¬¸®¾î/Á×À½/Æ÷±â)
+    [Header("ì‹¤í–‰ ì¤‘ ë¶„ê¸°")]
+    public int totalRunsCompleted;       // ë§ˆì„ë¡œ ë˜ëŒì•„ì˜¨ í”Œë ˆì´ íšŸìˆ˜(í´ë¦¬ì–´/ì£½ìŒ/í¬ê¸°)
     public RunOutcome lastRunOutcome = RunOutcome.None;
-    public int lastHandledRunIndex;      // '¸¶À» ±ÍÈ¯ ÈÄ Ã¹ ´ëÈ­
+    public int lastHandledRunIndex;      // 'ë§ˆì„ ê·€í™˜ í›„ ì²« ëŒ€í™”
 
-    [Header("¹«±â ¼±ÅÃ »óÅÂ")]
+    [Header("ë¬´ê¸° ì„ íƒ ìƒíƒœ")]
     public StarterWeaponKind currentStarterWeapon = StarterWeaponKind.None;
     [HideInInspector] public StarterWeaponKind pendingStarterWeapon = StarterWeaponKind.None;
+
+    [Header("1íšŒì„± ëŒ€í™”")]
+    public bool firstPostRunTalkShown = false;
 
     void Awake()
     {
@@ -43,7 +46,7 @@ public class GameState : MonoBehaviour
     public void OnPlayerDied() { lastRunOutcome = RunOutcome.Died; }
     public void OnPlayerQuitRun() { lastRunOutcome = RunOutcome.Quit; }
 
-    // ¸¶À»·Î µ¹¾Æ¿ÔÀ» ¶§(¸¶À» ¾À ·Îµå ½Ã È£Ãâ)
+    // ë§ˆì„ë¡œ ëŒì•„ì™”ì„ ë•Œ(ë§ˆì„ ì”¬ ë¡œë“œ ì‹œ í˜¸ì¶œ)
     public void OnReturnToVillage()
     {
         inDungeon = false;
