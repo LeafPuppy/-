@@ -503,6 +503,7 @@ GameObject:
   - component: {fileID: 538631163}
   - component: {fileID: 538631162}
   - component: {fileID: 538631161}
+  - component: {fileID: 538631164}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -578,12 +579,26 @@ Transform:
   m_GameObject: {fileID: 538631160}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.7, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &538631164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538631160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2ff35a06012104a8192628403d1c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1626908465}
+  mapTag: MapEndWall
 --- !u!1 &582226666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,6 +1775,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4801195c9d285b442ae57923d751ea15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1626908465 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4616377627677633813, guid: 0f608880fb538d64da7cb0706f03d5f6, type: 3}
+  m_PrefabInstance: {fileID: 1380742491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1701817377
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,6 +2039,7 @@ GameObject:
   - component: {fileID: 1874552464}
   - component: {fileID: 1874552467}
   - component: {fileID: 1874552466}
+  - component: {fileID: 1874552468}
   m_Layer: 0
   m_Name: DungeonEnter
   m_TagString: Untagged
@@ -2121,6 +2142,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficultyUI: {fileID: 419287845}
   prompt: {fileID: 1874552466}
+--- !u!61 &1874552468
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874552463}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.05, y: 3}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.05, y: 3}
+  m_EdgeRadius: 0
 --- !u!1001 &2099500744
 PrefabInstance:
   m_ObjectHideFlags: 0
