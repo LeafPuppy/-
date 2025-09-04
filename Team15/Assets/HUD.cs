@@ -27,7 +27,7 @@ public class HUD : MonoBehaviour
 
     public void UpdateWeapon()
     {
-        if (CharacterManager.Instance.Player.controller.weaponHolder != null)
+        if (CharacterManager.Instance.Player.controller.weaponHolder.gameObject.name != "Hand")
         {
             weapon.enabled = true;
             get.SetActive(false);

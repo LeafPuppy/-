@@ -8,11 +8,11 @@ public class DashPatternSO : PatternDataSO
     public float dashSpeed;
     public float sturnTime;
     public Vector2 hitBox;
-    public bool isHard;
     private int round;
 
     public override IEnumerator Execute(Monster monster)
     {
+        isHard = GameState.Instance.currentDifficulty == Difficulty.Hard ? true : false;
         round = 1;
         monster._collider.isTrigger = true;
         monster.isMaintain = true;
