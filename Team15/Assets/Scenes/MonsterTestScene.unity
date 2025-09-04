@@ -451,6 +451,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d8620df880e13b546986b5edbaf8c156, type: 2}
   - {fileID: 11400000, guid: 091e5ac948ad5b04e820bc3a98932f72, type: 2}
   - {fileID: 11400000, guid: 771b5fffc47b2714f871178c7eb7e76f, type: 2}
+  - {fileID: 11400000, guid: aa50f77bf98d06c45853d8bc600d3e28, type: 2}
   _collider: {fileID: 0}
   back: {fileID: 0}
   rg: {fileID: 0}
@@ -458,7 +459,7 @@ MonoBehaviour:
   speed: 0
   inPattern: 0
   isMaintain: 0
-  canSpawn: 0
+  canSpawn: 1
   attackRange: 3
 --- !u!95 &317497441
 Animator:
