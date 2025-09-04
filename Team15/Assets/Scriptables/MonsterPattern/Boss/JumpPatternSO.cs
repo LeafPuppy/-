@@ -36,7 +36,7 @@ public class JumpPatternSO : PatternDataSO
             {
                 if (ground.CompareTag("Ground"))
                 {
-                    if (monster.stateMachine.Player.transform.position.y < -1)
+                    if (monster.stateMachine.Player.transform.position.y < 2)
                     {
                         Debug.Log("플레이어 데미지");
                         monster.stateMachine.Player.TryGetComponent<IDamageable>(out IDamageable damageable);
