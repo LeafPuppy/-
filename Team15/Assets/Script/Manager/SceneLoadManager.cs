@@ -26,7 +26,6 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             Debug.Log("로딩중");
             await Task.Yield();
         }
-
         Debug.Log("로딩 완료");
     }
 }
