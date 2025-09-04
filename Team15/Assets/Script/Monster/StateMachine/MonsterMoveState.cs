@@ -25,7 +25,6 @@ public class MonsterMoveState : MonsterBaseState
 
     public override void Update()
     {
-
         if (stateMachine.Player != null)
         {
             if (!stateMachine.Monster.inPattern)

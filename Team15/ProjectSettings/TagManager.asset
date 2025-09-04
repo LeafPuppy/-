@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - sampletag
   - MapEndWall
+  - Spikes
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Interactable
   - Weapon
   - 
-  - 
+  - Enemy
   - 
   - 
   - 

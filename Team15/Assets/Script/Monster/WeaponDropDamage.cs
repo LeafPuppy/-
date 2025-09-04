@@ -19,5 +19,9 @@ public class WeaponDropDamage : MonoBehaviour
         {
             canDamage = false;
         }
+        else if(collision.gameObject.CompareTag("Spikes"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

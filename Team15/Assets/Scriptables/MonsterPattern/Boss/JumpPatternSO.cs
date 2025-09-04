@@ -11,7 +11,7 @@ public class JumpPatternSO : PatternDataSO
     {
         yield return Jump(monster);
 
-        //50ÆÛ¼¾Æ® È®·ü·Î 2Å¸ ½ÇÇà
+        //50í¼ì„¼íŠ¸ í™•ë¥ ë¡œ 2íƒ€ ì‹¤í–‰
         if(Random.Range(0, 2) < 1)
         {
             monster.StopCoroutine(monster.co);
@@ -30,7 +30,7 @@ public class JumpPatternSO : PatternDataSO
 
         while (monster.isMaintain)
         {
-            //Á¡ÇÁ ÈÄ ÂøÁö Ã¼Å©
+            //ì í”„ í›„ ì°©ì§€ ì²´í¬
             Collider2D[] objects = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
             foreach (var ground in objects)
             {
@@ -38,7 +38,7 @@ public class JumpPatternSO : PatternDataSO
                 {
                     if (monster.stateMachine.Player.transform.position.y < -1)
                     {
-                        Debug.Log("ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö");
+                        Debug.Log("í”Œë ˆì´ì–´ ë°ë¯¸ì§€");
                         monster.stateMachine.Player.TryGetComponent<IDamageable>(out IDamageable damageable);
                         damageable.TakeDamage(damage);
                     }
