@@ -171,14 +171,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4570095752333625792, guid: d35968d0ad15114438683d7aca6a7a29, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4570095752333625792, guid: d35968d0ad15114438683d7aca6a7a29, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 1152
-      objectReference: {fileID: 0}
     - target: {fileID: 5017775031717342345, guid: d35968d0ad15114438683d7aca6a7a29, type: 3}
       propertyPath: m_Name
       value: Sword
@@ -634,14 +626,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Staff
       objectReference: {fileID: 0}
-    - target: {fileID: 7639060569896407843, guid: 7473b0ab62a6b084ca82e7e46a384ce0, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7639060569896407843, guid: 7473b0ab62a6b084ca82e7e46a384ce0, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 1152
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -698,14 +682,6 @@ PrefabInstance:
     - target: {fileID: 7196562201049412557, guid: f9135090a3ae8c34c8496d027b5c5440, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7499466552876041593, guid: f9135090a3ae8c34c8496d027b5c5440, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7499466552876041593, guid: f9135090a3ae8c34c8496d027b5c5440, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 1152
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2374,14 +2350,6 @@ PrefabInstance:
     - target: {fileID: 4538320947589319555, guid: cf39708a835d0904a9e1844d9d189902, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879740023231110934, guid: cf39708a835d0904a9e1844d9d189902, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879740023231110934, guid: cf39708a835d0904a9e1844d9d189902, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 1152
       objectReference: {fileID: 0}
     - target: {fileID: 8156212566911197075, guid: cf39708a835d0904a9e1844d9d189902, type: 3}
       propertyPath: m_Name

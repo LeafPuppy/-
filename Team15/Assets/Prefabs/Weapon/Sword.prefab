@@ -100,7 +100,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1152
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 2253688309146324319}
   - component: {fileID: -3156727263428383078}
   - component: {fileID: 4570095752333625792}
-  - component: {fileID: 5056586076288213720}
+  - component: {fileID: 6933630493727329537}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -543,7 +543,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
---- !u!50 &5056586076288213720
+--- !u!50 &6933630493727329537
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -565,7 +565,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1152
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
