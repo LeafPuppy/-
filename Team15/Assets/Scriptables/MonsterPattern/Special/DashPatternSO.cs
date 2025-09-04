@@ -46,38 +46,33 @@ public class DashPatternSO : PatternDataSO
                         damageable.TakeDamage(damage);
                     }
                 }
-                //부딪힌 오브젝트 태그가 MapEndWall이면 돌진 끝, 잠시 스턴 후 재개
-                Collider2D[] walls = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
-                foreach (var wall in walls)
+                if (monster.transform.position.x >= 12.5f && round == 1 || monster.transform.position.x <= -3.5f && round == 2)
                 {
-                    if (wall.CompareTag("MapEndWall"))
+                    if (!isHard)
                     {
-                        if (!isHard)
-                        {
-                            monster.isMaintain = false;
-                            monster._collider.isTrigger = false;
-                            monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
-                            monster.rg.gravityScale = 1;
-                            yield return new WaitForSeconds(sturnTime);
-                            monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
-                            monster.speed = monster.data.speed;
-                            monster.StartCoroutine(monster.CheckInPattern());
-                        }
-                        else if(isHard && round == 2)
-                        {
-                            monster.isMaintain = false;
-                            monster._collider.isTrigger = false;
-                            monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
-                            monster.rg.gravityScale = 1;
-                            yield return new WaitForSeconds(sturnTime);
-                            monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
-                            monster.speed = monster.data.speed;
-                            monster.StartCoroutine(monster.CheckInPattern());
-                        }
-                        else
-                        {
-                            round++;
-                        }
+                        monster.isMaintain = false;
+                        monster._collider.isTrigger = false;
+                        monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                        monster.rg.gravityScale = 1;
+                        yield return new WaitForSeconds(sturnTime);
+                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
+                        monster.speed = monster.data.speed;
+                        monster.StartCoroutine(monster.CheckInPattern());
+                    }
+                    else if (isHard && round == 2)
+                    {
+                        monster.isMaintain = false;
+                        monster._collider.isTrigger = false;
+                        monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                        monster.rg.gravityScale = 1;
+                        yield return new WaitForSeconds(sturnTime);
+                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
+                        monster.speed = monster.data.speed;
+                        monster.StartCoroutine(monster.CheckInPattern());
+                    }
+                    else
+                    {
+                        round++;
                     }
                 }
                 yield return null;
@@ -110,38 +105,33 @@ public class DashPatternSO : PatternDataSO
                         damageable.TakeDamage(damage);
                     }
                 }
-                //부딪힌 오브젝트 태그가 MapEndWall이면 돌진 끝, 잠시 스턴 후 재개
-                Collider2D[] walls = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
-                foreach (var wall in walls)
+                if (monster.transform.position.x >= 12.5f && round == 2 || monster.transform.position.x <= -3.5f && round == 1)
                 {
-                    if (wall.CompareTag("MapEndWall"))
+                    if (!isHard)
                     {
-                        if (!isHard)
-                        {
-                            monster.isMaintain = false;
-                            monster._collider.isTrigger = false;
-                            monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
-                            monster.rg.gravityScale = 1;
-                            yield return new WaitForSeconds(sturnTime);
-                            monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
-                            monster.speed = monster.data.speed;
-                            monster.StartCoroutine(monster.CheckInPattern());
-                        }
-                        else if (isHard && round == 2)
-                        {
-                            monster.isMaintain = false;
-                            monster._collider.isTrigger = false;
-                            monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
-                            monster.rg.gravityScale = 1;
-                            yield return new WaitForSeconds(sturnTime);
-                            monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
-                            monster.speed = monster.data.speed;
-                            monster.StartCoroutine(monster.CheckInPattern());
-                        }
-                        else
-                        {
-                            round++;
-                        }
+                        monster.isMaintain = false;
+                        monster._collider.isTrigger = false;
+                        monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                        monster.rg.gravityScale = 1;
+                        yield return new WaitForSeconds(sturnTime);
+                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
+                        monster.speed = monster.data.speed;
+                        monster.StartCoroutine(monster.CheckInPattern());
+                    }
+                    else if (isHard && round == 2)
+                    {
+                        monster.isMaintain = false;
+                        monster._collider.isTrigger = false;
+                        monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                        monster.rg.gravityScale = 1;
+                        yield return new WaitForSeconds(sturnTime);
+                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
+                        monster.speed = monster.data.speed;
+                        monster.StartCoroutine(monster.CheckInPattern());
+                    }
+                    else
+                    {
+                        round++;
                     }
                 }
                 yield return null;

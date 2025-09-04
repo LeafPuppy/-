@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3566780389429955871}
   - component: {fileID: 126931271592891051}
   - component: {fileID: 7413788534319553810}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 8818508683070004731}
   - component: {fileID: 1267008912401931757}
   - component: {fileID: 7059738886352853213}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Devil
   m_TagString: Untagged
   m_Icon: {fileID: 0}

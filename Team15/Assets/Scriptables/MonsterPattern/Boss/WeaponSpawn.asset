@@ -16,5 +16,5 @@ MonoBehaviour:
   spawnNum: 5
   weaponPrefabs:
   - {fileID: 5017775031717342345, guid: d35968d0ad15114438683d7aca6a7a29, type: 3}
-  - {fileID: 8487646513497564821, guid: b57aade7dd0724c40ad5e05167c07c41, type: 3}
-  - {fileID: 3367289905992179153, guid: 53bccaad9ccf937468decfd369a39fa5, type: 3}
+  - {fileID: 1911749747641018843, guid: 7473b0ab62a6b084ca82e7e46a384ce0, type: 3}
+  - {fileID: 7126737995402094272, guid: f9135090a3ae8c34c8496d027b5c5440, type: 3}
