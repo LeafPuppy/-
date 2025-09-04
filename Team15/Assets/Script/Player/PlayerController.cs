@@ -201,6 +201,23 @@ public class PlayerController : MonoBehaviour
             lastDashTime = Time.time;
         }
     }
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed && weaponHolder.childCount > 0)
+        {
+            var weaponObj = weaponHolder.GetChild(0).GetComponent<WeaponObject>();
+            if (weaponObj == null) return;
+
+            // 공격 방향: 마우스 방향
+            Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+            Vector2 attackDir = (mouseWorldPos - transform.position).normalized;
+
+            // 공격 시작 위치: 플레이어 위치
+            weaponObj.TakeAttack(transform.position, attackDir);
+        }
+    }
+
 
     public void OnPickWeapon(InputAction.CallbackContext context)
     {

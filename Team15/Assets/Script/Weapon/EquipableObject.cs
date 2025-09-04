@@ -7,7 +7,6 @@ public class EquipableObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Trigger Entered");
         if (other.CompareTag("Player"))
         {
             objectUI.SetActive(true);
@@ -16,7 +15,6 @@ public class EquipableObject : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Trigger exit");
         if (collision.CompareTag("Player"))
         {
             objectUI.SetActive(false);

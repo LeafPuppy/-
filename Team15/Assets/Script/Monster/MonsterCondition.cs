@@ -25,15 +25,13 @@ public class MonsterCondition : MonoBehaviour, IDamageable
         monster.animationController.ChangeAnimation(AnimationState.Damage);
     }
 
-    
-
     public IEnumerator Die()
     {
         dropPosition = transform;
         monster.animationController.ChangeAnimation(AnimationState.Die);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
-        // ªÁ∏¡Ω√ π´±‚ µÂ∑”
+        // ÏÇ¨ÎßùÏãú Î¨¥Í∏∞ ÎìúÎ°≠
         if (dropWeapon != null)
         {
             Instantiate(dropWeapon, dropPosition);
