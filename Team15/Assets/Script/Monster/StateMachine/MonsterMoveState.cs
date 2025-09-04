@@ -38,14 +38,31 @@ public class MonsterMoveState : MonsterBaseState
 
             if (moveDir.x < 0)
             {
-                stateMachine.Monster.sprite.flipX = true;
+                if(stateMachine.Monster.transform.localScale.x > 0)
+                { 
+                    var sc = stateMachine.Monster.transform.localScale;
+                    sc.x *= -1;
+                    stateMachine.Monster.transform.localScale = sc;
+                }
             }
             else
-                stateMachine.Monster.sprite.flipX = false;
+            {
+                if (stateMachine.Monster.transform.localScale.x < 0)
+                {
+                    var sc = stateMachine.Monster.transform.localScale;
+                    sc.x *= -1;
+                    stateMachine.Monster.transform.localScale = sc;
+                }
+            }
 
             if (Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) < stateMachine.Monster.attackRange)
             {
                 stateMachine.ChangeState(stateMachine.AttackState);
+            }
+
+            if(Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) > stateMachine.Monster.data.chasingRange)
+            {
+                stateMachine.Player = null;
             }
         }
         else

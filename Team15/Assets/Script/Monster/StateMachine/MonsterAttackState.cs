@@ -20,21 +20,28 @@ public class MonsterAttackState : MonsterBaseState
 
     public override void Update()
     {
-        if (stateMachine.Monster.patterns.Length != 0 && !stateMachine.Monster.inPattern)
+        if (stateMachine.Player != null)
         {
-            //¸Ê¿¡ ¹«±â°¡ ¾øÀ¸¸é(ÇÃ·¹ÀÌ¾î ¼ÒÀ¯¹«±â Á¦¿Ü) ½ºÆùÆÐÅÏ ½ÇÇà
-            //¹«Á¶°Ç ¸¶Áö¸· ÆÐÅÏÀÌ ¹«±â ¼ÒÈ¯
-            if (stateMachine.Monster.canSpawn)
-                stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[stateMachine.Monster.patterns.Length - 1].Execute(stateMachine.Monster));
+            if (stateMachine.Monster.patterns.Length != 0 && !stateMachine.Monster.inPattern)
+            {
+                //ë§µì— ë¬´ê¸°ê°€ ì—†ìœ¼ë©´(í”Œë ˆì´ì–´ ì†Œìœ ë¬´ê¸° ì œì™¸) ìŠ¤í°íŒ¨í„´ ì‹¤í–‰
+                //ë¬´ì¡°ê±´ ë§ˆì§€ë§‰ íŒ¨í„´ì´ ë¬´ê¸° ì†Œí™˜
+                if (stateMachine.Monster.canSpawn)
+                    stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[stateMachine.Monster.patterns.Length - 1].Execute(stateMachine.Monster));
 
-            //¸Ê¿¡ ¹«±â°¡ ÀÖ´Ù¸é ±âÅ¸ ÆÐÅÏ ½ÇÇà
-            stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[Random.Range(0, stateMachine.Monster.patterns.Length - 1)].Execute(stateMachine.Monster));
+                //ë§µì— ë¬´ê¸°ê°€ ìžˆë‹¤ë©´ ê¸°íƒ€ íŒ¨í„´ ì‹¤í–‰
+                stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[Random.Range(0, stateMachine.Monster.patterns.Length - 1)].Execute(stateMachine.Monster));
 
+            }
+
+            if (Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) > stateMachine.Monster.attackRange)
+            {
+                stateMachine.ChangeState(stateMachine.MoveState);
+            }
         }
-
-        if (Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) > stateMachine.Monster.attackRange)
+        else
         {
-            stateMachine.ChangeState(stateMachine.MoveState);
+            stateMachine.ChangeState(stateMachine.IdleState);
         }
     }
 }

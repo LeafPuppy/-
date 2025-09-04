@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a2e664679e476498f16f052576fa81, type: 3}
+  m_Name: WeaponSpawn
+  m_EditorClassIdentifier: 
+  damage: 15
+  spawnNum: 5
+  weaponPrefabs:
+  - {fileID: 5017775031717342345, guid: d35968d0ad15114438683d7aca6a7a29, type: 3}
+  - {fileID: 8487646513497564821, guid: b57aade7dd0724c40ad5e05167c07c41, type: 3}
+  - {fileID: 3367289905992179153, guid: 53bccaad9ccf937468decfd369a39fa5, type: 3}

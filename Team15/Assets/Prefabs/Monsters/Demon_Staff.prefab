@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5086470147487081644}
   - component: {fileID: 8379239049512754679}
   m_Layer: 0
-  m_Name: Demon_Range
+  m_Name: Demon_Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

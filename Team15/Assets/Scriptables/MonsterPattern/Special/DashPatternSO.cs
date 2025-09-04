@@ -8,45 +8,76 @@ public class DashPatternSO : PatternDataSO
     public float dashSpeed;
     public float sturnTime;
     public Vector2 hitBox;
-
+    public bool isHard;
+    private int round;
 
     public override IEnumerator Execute(Monster monster)
     {
+        round = 1;
         monster._collider.isTrigger = true;
         monster.isMaintain = true;
         monster.inPattern = true;
         monster.rg.gravityScale = 0;
-        if (!monster.sprite.flipX)
+        if (monster.transform.localScale.x > 0)
         {
+            monster.animationController.ChangeAnimation(AnimationState.Move);
+            yield return new WaitForSeconds(1.5f);
             while (monster.isMaintain)
             {
-                monster.transform.position += Vector3.right * dashSpeed * Time.fixedDeltaTime;
+                if (round == 1)
+                    monster.transform.position += Vector3.right * dashSpeed * Time.fixedDeltaTime;
+                else if (round == 2)
+                {
+                    var sc = monster.transform.localScale;
+                    sc.x *= -1;
+                    monster.transform.localScale = sc;
+                    monster.transform.position += Vector3.left * dashSpeed * Time.fixedDeltaTime;
+                }
 
-                //ÀÌµ¿Áß ÇÃ·¹ÀÌ¾î¶û ºÎµúÈ÷¸é µ¥¹ÌÁö ÀÔÈû
+
+                //ì´ë™ì¤‘ í”Œë ˆì´ì–´ë‘ ë¶€ë”ªíˆë©´ ë°ë¯¸ì§€ ì…í˜
                 Collider2D[] objects = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
                 foreach (var obj in objects)
                 {
                     if (obj.CompareTag("Player"))
                     {
-                        Debug.Log("ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö");
+                        Debug.Log("í”Œë ˆì´ì–´ ë°ë¯¸ì§€");
                         obj.TryGetComponent<IDamageable>(out IDamageable damageable);
                         damageable.TakeDamage(damage);
                     }
                 }
-                //ºÎµúÈù ¿ÀºêÁ§Æ® ÅÂ±×°¡ MapEndWallÀÌ¸é µ¹Áø ³¡, Àá½Ã ½ºÅÏ ÈÄ Àç°³
+                //ë¶€ë”ªíŒ ì˜¤ë¸Œì íŠ¸ íƒœê·¸ê°€ MapEndWallì´ë©´ ëŒì§„ ë, ì ì‹œ ìŠ¤í„´ í›„ ì¬ê°œ
                 Collider2D[] walls = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
                 foreach (var wall in walls)
                 {
                     if (wall.CompareTag("MapEndWall"))
                     {
-                        monster.isMaintain = false;
-                        monster._collider.isTrigger = false;
-                        monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
-                        monster.rg.gravityScale = 1;
-                        yield return new WaitForSeconds(sturnTime);
-                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
-                        monster.speed = monster.data.speed;
-                        monster.StartCoroutine(monster.CheckInPattern());
+                        if (!isHard)
+                        {
+                            monster.isMaintain = false;
+                            monster._collider.isTrigger = false;
+                            monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                            monster.rg.gravityScale = 1;
+                            yield return new WaitForSeconds(sturnTime);
+                            monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
+                            monster.speed = monster.data.speed;
+                            monster.StartCoroutine(monster.CheckInPattern());
+                        }
+                        else if(isHard && round == 2)
+                        {
+                            monster.isMaintain = false;
+                            monster._collider.isTrigger = false;
+                            monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                            monster.rg.gravityScale = 1;
+                            yield return new WaitForSeconds(sturnTime);
+                            monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
+                            monster.speed = monster.data.speed;
+                            monster.StartCoroutine(monster.CheckInPattern());
+                        }
+                        else
+                        {
+                            round++;
+                        }
                     }
                 }
                 yield return null;
@@ -54,35 +85,63 @@ public class DashPatternSO : PatternDataSO
         }
         else
         {
+            monster.animationController.ChangeAnimation(AnimationState.Move);
+            yield return new WaitForSeconds(1.5f);
             while (monster.isMaintain)
             {
-                monster.transform.position += Vector3.left * dashSpeed * Time.fixedDeltaTime;
+                if (round == 1)
+                    monster.transform.position += Vector3.left * dashSpeed * Time.fixedDeltaTime;
+                else if (round == 2)
+                {
+                    var sc = monster.transform.localScale;
+                    sc.x *= -1;
+                    monster.transform.localScale = sc;
+                    monster.transform.position += Vector3.right * dashSpeed * Time.fixedDeltaTime;
+                }
 
-                //ÀÌµ¿Áß ÇÃ·¹ÀÌ¾î¶û ºÎµúÈ÷¸é µ¥¹ÌÁö ÀÔÈû
+                //ì´ë™ì¤‘ í”Œë ˆì´ì–´ë‘ ë¶€ë”ªíˆë©´ ë°ë¯¸ì§€ ì…í˜
                 Collider2D[] objects = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
                 foreach (var obj in objects)
                 {
                     if (obj.CompareTag("Player"))
                     {
-                        Debug.Log("ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö");
+                        Debug.Log("í”Œë ˆì´ì–´ ë°ë¯¸ì§€");
                         obj.TryGetComponent<IDamageable>(out IDamageable damageable);
                         damageable.TakeDamage(damage);
                     }
                 }
-                //ºÎµúÈù ¿ÀºêÁ§Æ® ÅÂ±×°¡ MapEndWallÀÌ¸é µ¹Áø ³¡, Àá½Ã ½ºÅÏ ÈÄ Àç°³
+                //ë¶€ë”ªíŒ ì˜¤ë¸Œì íŠ¸ íƒœê·¸ê°€ MapEndWallì´ë©´ ëŒì§„ ë, ì ì‹œ ìŠ¤í„´ í›„ ì¬ê°œ
                 Collider2D[] walls = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
                 foreach (var wall in walls)
                 {
                     if (wall.CompareTag("MapEndWall"))
                     {
-                        monster.isMaintain = false;
-                        monster._collider.isTrigger = false;
-                        monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
-                        monster.rg.gravityScale = 1;
-                        yield return new WaitForSeconds(sturnTime);
-                        monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
-                        monster.speed = monster.data.speed;
-                        monster.StartCoroutine(monster.CheckInPattern());
+                        if (!isHard)
+                        {
+                            monster.isMaintain = false;
+                            monster._collider.isTrigger = false;
+                            monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                            monster.rg.gravityScale = 1;
+                            yield return new WaitForSeconds(sturnTime);
+                            monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
+                            monster.speed = monster.data.speed;
+                            monster.StartCoroutine(monster.CheckInPattern());
+                        }
+                        else if (isHard && round == 2)
+                        {
+                            monster.isMaintain = false;
+                            monster._collider.isTrigger = false;
+                            monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+                            monster.rg.gravityScale = 1;
+                            yield return new WaitForSeconds(sturnTime);
+                            monster.stateMachine.ChangeState(monster.stateMachine.IdleState);
+                            monster.speed = monster.data.speed;
+                            monster.StartCoroutine(monster.CheckInPattern());
+                        }
+                        else
+                        {
+                            round++;
+                        }
                     }
                 }
                 yield return null;

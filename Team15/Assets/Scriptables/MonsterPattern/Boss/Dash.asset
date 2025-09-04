@@ -16,3 +16,4 @@ MonoBehaviour:
   dashSpeed: 2.5
   sturnTime: 0
   hitBox: {x: 0.5, y: 1}
+  isHard: 0

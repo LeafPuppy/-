@@ -16,5 +16,10 @@ MonoBehaviour:
   spawnCount: 2
   spawnTime: 3
   spawnPool:
-  - {fileID: 3433422431691623969, guid: 73a36d9e44352c446b3d67fe75976cc2, type: 3}
   - {fileID: 8794621045914476496, guid: 6c7412822ba1cfc44b16d37ab3bf0b23, type: 3}
+  - {fileID: 8794621045914476496, guid: 75edde954f2e89343b9700f62dffe272, type: 3}
+  spawnPositions:
+  - {x: -6, y: 1.4}
+  - {x: -3, y: -0.6}
+  - {x: 3, y: -0.6}
+  - {x: 6, y: 1.4}

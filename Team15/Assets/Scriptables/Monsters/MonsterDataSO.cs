@@ -14,9 +14,10 @@ public class MonsterDataSO : ScriptableObject
     [Header("MonsterInfo")]
     public float maxHealth;
     public float speed;
+    public float chasingRange;
     public MonsterType type;
 
-    //¹«±â Ãß°¡µÇ¸é ±× ¶§ ¼öÁ¤
+    //ë¬´ê¸° ì¶”ê°€ë˜ë©´ ê·¸ ë•Œ ìˆ˜ì •
     //[Header("WeaponInfo")]
-    //¹«±âÁ¤º¸
+    //ë¬´ê¸°ì •ë³´
 }
