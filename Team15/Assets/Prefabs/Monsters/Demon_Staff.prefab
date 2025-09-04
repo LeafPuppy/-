@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2549072736494970009}
   - component: {fileID: 5086470147487081644}
   - component: {fileID: 8379239049512754679}
+  - component: {fileID: -4716555031857272581}
   m_Layer: 12
   m_Name: Demon_Staff
   m_TagString: Untagged
@@ -235,3 +236,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.55}
   m_EdgeRadius: 0
+--- !u!114 &-4716555031857272581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8794621045914476496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc86136cf2157174db3f105d18318588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  monster: {fileID: 1068493802480030745}
+  dropWeapon: {fileID: 0}
