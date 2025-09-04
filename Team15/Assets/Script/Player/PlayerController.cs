@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     public float jumpHoldTime = 0.2f;
     public float jumpHoldForce = 5f;
 
+    [Header("Jump (Accessory)")]
+    public int extraAirJumps = 0; // 추가 공중 점프 가능 횟수
+    int airJumpsUsed = 0;
+
     [Header("Dash Settings")]
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
@@ -169,10 +173,20 @@ public class PlayerController : MonoBehaviour
     {
         if (DialogueUI.Instance && DialogueUI.Instance.IsOpen) return;
 
-        if (context.performed && isGrounded && !isDashing)
+        if (context.performed && !isDashing)
         {
-            jumpPressed = true;
-            jumpHeld = true;
+            if (isGrounded)
+            {
+                jumpPressed = true;
+                jumpHeld = true;
+                airJumpsUsed = 0;
+            }
+            else if (airJumpsUsed < extraAirJumps)
+            {
+                jumpPressed = true;
+                jumpHeld = true;
+                airJumpsUsed = 0;
+            }
         }
         else if (context.canceled)
         {
@@ -338,6 +352,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            airJumpsUsed = 0;
         }
     }
 
@@ -348,4 +363,8 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    public void AddExtraAirJumps(int count) { extraAirJumps += count; if (extraAirJumps < 0) extraAirJumps = 0; }
+    public void AddMoveSpeed(float delta) { moveSpeed += delta; if (moveSpeed < 0f) moveSpeed = 0f; }
+    public void MultiplyDashCooldown(float m) { dashCooldown *= m; if (dashCooldown < 0.01f) dashCooldown = 0.01f; }
 }
