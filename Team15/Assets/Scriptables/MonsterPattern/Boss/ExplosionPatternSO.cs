@@ -14,22 +14,22 @@ public class ExplosionPatternSO : PatternDataSO
     public override IEnumerator Execute(Monster monster)
     {
         monster.inPattern = true;
-        //·£´ı À§Ä¡¿¡ Æø¹ßÁöÁ¡ Ç¥½Ã
-        exPosX = Random.Range(-4f, 4f);
-        var point = Instantiate(pointEffect, new Vector2(exPosX, -2), Quaternion.identity);
+        //ëœë¤ ìœ„ì¹˜ì— í­ë°œì§€ì  í‘œì‹œ
+        exPosX = Random.Range(-3f, 12f);
+        var point = Instantiate(pointEffect, new Vector2(exPosX, 0.04f), Quaternion.identity);
 
-        //delayTime¸¸Å­ ´ë±â
+        //delayTimeë§Œí¼ ëŒ€ê¸°
         yield return new WaitForSeconds(delayTime);
 
-        //Æø¹ßÁöÁ¡ »èÁ¦, Æø¹ßÀÌÆåÆ® Ç¥½Ã
+        //í­ë°œì§€ì  ì‚­ì œ, í­ë°œì´í™íŠ¸ í‘œì‹œ
         Destroy(point);
-        var ex = Instantiate(exEffect, new Vector2(exPosX, -1.5f), Quaternion.identity);
-        Collider2D[] objects = Physics2D.OverlapBoxAll(new Vector2(exPosX, -1.5f), hitBox, 0);
+        var ex = Instantiate(exEffect, new Vector2(exPosX, 0.6f), Quaternion.identity);
+        Collider2D[] objects = Physics2D.OverlapBoxAll(new Vector2(exPosX, 0.6f), hitBox, 0);
         foreach (Collider2D obj in objects)
         {
             if(obj.CompareTag("Player"))
             {
-                Debug.Log("ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö");
+                Debug.Log("í”Œë ˆì´ì–´ ë°ë¯¸ì§€");
                 obj.TryGetComponent<IDamageable>(out IDamageable damageable);
                 damageable.TakeDamage(damage);
             }
@@ -37,7 +37,7 @@ public class ExplosionPatternSO : PatternDataSO
 
         monster.StartCoroutine(monster.CheckInPattern());
 
-        //1ÃÊ µÚ Æø¹ßÀÌÆåÆ® »èÁ¦
+        //1ì´ˆ ë’¤ í­ë°œì´í™íŠ¸ ì‚­ì œ
         yield return new WaitForSeconds(1f);
         Destroy(ex);
     }

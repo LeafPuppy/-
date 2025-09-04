@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 2549072736494970009}
   - component: {fileID: 5086470147487081644}
   - component: {fileID: 8379239049512754679}
-  m_Layer: 0
+  - component: {fileID: -4716555031857272581}
+  m_Layer: 12
   m_Name: Demon_Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.45, y: 1.53, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -123,15 +124,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0637f06e62d1c24da5e4eb193de9d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   data: {fileID: 11400000, guid: 13944559779db67409e6983723001446, type: 2}
-  dropWeapon: {fileID: 0}
   animationController: {fileID: 0}
   monsterController: {fileID: 0}
   sprite: {fileID: 2162531560138162288}
   patterns: []
   _collider: {fileID: 0}
+  back: {fileID: 0}
+  rg: {fileID: 0}
+  condition: {fileID: 0}
   speed: 0
   inPattern: 0
   isMaintain: 0
@@ -222,7 +223,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1}
+  m_Offset: {x: 0, y: -0.13}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -233,5 +234,20 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.7}
+  m_Size: {x: 0.4, y: 0.55}
   m_EdgeRadius: 0
+--- !u!114 &-4716555031857272581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8794621045914476496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc86136cf2157174db3f105d18318588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  monster: {fileID: 1068493802480030745}
+  dropWeapon: {fileID: 0}

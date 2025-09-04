@@ -2781,6 +2781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 40
+  material: {fileID: 119593352}
+  outerUV: {x: 0, y: 0, z: 1, w: 1}
   image: {fileID: 919487784}
 --- !u!114 &919487784
 MonoBehaviour:

@@ -22,6 +22,4 @@ public class MonsterStateMachine : StateMachine
         AttackState = new MonsterAttackState(this);
         SturnState = new MonsterSturnState(this);
     }
-
-
 }
