@@ -30,9 +30,11 @@ public class MonsterAttackState : MonsterBaseState
                     stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[stateMachine.Monster.patterns.Length - 1].Execute(stateMachine.Monster));
 
                 //맵에 무기가 있다면 기타 패턴 실행
-                stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[Random.Range(0, stateMachine.Monster.patterns.Length - 1)].Execute(stateMachine.Monster));
+                if(!stateMachine.Monster.canSpawn)
+                    stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[Random.Range(0, stateMachine.Monster.patterns.Length - 1)].Execute(stateMachine.Monster));
 
             }
+            if (stateMachine.Player == null) stateMachine.ChangeState(stateMachine.IdleState);
 
             if (Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) > stateMachine.Monster.attackRange)
             {

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 150
   speed: 1.5
-  chasingRange: 25
+  chasingRange: 100
   type: 3
