@@ -317,6 +317,7 @@ MonoBehaviour:
   controller: {fileID: 6528878772829607317}
   condition: {fileID: 3248471221112562395}
   animator: {fileID: 0}
+  weaponHolder: {fileID: 0}
 --- !u!114 &6528878772829607317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +342,8 @@ MonoBehaviour:
   interactMask:
     serializedVersion: 2
     m_Bits: 512
+  weaponHolder: {fileID: 0}
+  handRadius: 0.5
 --- !u!114 &3248471221112562395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,3 +357,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  isHoldWeapon: 0
