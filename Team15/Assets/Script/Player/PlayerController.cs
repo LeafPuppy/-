@@ -42,6 +42,14 @@ public class PlayerController : MonoBehaviour
 
     private PlayerCondition playerCondition;
 
+    [SerializeField] private Transform weaponHolder;
+    [SerializeField] private float handRadius = 0.5f; // 플레이어 중심에서 핸드까지의 거리
+    private Transform currentWeapon;
+    private bool isWeaponThrown = false;
+    private float weaponThrowTime = 0f;
+    private float weaponThrowSpeed = 30f;
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -61,34 +69,44 @@ public class PlayerController : MonoBehaviour
         {
             dashTime += Time.deltaTime;
             float movedDistance = Vector2.Distance(rb.position, dashStartPos);
-            playerCondition.state = PlayerState.Dash;
-            // 목표 거리만큼 이동했거나, 지속시간이 끝나면 대쉬 종료
+            playerCondition.state = AnimationState.Dash;
             if (movedDistance >= dashTargetDistance || dashTime >= dashDuration)
             {
                 isDashing = false;
                 rb.velocity = Vector2.zero;
-                playerCondition.state = PlayerState.Idle;
+                playerCondition.state = AnimationState.Idle;
             }
             else
             {
                 rb.velocity = dashDirection * dashSpeed;
             }
         }
-        // 마우스 위치에 따라 스프라이트 뒤집기
+
+        // 마우스 방향에 따라 flip 결정
         Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
         float mouseX = mouseWorldPos.x;
         float playerX = transform.position.x;
+        int flip = mouseX < playerX ? -1 : 1;
 
-        if (mouseX < playerX)
+        // 플레이어 스프라이트 뒤집기
+        transform.localScale = new Vector3(flip * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+        if (weaponHolder != null)
         {
-            // 왼쪽: x축을 -1로
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-        else
-        {
-            // 오른쪽: x축을 +1로
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            Vector2 dir = (mouseWorldPos - transform.position);
+            float angleRad = Mathf.Atan2(dir.y, dir.x);
+            float angleDeg = angleRad * Mathf.Rad2Deg;
+
+            // 원 궤도 위치 계산 (마우스 방향 기준, flip과 무관)
+            Vector2 offset = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * handRadius;
+            weaponHolder.position = (Vector2)transform.position + offset;
+
+            // 핸드 회전: flip에 따라 Y축 180도, Z축 각도 반전
+            if (flip == -1)
+                weaponHolder.rotation = Quaternion.Euler(0f, 180f, -angleDeg);
+            else
+                weaponHolder.rotation = Quaternion.Euler(0f, 0f, angleDeg);
         }
     }
 
@@ -107,7 +125,7 @@ public class PlayerController : MonoBehaviour
                 isJumping = true;
                 jumpTimeCounter = jumpHoldTime;
                 jumpPressed = false;
-                playerCondition.state = PlayerState.Jump;
+                playerCondition.state = AnimationState.Jump;
             }
 
             // 점프 유지
@@ -122,8 +140,8 @@ public class PlayerController : MonoBehaviour
                 {
                     isJumping = false;
 
-                    if(!ismoving)
-                        playerCondition.state = PlayerState.Idle;
+                    if (!ismoving)
+                        playerCondition.state = AnimationState.Idle;
                 }
             }
         }
@@ -137,12 +155,12 @@ public class PlayerController : MonoBehaviour
 
         if (moveInput.x != 0 && isGrounded && !isDashing)
         {
-            playerCondition.state = PlayerState.Move;
+            playerCondition.state = AnimationState.Move;
             ismoving = true;
         }
         else if (isGrounded && !isDashing)
         {
-            playerCondition.state = PlayerState.Idle;
+            playerCondition.state = AnimationState.Idle;
             ismoving = false;
         }
     }
@@ -181,6 +199,83 @@ public class PlayerController : MonoBehaviour
             isDashing = true;
             dashTime = 0f;
             lastDashTime = Time.time;
+        }
+    }
+
+    public void OnPickWeapon(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EquipableObject[] equipables = FindObjectsOfType<EquipableObject>();
+            if (equipables.Length == 0) return;
+
+            EquipableObject nearest = null;
+            float minDist = float.MaxValue;
+            Vector3 playerPos = transform.position;
+
+            foreach (var obj in equipables)
+            {
+                float dist = Vector3.Distance(playerPos, obj.transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    nearest = obj;
+                }
+            }
+
+            if (nearest != null)
+            {
+                if (nearest.isEquipable)
+                {
+                    nearest.objectUI.SetActive(false);
+                    nearest.isEquipable = false;
+                    nearest.transform.SetParent(weaponHolder.transform);
+                    nearest.transform.localPosition = Vector3.zero;
+
+                    // flip 상태에 따라 무기 회전/스케일 초기화
+                    float flip = Mathf.Sign(transform.localScale.x);
+                    nearest.transform.localScale = new Vector3(flip * Mathf.Abs(nearest.transform.localScale.x), nearest.transform.localScale.y, nearest.transform.localScale.z);
+
+                    // 무기 회전도 flip에 맞게 초기화
+                    nearest.transform.localRotation = flip < 0
+                        ? Quaternion.Euler(0f, 180f, 0f)
+                        : Quaternion.identity;
+
+                    nearest.GetComponent<Rigidbody2D>().simulated = false;
+
+                    isWeaponThrown = false;
+                    currentWeapon = nearest.transform;
+                }
+            }
+        }
+    }
+
+    //todo. 마찰계수같은걸 넣어서 던진 무기가 천천히 멈추게 하기
+    public void OnThrowWeapon(InputAction.CallbackContext context)
+    {
+        if (context.performed && !isWeaponThrown && weaponHolder.childCount > 0)
+        {
+            currentWeapon = weaponHolder.GetChild(0);
+            var rb2d = currentWeapon.GetComponent<Rigidbody2D>();
+            if (rb2d == null) return;
+
+            currentWeapon.SetParent(null);
+            rb2d.simulated = true;
+            rb2d.velocity = Vector2.zero;
+            rb2d.angularVelocity = 0f;
+
+            Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+            Vector2 throwDir = (mouseWorldPos - transform.position).normalized;
+
+            rb2d.AddForce(throwDir * weaponThrowSpeed, ForceMode2D.Impulse);
+            rb2d.AddTorque(5f, ForceMode2D.Impulse);
+
+            isWeaponThrown = true;
+            weaponThrowTime = 0f;
+
+            // 던진 후 currentWeapon 참조 해제 (필요시)
+            currentWeapon = null;
         }
     }
 

@@ -1,5 +1,13 @@
 using UnityEngine;
-
+public enum AnimationState
+{
+    Idle,
+    Move,
+    Jump,
+    Damage,
+    Die,
+    Dash
+}
 public class EntityAnimationController : MonoBehaviour
 {
     private readonly int isMove = Animator.StringToHash("Move");
@@ -10,26 +18,26 @@ public class EntityAnimationController : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
-    public void ChangeAnimation(PlayerState state)
+    public void ChangeAnimation(AnimationState state)
     {
         switch (state)
         {
-            case PlayerState.Idle:
+            case AnimationState.Idle:
                 animator.SetBool(isMove, false);
                 break;
-            case PlayerState.Move:
+            case AnimationState.Move:
                 animator.SetBool(isMove, true);
                 break;
-            case PlayerState.Jump:
+            case AnimationState.Jump:
                 animator.SetTrigger(isJump);
                 break;
-            case PlayerState.Dash:
+            case AnimationState.Dash:
                 animator.SetTrigger(isDash);
                 break;
-            case PlayerState.Damage:
+            case AnimationState.Damage:
                 animator.SetTrigger(isDamage);
                 break;
-            case PlayerState.Die:
+            case AnimationState.Die:
                 animator.SetTrigger(isDie);
                 break;
         }

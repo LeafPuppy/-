@@ -1,19 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum PlayerState
-{
-    Idle,
-    Move,
-    Jump,
-    Damage,
-    Die,
-    Dash
-}
+
 
 public class PlayerCondition : MonoBehaviour
 {
-    public PlayerState state = PlayerState.Idle;
+    public AnimationState state = AnimationState.Idle;
+    public bool isHoldWeapon = false;
     void Start()
     {
         

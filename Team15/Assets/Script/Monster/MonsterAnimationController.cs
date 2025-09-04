@@ -1,13 +1,5 @@
 using UnityEngine;
 
-public enum AnimationState
-{
-    Idle,
-    Move,
-    Jump,
-    Damage,
-    Die,
-}
 
 public class MonsterAnimationController : MonoBehaviour
 {
