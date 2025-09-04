@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private float jumpTimeCounter;
     private bool jumpHeld;
 
-    private bool isDashing = false;
+    public bool isDashing = false;
     private float dashTime = 0f;
     private float lastDashTime = -999f;
     private Vector2 dashDirection;
@@ -42,16 +42,13 @@ public class PlayerController : MonoBehaviour
 
     private PlayerCondition playerCondition;
 
-    [SerializeField] private Transform weaponHolder;
+    public Transform weaponHolder;
     [SerializeField] private float handRadius = 0.5f; // 플레이어 중심에서 핸드까지의 거리
     private Transform currentWeapon;
     private bool isWeaponThrown = false;
     private float weaponThrowTime = 0f;
     private float weaponThrowSpeed = 30f;
 
-    [Header("Jump (Accessory)")]
-    public int extraAirJumps = 0;   // 추가 공중 점프 가능 횟수
-    int airJumpsUsed = 0;           // 현재 공중에서 사용한 추가 점프 횟수
 
     void Awake()
     {
@@ -172,20 +169,10 @@ public class PlayerController : MonoBehaviour
     {
         if (DialogueUI.Instance && DialogueUI.Instance.IsOpen) return;
 
-        if (context.performed && !isDashing)
+        if (context.performed && isGrounded && !isDashing)
         {
-            if (isGrounded)
-            {
-                jumpPressed = true;
-                jumpHeld = true;
-                airJumpsUsed = 0;
-            }
-            else if (airJumpsUsed < extraAirJumps)
-            {
-                jumpPressed = true;
-                jumpHeld = true;
-                airJumpsUsed++;
-            }
+            jumpPressed = true;
+            jumpHeld = true;
         }
         else if (context.canceled)
         {
@@ -214,6 +201,23 @@ public class PlayerController : MonoBehaviour
             lastDashTime = Time.time;
         }
     }
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed && weaponHolder.childCount > 0)
+        {
+            var weaponObj = weaponHolder.GetChild(0).GetComponent<WeaponObject>();
+            if (weaponObj == null) return;
+
+            // 공격 방향: 마우스 방향
+            Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+            Vector2 attackDir = (mouseWorldPos - transform.position).normalized;
+
+            // 공격 시작 위치: 플레이어 위치
+            weaponObj.TakeAttack(transform.position, attackDir);
+        }
+    }
+
 
     public void OnPickWeapon(InputAction.CallbackContext context)
     {
@@ -302,20 +306,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (DifficultyUI.Instance != null && DifficultyUI.Instance.IsOpen)
-        {
-            DifficultyUI.Instance.Close();
-            return;
-        }
-
         var target = GetNearestInteractable();
         if (target != null)
         {
             var player = GetComponent<Player>();
             target.Interact(player);
         }
-
-        
     }
 
     IInteractable GetNearestInteractable()
@@ -342,7 +338,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-            airJumpsUsed = 0;
         }
     }
 
@@ -352,23 +347,5 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
-    }
-
-    public void AddExtraAirJumps(int count)
-    {
-        extraAirJumps += count;
-        if (extraAirJumps < 0) extraAirJumps = 0;
-    }
-
-    public void AddMoveSpeed(float delta)
-    {
-        moveSpeed += delta;
-        if (moveSpeed < 0f) moveSpeed = 0f;
-    }
-
-    public void MultiplyDashCooldown(float m)
-    {
-        dashCooldown *= m;
-        if (dashCooldown < 0.01f) dashCooldown = 0.01f;
     }
 }
