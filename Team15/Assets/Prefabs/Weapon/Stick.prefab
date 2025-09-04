@@ -100,7 +100,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1152
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 4538320947589319555}
   - component: {fileID: 7879740023231110934}
   - component: {fileID: 2070799854953303439}
-  - component: {fileID: 5764649460356632323}
+  - component: {fileID: 8464631936416735617}
   m_Layer: 0
   m_Name: Stick
   m_TagString: Untagged
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectUI: {fileID: 5382369518939223935}
   isEquipable: 0
---- !u!50 &5764649460356632323
+--- !u!50 &8464631936416735617
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -699,7 +699,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1152
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 396689036}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: MapEndWall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 699952276}
   - component: {fileID: 699952275}
   - component: {fileID: 699952277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1541,7 +1541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &1281039059
 Grid:
   m_ObjectHideFlags: 0

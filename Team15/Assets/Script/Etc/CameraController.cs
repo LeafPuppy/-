@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target; // µû¶ó°¥ Å¸°Ù(ÇÃ·¹ÀÌ¾î)
-    public string mapTag = "sampletag"; // ¸Ê °æ°è ¿ÀºêÁ§Æ® ÅÂ±×
+    public Transform target; // ë”°ë¼ê°ˆ íƒ€ê²Ÿ(í”Œë ˆì´ì–´)
+    public string mapTag = "MapEndWall"; // ë§µ ê²½ê³„ ì˜¤ë¸Œì íŠ¸ íƒœê·¸
 
     private Camera cam;
     private float halfHeight;
@@ -29,40 +29,40 @@ public class CameraController : MonoBehaviour
         float clampX = Mathf.Clamp(target.position.x, minPosition.x + halfWidth, maxPosition.x - halfWidth);
         float centerY = target.position.y + 3f;
 
-        // Ä«¸Ş¶ó zÃàÀ» -10À¸·Î °íÁ¤
+        // ì¹´ë©”ë¼ zì¶•ì„ -10ìœ¼ë¡œ ê³ ì •
         transform.position = new Vector3(clampX, centerY, -10f);
     }
 
     void CalculateMapBounds()
     {
-        GameObject[] mapObjects = GameObject.FindGameObjectsWithTag(mapTag);
-        if (mapObjects.Length == 0)
+        GameObject mapObject = GameObject.FindGameObjectWithTag(mapTag);
+        if (mapObject == null)
         {
-            Debug.LogWarning($"ÅÂ±× '{mapTag}'¸¦ °¡Áø ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogWarning($"íƒœê·¸ '{mapTag}'ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
             minPosition = Vector2.zero;
             maxPosition = Vector2.zero;
             return;
         }
 
-        float minX = mapObjects[0].transform.position.x;
-        float maxX = minX;
-
-        foreach (GameObject obj in mapObjects)
+        var tilemapCol = mapObject.GetComponent<UnityEngine.Tilemaps.TilemapCollider2D>();
+        if (tilemapCol == null)
         {
-            float x = obj.transform.position.x;
-            if (x < minX) minX = x;
-            if (x > maxX) maxX = x;
+            Debug.LogWarning("TilemapCollider2Dë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
+            minPosition = Vector2.zero;
+            maxPosition = Vector2.zero;
+            return;
         }
 
-        minPosition = new Vector2(minX, 0f);
-        maxPosition = new Vector2(maxX, 0f);
+        Bounds bounds = tilemapCol.bounds;
+        minPosition = new Vector2(bounds.min.x, bounds.min.y);
+        maxPosition = new Vector2(bounds.max.x, bounds.max.y);
     }
 
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        // °æ°è ¹Ú½º ±×¸®±â
+        // ê²½ê³„ ë°•ìŠ¤ ê·¸ë¦¬ê¸°
         Vector3 bottomLeft = new Vector3(minPosition.x, minPosition.y, 0f);
         Vector3 topLeft = new Vector3(minPosition.x, maxPosition.y, 0f);
         Vector3 topRight = new Vector3(maxPosition.x, maxPosition.y, 0f);
