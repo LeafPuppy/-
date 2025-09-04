@@ -2040,7 +2040,7 @@ GameObject:
   - component: {fileID: 1874552467}
   - component: {fileID: 1874552466}
   - component: {fileID: 1874552468}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DungeonEnter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2126,7 +2126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171ededcdac956e43b6e1d75a4fa3d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonEnterUI: {fileID: 1304450497}
+  enterPanel: {fileID: 1400329141}
   playerTag: Player
 --- !u!114 &1874552467
 MonoBehaviour:

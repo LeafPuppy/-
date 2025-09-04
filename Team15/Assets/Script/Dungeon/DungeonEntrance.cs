@@ -8,15 +8,21 @@ public class DungeonEntrance : MonoBehaviour, IInteractable
     public DifficultyUI difficultyUI;
     public DungeonEntrancePrompt prompt;
 
-    void Reset() { if (!prompt) prompt = GetComponent<DungeonEntrancePrompt>(); }
+    void Reset()
+    {
+        if (!prompt) prompt = GetComponent<DungeonEntrancePrompt>();
+    }
 
     public void Interact(Player player)
     {
-        GetComponent<DungeonEntrancePrompt>()?.dungeonEnterUI?.SetActive(false);
+        if (prompt != null)
+            prompt.Hide();
 
-        if (difficultyUI != null)
-        {
+        if (difficultyUI == null) return;
+
+        if (difficultyUI.IsOpen)
+            difficultyUI.Close();
+        else
             difficultyUI.Open();
-        }
     }
 }
