@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
-    public float dashMaxDistance = 5f; // ÃÖ´ë ´ë½¬ °Å¸®
+    public float dashMaxDistance = 5f; // ìµœëŒ€ ëŒ€ì‰¬ ê±°ë¦¬
 
     [Header("Interact Settings")]
     [SerializeField] float interactRadius = 1f;
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private float jumpTimeCounter;
     private bool jumpHeld;
 
-    private bool isDashing = false;
+    public bool isDashing = false;
     private float dashTime = 0f;
     private float lastDashTime = -999f;
     private Vector2 dashDirection;
@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
 
     private PlayerCondition playerCondition;
 
-    [SerializeField] private Transform weaponHolder;
-    [SerializeField] private float handRadius = 0.5f; // ÇÃ·¹ÀÌ¾î Áß½É¿¡¼­ ÇÚµå±îÁöÀÇ °Å¸®
+    public Transform weaponHolder;
+    [SerializeField] private float handRadius = 0.5f; // í”Œë ˆì´ì–´ ì¤‘ì‹¬ì—ì„œ í•¸ë“œê¹Œì§€ì˜ ê±°ë¦¬
     private Transform currentWeapon;
     private bool isWeaponThrown = false;
     private float weaponThrowTime = 0f;
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // ´ë½¬ Ã³¸® (´ë½¬´Â Update¿¡¼­ À¯Áö)
+        // ëŒ€ì‰¬ ì²˜ë¦¬ (ëŒ€ì‰¬ëŠ” Updateì—ì„œ ìœ ì§€)
         if (isDashing)
         {
             dashTime += Time.deltaTime;
@@ -82,14 +82,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // ¸¶¿ì½º ¹æÇâ¿¡ µû¶ó flip °áÁ¤
+        // ë§ˆìš°ìŠ¤ ë°©í–¥ì— ë”°ë¼ flip ê²°ì •
         Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
         float mouseX = mouseWorldPos.x;
         float playerX = transform.position.x;
         int flip = mouseX < playerX ? -1 : 1;
 
-        // ÇÃ·¹ÀÌ¾î ½ºÇÁ¶óÀÌÆ® µÚÁı±â
+        // í”Œë ˆì´ì–´ ìŠ¤í”„ë¼ì´íŠ¸ ë’¤ì§‘ê¸°
         transform.localScale = new Vector3(flip * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 
         if (weaponHolder != null)
@@ -98,11 +98,11 @@ public class PlayerController : MonoBehaviour
             float angleRad = Mathf.Atan2(dir.y, dir.x);
             float angleDeg = angleRad * Mathf.Rad2Deg;
 
-            // ¿ø ±Ëµµ À§Ä¡ °è»ê (¸¶¿ì½º ¹æÇâ ±âÁØ, flip°ú ¹«°ü)
+            // ì› ê¶¤ë„ ìœ„ì¹˜ ê³„ì‚° (ë§ˆìš°ìŠ¤ ë°©í–¥ ê¸°ì¤€, flipê³¼ ë¬´ê´€)
             Vector2 offset = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * handRadius;
             weaponHolder.position = (Vector2)transform.position + offset;
 
-            // ÇÚµå È¸Àü: flip¿¡ µû¶ó YÃà 180µµ, ZÃà °¢µµ ¹İÀü
+            // í•¸ë“œ íšŒì „: flipì— ë”°ë¼ Yì¶• 180ë„, Zì¶• ê°ë„ ë°˜ì „
             if (flip == -1)
                 weaponHolder.rotation = Quaternion.Euler(0f, 180f, -angleDeg);
             else
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
 
-            // Á¡ÇÁ ½ÃÀÛ
+            // ì í”„ ì‹œì‘
             if (jumpPressed && isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
                 playerCondition.state = AnimationState.Jump;
             }
 
-            // Á¡ÇÁ À¯Áö
+            // ì í”„ ìœ ì§€
             if (isJumping && jumpHeld)
             {
                 if (jumpTimeCounter > 0)
@@ -232,11 +232,11 @@ public class PlayerController : MonoBehaviour
                     nearest.transform.SetParent(weaponHolder.transform);
                     nearest.transform.localPosition = Vector3.zero;
 
-                    // flip »óÅÂ¿¡ µû¶ó ¹«±â È¸Àü/½ºÄÉÀÏ ÃÊ±âÈ­
+                    // flip ìƒíƒœì— ë”°ë¼ ë¬´ê¸° íšŒì „/ìŠ¤ì¼€ì¼ ì´ˆê¸°í™”
                     float flip = Mathf.Sign(transform.localScale.x);
                     nearest.transform.localScale = new Vector3(flip * Mathf.Abs(nearest.transform.localScale.x), nearest.transform.localScale.y, nearest.transform.localScale.z);
 
-                    // ¹«±â È¸Àüµµ flip¿¡ ¸Â°Ô ÃÊ±âÈ­
+                    // ë¬´ê¸° íšŒì „ë„ flipì— ë§ê²Œ ì´ˆê¸°í™”
                     nearest.transform.localRotation = flip < 0
                         ? Quaternion.Euler(0f, 180f, 0f)
                         : Quaternion.identity;
@@ -250,7 +250,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //todo. ¸¶Âû°è¼ö°°Àº°É ³Ö¾î¼­ ´øÁø ¹«±â°¡ ÃµÃµÈ÷ ¸ØÃß°Ô ÇÏ±â
+    //todo. ë§ˆì°°ê³„ìˆ˜ê°™ì€ê±¸ ë„£ì–´ì„œ ë˜ì§„ ë¬´ê¸°ê°€ ì²œì²œíˆ ë©ˆì¶”ê²Œ í•˜ê¸°
     public void OnThrowWeapon(InputAction.CallbackContext context)
     {
         if (context.performed && !isWeaponThrown && weaponHolder.childCount > 0)
@@ -274,7 +274,7 @@ public class PlayerController : MonoBehaviour
             isWeaponThrown = true;
             weaponThrowTime = 0f;
 
-            // ´øÁø ÈÄ currentWeapon ÂüÁ¶ ÇØÁ¦ (ÇÊ¿ä½Ã)
+            // ë˜ì§„ í›„ currentWeapon ì°¸ì¡° í•´ì œ (í•„ìš”ì‹œ)
             currentWeapon = null;
         }
     }

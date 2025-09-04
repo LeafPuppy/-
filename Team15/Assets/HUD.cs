@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
 {
     public Image HPBar;
     public Image weapon;
+    public GameObject get;
     public GameObject dashCool;
 
     public TextMeshProUGUI jemCount;
@@ -15,6 +16,8 @@ public class HUD : MonoBehaviour
     private void Update()
     {
         UpdateHp();
+        UpdateWeapon();
+        UpdateDash();
     }
 
     public void UpdateHp()
@@ -22,10 +25,20 @@ public class HUD : MonoBehaviour
         HPBar.fillAmount = CharacterManager.Instance.Player.currentHealth / CharacterManager.Instance.Player.maxHealth;
     }
 
-    public void UpdateWeapon(string Name)
+    public void UpdateWeapon()
     {
-        //스프라이트 이름이랑 무기 이름 같에 수정해서 받기
-        weapon.sprite = ResourceManager.Instance.LoadAsset<Sprite>(name, eAssetType.Sprite, eCategoryType.Weapon);
+        if (CharacterManager.Instance.Player.controller.weaponHolder != null)
+        {
+            weapon.enabled = true;
+            get.SetActive(false);
+            var name = CharacterManager.Instance.Player.controller.weaponHolder.gameObject.name;
+            weapon.sprite = ResourceManager.Instance.LoadAsset<Sprite>(name, eAssetType.Sprite, eCategoryType.Weapon);
+        }
+        else
+        {
+            get.SetActive(true);
+            weapon.enabled = false;
+        }
     }
 
     public void UpdateJem(int amount)
@@ -36,7 +49,6 @@ public class HUD : MonoBehaviour
 
     public void UpdateDash()
     {
-        //플레이어 컨트롤러 isDashing public으로 풀기
-        //dashCool.SetActive(CharacterManager.Instance.Player.controller.isDashing);
+        dashCool.SetActive(CharacterManager.Instance.Player.controller.isDashing);
     }
 }
