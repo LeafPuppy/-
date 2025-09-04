@@ -145,6 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstMeet: {fileID: 11400000, guid: 71cdbcc93e6c89b47bde1cdcbbdf4a77, type: 2}
   preFirstEntry: {fileID: 11400000, guid: 21127bae76fb8db46bf8c510d4982a74, type: 2}
-  postFirst_Clear: {fileID: 11400000, guid: 2a68aed3d435a5e4f8950b3ae7dad992, type: 2}
-  postFirst_Death: {fileID: 11400000, guid: 2c79a7ce848f0984cb5cdc5ac1f2c7dd, type: 2}
-  preReEntry: {fileID: 11400000, guid: e9213d00f79e29241b50ff8a7dbb2a38, type: 2}
+  postFirst_Clear: {fileID: 0}
+  postFirst_Death: {fileID: 0}
+  preReEntry: {fileID: 0}

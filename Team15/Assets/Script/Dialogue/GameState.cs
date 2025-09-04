@@ -5,31 +5,23 @@ using UnityEngine;
 public enum RunOutcome { None, Cleared, Died, Quit }
 public enum StarterWeaponKind { None, Sword, Bow, Staff }
 
-public enum Difficulty { Normal, Hard }
-
 public class GameState : MonoBehaviour
 {
     public static GameState Instance { get; private set; }
 
-    [Header("ë¶„ê¸°")]
-    public bool hasMetMerchant;          // ê²Œì„ ì‹œì‘ í›„ ìƒì¸ê³¼ ì²« ë§Œë‚¨ ëŒ€í™” í–ˆëŠ”ê°€
-    public bool everEnteredDungeon;      // ë˜ì „ì— í•œ ë²ˆì´ë¼ë„ ë“¤ì–´ê°”ëŠ”ê°€
-    public bool inDungeon;               // í˜„ì¬ ë˜ì „ ì•ˆì¸ê°€
+    [Header("ºĞ±â")]
+    public bool hasMetMerchant;          // °ÔÀÓ ½ÃÀÛ ÈÄ »óÀÎ°ú Ã¹ ¸¸³² ´ëÈ­ Çß´Â°¡
+    public bool everEnteredDungeon;      // ´øÀü¿¡ ÇÑ ¹øÀÌ¶óµµ µé¾î°¬´Â°¡
+    public bool inDungeon;               // ÇöÀç ´øÀü ¾ÈÀÎ°¡
 
-    [Header("ì‹¤í–‰ ì¤‘ ë¶„ê¸°")]
-    public int totalRunsCompleted;       // ë§ˆì„ë¡œ ë˜ëŒì•„ì˜¨ í”Œë ˆì´ íšŸìˆ˜(í´ë¦¬ì–´/ì£½ìŒ/í¬ê¸°)
+    [Header("½ÇÇà Áß ºĞ±â")]
+    public int totalRunsCompleted;       // ¸¶À»·Î µÇµ¹¾Æ¿Â ÇÃ·¹ÀÌ È½¼ö(Å¬¸®¾î/Á×À½/Æ÷±â)
     public RunOutcome lastRunOutcome = RunOutcome.None;
-    public int lastHandledRunIndex;      // 'ë§ˆì„ ê·€í™˜ í›„ ì²« ëŒ€í™”
+    public int lastHandledRunIndex;      // '¸¶À» ±ÍÈ¯ ÈÄ Ã¹ ´ëÈ­
 
-    [Header("ë¬´ê¸° ì„ íƒ ìƒíƒœ")]
+    [Header("¹«±â ¼±ÅÃ »óÅÂ")]
     public StarterWeaponKind currentStarterWeapon = StarterWeaponKind.None;
     [HideInInspector] public StarterWeaponKind pendingStarterWeapon = StarterWeaponKind.None;
-
-    [Header("1íšŒì„± ëŒ€í™”")]
-    public bool firstPostRunTalkShown = false;
-
-    [Header("ë˜ì „ ë‚œì´ë„")]
-    public Difficulty currentDifficulty = Difficulty.Normal;
 
     void Awake()
     {
@@ -51,9 +43,7 @@ public class GameState : MonoBehaviour
     public void OnPlayerDied() { lastRunOutcome = RunOutcome.Died; }
     public void OnPlayerQuitRun() { lastRunOutcome = RunOutcome.Quit; }
 
-    public static float EnemyHpMul => Instance != null && Instance.currentDifficulty == Difficulty.Hard ? 1.5f : 1f;
-
-    // ë§ˆì„ë¡œ ëŒì•„ì™”ì„ ë•Œ(ë§ˆì„ ì”¬ ë¡œë“œ ì‹œ í˜¸ì¶œ)
+    // ¸¶À»·Î µ¹¾Æ¿ÔÀ» ¶§(¸¶À» ¾À ·Îµå ½Ã È£Ãâ)
     public void OnReturnToVillage()
     {
         inDungeon = false;

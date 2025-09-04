@@ -22,7 +22,7 @@ MonoBehaviour:
     pickWeapon: 0
     nextIfSame: {fileID: 0}
     commitSelectedWeapon: 1
-  - label: "\uC544\uB2C8\uC694"
+  - label: "\uC544\uB2C8\uC624"
     next: {fileID: 11400000, guid: af8afed8e373c614ca6449cef7c857c9, type: 2}
     pickWeapon: 0
     nextIfSame: {fileID: 0}

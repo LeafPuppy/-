@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 public class DialogueNPC : MonoBehaviour, IInteractable
 {
-    [Header("ìƒíƒœë³„ ì‹œì‘ ë…¸ë“œ")]
-    [SerializeField] DialogueNode firstMeet;        //ì²« ë§Œë‚¨ 
-    [SerializeField] DialogueNode preFirstEntry;    //ì²« ëŒ€í™” í›„ ~ ì²« ì…ì¥ ì „
-    [SerializeField] DialogueNode postFirst_Clear;  //ì²« ë˜ì „ í›„ í´ë¦¬ì–´(1íšŒì„±)
-    [SerializeField] DialogueNode postFirst_Death;  //ì²« ë˜ì „ í›„ ì‚¬ë§(1íšŒì„±)
-    [SerializeField] DialogueNode preReEntry;       //ë‘ ë²ˆì§¸ ë˜ì „ ì§„ì…
+    [Header("»óÅÂº° ½ÃÀÛ ³ëµå")]
+    [SerializeField] DialogueNode firstMeet;        //Ã¹ ¸¸³² 
+    [SerializeField] DialogueNode preFirstEntry;    //Ã¹ ´ëÈ­ ÈÄ ~ Ã¹ ÀÔÀå Àü
+    [SerializeField] DialogueNode postFirst_Clear;  //Ã¹ ´øÀü ÈÄ Å¬¸®¾î
+    [SerializeField] DialogueNode postFirst_Death;  //Ã¹ ´øÀü ÈÄ »ç¸Á
+    [SerializeField] DialogueNode preReEntry;       //µÎ ¹øÂ° ´øÀü ÁøÀÔ
 
     public void Interact(Player player)
     {
@@ -22,11 +22,10 @@ public class DialogueNPC : MonoBehaviour, IInteractable
             if (start == null) return;
 
             var gs = GameState.Instance;
-
             if (!gs.hasMetMerchant && start == firstMeet)
                 gs.OnTalkedToMerchantFirstTime();
 
-            if (gs.totalRunsCompleted > gs.lastHandledRunIndex)
+            if (gs.totalRunsCompleted > gs.lastHandledRunIndex && (start == postFirst_Clear || start == postFirst_Death))
             {
                 gs.lastHandledRunIndex = gs.totalRunsCompleted;
             }
@@ -43,28 +42,21 @@ public class DialogueNPC : MonoBehaviour, IInteractable
     {
         var gs = GameState.Instance;
 
-        //ì™„ì „ ì²˜ìŒ(ìƒì¸ì„ ì•„ì§ ëª» ë§Œë‚¨)
+        //¿ÏÀü Ã³À½(»óÀÎÀ» ¾ÆÁ÷ ¸ø ¸¸³²)
         if (!gs.hasMetMerchant) return firstMeet;
 
-        //ì•„ì§ ë˜ì „ì— í•œ ë²ˆë„ ì•ˆ ë“¤ì–´ê°”ìœ¼ë©´(= ì²« ëŒ€í™” í›„ ~ ì²« ì…ì¥ ì „)
+        //¾ÆÁ÷ ´øÀü¿¡ ÇÑ ¹øµµ ¾È µé¾î°¬À¸¸é(= Ã¹ ´ëÈ­ ÈÄ ~ Ã¹ ÀÔÀå Àü)
         if (!gs.everEnteredDungeon) return preFirstEntry;
 
-        //ë°©ê¸ˆ ì „ ëŸ°ì—ì„œ ë§ˆì„ë¡œ ëŒì•„ì™”ê³ , ì•„ì§ ê·€í™˜ í›„ ì²« ëŒ€í™”ë¥¼ ì•ˆ í•œ ê²½ìš°
+        //¹æ±İ Àü ·±¿¡¼­ ¸¶À»·Î µ¹¾Æ¿Ô°í, ¾ÆÁ÷ ±ÍÈ¯ ÈÄ Ã¹ ´ëÈ­¸¦ ¾È ÇÑ °æ¿ì
         bool justReturnedFromRun = gs.totalRunsCompleted > gs.lastHandledRunIndex;
         if (justReturnedFromRun)
         {
-            bool isFirstReturnEver = (gs.totalRunsCompleted == 1);
-
-            if (isFirstReturnEver)
-            {
-                if (gs.lastRunOutcome == RunOutcome.Cleared && postFirst_Clear) return postFirst_Clear;
-                if (gs.lastRunOutcome == RunOutcome.Died && postFirst_Death) return postFirst_Death;
-            }
-
-            return preReEntry;
+            if (gs.lastRunOutcome == RunOutcome.Cleared && postFirst_Clear) return postFirst_Clear;
+            if (gs.lastRunOutcome == RunOutcome.Died && postFirst_Death) return postFirst_Death;
         }
 
-        //ê·¸ ì™¸(ë‘ ë²ˆì§¸ ì´í›„ ì¬ì…ì¥ ì¤€ë¹„ ëŒ€í™”)
+        //±× ¿Ü(µÎ ¹øÂ° ÀÌÈÄ ÀçÀÔÀå ÁØºñ ´ëÈ­)
         return preReEntry;
     }
 }

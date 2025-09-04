@@ -5,16 +5,16 @@ using UnityEngine;
 public class ObjectUI : MonoBehaviour
 {
     public Transform target;
-    public float offsetY = 1.5f; // ì›”ë“œ ê¸°ì¤€ ìœ„ìª½ ê±°ë¦¬
+    public float offsetY = 1.5f; // ¿ùµå ±âÁØ À§ÂÊ °Å¸®
 
     void LateUpdate()
     {
         if (!target) return;
 
-        // ì˜¤ë¸Œì íŠ¸ ìœ„ì¹˜ + ì›”ë“œ up ë°©í–¥ìœ¼ë¡œ ì˜¤í”„ì…‹
+        // ¿ÀºêÁ§Æ® À§Ä¡ + ¿ùµå up ¹æÇâÀ¸·Î ¿ÀÇÁ¼Â
         transform.position = target.position + Vector3.up * offsetY;
 
-        // íšŒì „ì€ í•­ìƒ ê³ ì •
+        // È¸ÀüÀº Ç×»ó °íÁ¤
         transform.rotation = Quaternion.identity;
     }
 }
