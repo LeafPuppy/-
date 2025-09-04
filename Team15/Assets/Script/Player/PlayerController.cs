@@ -288,12 +288,20 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (DifficultyUI.Instance != null && DifficultyUI.Instance.IsOpen)
+        {
+            DifficultyUI.Instance.Close();
+            return;
+        }
+
         var target = GetNearestInteractable();
         if (target != null)
         {
             var player = GetComponent<Player>();
             target.Interact(player);
         }
+
+        
     }
 
     IInteractable GetNearestInteractable()
