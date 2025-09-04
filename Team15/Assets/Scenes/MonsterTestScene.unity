@@ -411,6 +411,7 @@ GameObject:
   - component: {fileID: 317497444}
   - component: {fileID: 317497446}
   - component: {fileID: 317497445}
+  - component: {fileID: 317497447}
   m_Layer: 0
   m_Name: Dino
   m_TagString: Untagged
@@ -634,6 +635,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4850351, y: 0.62612134}
   m_EdgeRadius: 0
+--- !u!114 &317497447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317497437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc86136cf2157174db3f105d18318588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  monster: {fileID: 317497440}
+  dropWeapon: {fileID: 0}
 --- !u!1 &440586552
 GameObject:
   m_ObjectHideFlags: 0

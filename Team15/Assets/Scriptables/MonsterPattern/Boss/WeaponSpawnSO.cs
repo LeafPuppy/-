@@ -12,9 +12,12 @@ public class WeaponSpawnSO : PatternDataSO
         monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
         for (int i = 0; i < spawnNum; i++)
         {
-            var go = Instantiate(weaponPrefabs[Random.Range(0, weaponPrefabs.Length)], monster.transform.position, Quaternion.identity);
+            var go = Instantiate(weaponPrefabs[Random.Range(0, weaponPrefabs.Length)], monster.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             var rg = go.GetComponent<Rigidbody2D>();
-            rg.AddForce(new Vector2(1, Random.Range(-3, 3)) * Random.Range(5, 15), ForceMode2D.Impulse);
+            rg.AddForce(new Vector2(Random.Range(-3, 3), 1) * Random.Range(1, 10), ForceMode2D.Impulse);
+            go.AddComponent<WeaponDropDamage>();
+            var wdd = go.GetComponent<WeaponDropDamage>();
+            wdd.damage = damage;
         }
         yield return new WaitForSeconds(2f);
         monster.canSpawn = false;
