@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 0}
   bodyText: {fileID: 0}
+  choicesRoot: {fileID: 0}
+  choiceButtonPrefab: {fileID: 1626950978953720384, guid: d157dd71e0af61941adc6d118c186b26, type: 3}

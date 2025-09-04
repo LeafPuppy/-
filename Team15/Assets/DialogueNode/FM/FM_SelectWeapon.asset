@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16eebd5164b445f4c9854bebf9517760, type: 3}
+  m_Name: FM_SelectWeapon
+  m_EditorClassIdentifier: 
+  lines:
+  - "(\uAC80 / \uD65C/ \uC9C0\uD321\uC774 \uC911 1\uAC1C\uB97C \uACE0\uB974\uC790)"
+  choices:
+  - label: "\uAC80"
+    next: {fileID: 11400000, guid: c4c28971f33476544826292eb9a1dc6b, type: 2}
+    pickWeapon: 1
+    nextIfSame: {fileID: 0}
+    commitSelectedWeapon: 1
+  - label: "\uD65C"
+    next: {fileID: 11400000, guid: c4c28971f33476544826292eb9a1dc6b, type: 2}
+    pickWeapon: 2
+    nextIfSame: {fileID: 0}
+    commitSelectedWeapon: 1
+  - label: "\uC9C0\uD321\uC774"
+    next: {fileID: 11400000, guid: c4c28971f33476544826292eb9a1dc6b, type: 2}
+    pickWeapon: 3
+    nextIfSame: {fileID: 0}
+    commitSelectedWeapon: 1

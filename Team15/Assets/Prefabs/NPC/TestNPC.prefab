@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f768e37f1a5c15a4a87c27673b1ae9ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lines:
-  - "\uC8FC\uBCC0\uC5D0\uC11C \uBCF4\uC9C0 \uBABB\uD558\uB358 \uC0AC\uB78C\uC778\uB370
-    \uC124\uB9C8 \uB358\uC804\uC744 \uB4E4\uC5B4\uAC00\uB824\uACE0?"
-  - asdasd
-  - 123221
+  firstMeet: {fileID: 11400000, guid: 71cdbcc93e6c89b47bde1cdcbbdf4a77, type: 2}
+  preFirstEntry: {fileID: 11400000, guid: 21127bae76fb8db46bf8c510d4982a74, type: 2}
+  postFirst_Clear: {fileID: 0}
+  postFirst_Death: {fileID: 0}
+  preReEntry: {fileID: 0}
