@@ -17,6 +17,8 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] RectTransform choicesRoot;
     [SerializeField] Button choiceButtonPrefab;
 
+    StarterWeaponKind lastPickedWeapon = StarterWeaponKind.None;
+
     DialogueNode current;
     int index = -1;
     bool choosing = false;
@@ -40,10 +42,19 @@ public class DialogueUI : MonoBehaviour
     {
         if (!start) return;
 
+        bool isNewSession = !IsOpen;
+
         current = start;
         index = 0;
         choosing = false;
         ClearChoices();
+
+        if (isNewSession)
+        {
+            lastPickedWeapon = StarterWeaponKind.None;
+            if (GameState.Instance != null)
+                GameState.Instance.pendingStarterWeapon = StarterWeaponKind.None;
+        }
 
         panel.SetActive(true);
         bodyText.text = (current.lines != null && current.lines.Length > 0) ? current.lines[0] : "";
@@ -105,7 +116,36 @@ public class DialogueUI : MonoBehaviour
         {
             choosing = false;
             ClearChoices();
-            if (c.next) Show(c.next);
+
+            DialogueNode nextNode = c.next;
+
+            var gs = GameState.Instance;
+
+            if (gs != null)
+            {
+                if (c.pickWeapon != StarterWeaponKind.None)
+                {
+                    gs.pendingStarterWeapon = c.pickWeapon;
+                    lastPickedWeapon = c.pickWeapon;
+
+                    if (gs.currentStarterWeapon == c.pickWeapon && c.nextIfSame != null)
+                        nextNode = c.nextIfSame;
+                }
+
+                if (c.commitSelectedWeapon)
+                {
+                    var toCommit = gs.pendingStarterWeapon != StarterWeaponKind.None ? gs.pendingStarterWeapon : lastPickedWeapon;
+
+                    if (toCommit != StarterWeaponKind.None)
+                    {
+                        gs.currentStarterWeapon = toCommit;
+                        gs.pendingStarterWeapon = StarterWeaponKind.None;
+                        lastPickedWeapon = StarterWeaponKind.None;
+                    }
+                }
+            }
+
+            if (nextNode) Show(nextNode);
             else Hide();
         });
 

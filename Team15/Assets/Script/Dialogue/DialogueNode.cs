@@ -7,6 +7,11 @@ public class DialogueChoice
 {
     public string label;
     public DialogueNode next;
+
+    [Header("무기 선택")]
+    public StarterWeaponKind pickWeapon = StarterWeaponKind.None;
+    public DialogueNode nextIfSame;
+    public bool commitSelectedWeapon = false;
 }
 
 [CreateAssetMenu(menuName = "Dialogue/Node")]

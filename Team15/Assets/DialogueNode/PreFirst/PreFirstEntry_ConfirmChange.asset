@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16eebd5164b445f4c9854bebf9517760, type: 3}
+  m_Name: PreFirstEntry_ConfirmChange
+  m_EditorClassIdentifier: 
+  lines:
+  - "\uC798 \uC0DD\uAC01\uD558\uACE0 \uACE8\uB790\uC5B4\uC57C \uD560\uAC8C\uC57C."
+  - "\uB354 \uC774\uC0C1 \uC548 \uBC14\uAFD4\uC904\uAC8C\uB2C8\uAE4C \uB9D0\uC774\uC9C0"
+  - "\uC815\uB9D0 \uADF8\uAC78\uB85C \uD560\uAC90\uAC00?"
+  choices:
+  - label: "\uB124"
+    next: {fileID: 11400000, guid: e7dd1a2096b9ce54490246ec86868177, type: 2}
+    pickWeapon: 0
+    nextIfSame: {fileID: 0}
+    commitSelectedWeapon: 1
+  - label: "\uC544\uB2C8\uC624"
+    next: {fileID: 11400000, guid: af8afed8e373c614ca6449cef7c857c9, type: 2}
+    pickWeapon: 0
+    nextIfSame: {fileID: 0}
+    commitSelectedWeapon: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum RunOutcome { None, Cleared, Died, Quit }
+public enum StarterWeaponKind { None, Sword, Bow, Staff }
 
 public class GameState : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class GameState : MonoBehaviour
     public int totalRunsCompleted;       // 마을로 되돌아온 플레이 횟수(클리어/죽음/포기)
     public RunOutcome lastRunOutcome = RunOutcome.None;
     public int lastHandledRunIndex;      // '마을 귀환 후 첫 대화
+
+    [Header("무기 선택 상태")]
+    public StarterWeaponKind currentStarterWeapon = StarterWeaponKind.None;
+    [HideInInspector] public StarterWeaponKind pendingStarterWeapon = StarterWeaponKind.None;
 
     void Awake()
     {

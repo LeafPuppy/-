@@ -739,6 +739,8 @@ MonoBehaviour:
   totalRunsCompleted: 0
   lastRunOutcome: 0
   lastHandledRunIndex: 0
+  currentStarterWeapon: 0
+  pendingStarterWeapon: 0
 --- !u!4 &1212877110
 Transform:
   m_ObjectHideFlags: 0
@@ -1114,6 +1116,10 @@ PrefabInstance:
       propertyPath: firstMeet
       value: 
       objectReference: {fileID: 11400000, guid: 71cdbcc93e6c89b47bde1cdcbbdf4a77, type: 2}
+    - target: {fileID: 2819154644803447495, guid: 4ce9001e7a7c84e42a41969d8a0906a6, type: 3}
+      propertyPath: preFirstEntry
+      value: 
+      objectReference: {fileID: 11400000, guid: 21127bae76fb8db46bf8c510d4982a74, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
