@@ -16,8 +16,18 @@ public class MonsterCondition : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        if(this.gameObject.name != "Back")
-            currentHealth = monster.data.maxHealth;
+        if (this.gameObject.name != "Back")
+        {
+            if (monster == null || monster.data == null)
+            {
+                Debug.LogError($"[{name}] Monster/MonsterDataSO가 비어 있습니다.");
+                return;
+            }
+
+            float baseHp = monster.data.maxHealth;
+            float mul = GameState.EnemyHpMul;
+            currentHealth = Mathf.Ceil(baseHp * mul);
+        }
     }
 
     public void TakeDamage(float damage)

@@ -28,11 +28,25 @@ public class RewardUI : MonoBehaviour
     [Header("Accessory Select UI 참조")]
     [SerializeField] AccessorySelectUI accessorySelectUI;
 
+    [Header("Optional: 보상 종료 후 열 지도 UI")]
+    [SerializeField] GameObject mapSelectUI;
+    [SerializeField] bool openMapOnClose = false;
+
     public event Action OnFinished;
+
+    bool isOpen = false;
+    bool inputLocked = false;
 
     void Awake()
     {
         if (panel) panel.SetActive(false);
+    }
+
+    void OnDisable()
+    {
+        if (isOpen && Time.timeScale == 0f) Time.timeScale = 1f;
+        isOpen = false;
+        inputLocked = false;
     }
 
     public void Show() => ShowInternal(roomType, hasNextStage);
@@ -40,7 +54,13 @@ public class RewardUI : MonoBehaviour
 
     void ShowInternal(MapType mapType, bool nextStage)
     {
+        if (!panel) return;
+
         ResetCards();
+        panel.SetActive(true);
+        isOpen = true;
+        inputLocked = false;
+        Time.timeScale = 0f;
 
         var diff = GameState.Instance ? GameState.Instance.currentDifficulty : Difficulty.Normal;
         bool isHard = diff == Difficulty.Hard;
