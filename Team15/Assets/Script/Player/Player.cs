@@ -7,6 +7,7 @@ public class Player : Entity
     public PlayerController controller;
     public PlayerCondition condition;
     public PlayerAnimationController animator;
+    public GameObject weaponHolder;
     //public TalkScript talk;
 
     private void Awake()
@@ -20,11 +21,19 @@ public class Player : Entity
     private void Update()
     {
         animator.ChangeAnimation(condition.state);
+        if(weaponHolder.transform.childCount > 0)
+        {
+            condition.isHoldWeapon = true;
+        }
+        else
+        {
+            condition.isHoldWeapon = false;
+        }
     }
 
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        condition.state = PlayerState.Damage;
+        condition.state = AnimationState.Damage;
     }
 }
