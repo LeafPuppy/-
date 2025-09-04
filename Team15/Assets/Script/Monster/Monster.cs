@@ -21,7 +21,7 @@ public class Monster : MonoBehaviour
     public bool canSpawn;
     public Coroutine co;
 
-    //ÀÓ½Ã »ç°Å¸®
+    //ìž„ì‹œ ì‚¬ê±°ë¦¬
     public int attackRange;
 
     private void Awake()

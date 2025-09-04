@@ -24,12 +24,12 @@ public class MonsterAttackState : MonsterBaseState
         {
             if (stateMachine.Monster.patterns.Length != 0 && !stateMachine.Monster.inPattern)
             {
-                //¸Ê¿¡ ¹«±â°¡ ¾øÀ¸¸é(ÇÃ·¹ÀÌ¾î ¼ÒÀ¯¹«±â Á¦¿Ü) ½ºÆùÆĞÅÏ ½ÇÇà
-                //¹«Á¶°Ç ¸¶Áö¸· ÆĞÅÏÀÌ ¹«±â ¼ÒÈ¯
+                //ë§µì— ë¬´ê¸°ê°€ ì—†ìœ¼ë©´(í”Œë ˆì´ì–´ ì†Œìœ ë¬´ê¸° ì œì™¸) ìŠ¤í°íŒ¨í„´ ì‹¤í–‰
+                //ë¬´ì¡°ê±´ ë§ˆì§€ë§‰ íŒ¨í„´ì´ ë¬´ê¸° ì†Œí™˜
                 if (stateMachine.Monster.canSpawn)
                     stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[stateMachine.Monster.patterns.Length - 1].Execute(stateMachine.Monster));
 
-                //¸Ê¿¡ ¹«±â°¡ ÀÖ´Ù¸é ±âÅ¸ ÆĞÅÏ ½ÇÇà
+                //ë§µì— ë¬´ê¸°ê°€ ìˆë‹¤ë©´ ê¸°íƒ€ íŒ¨í„´ ì‹¤í–‰
                 stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[Random.Range(0, stateMachine.Monster.patterns.Length - 1)].Execute(stateMachine.Monster));
 
             }
