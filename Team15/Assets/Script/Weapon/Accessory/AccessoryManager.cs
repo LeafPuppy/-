@@ -30,29 +30,43 @@ public class AccessoryManager : MonoBehaviour
 
         var candidates = new List<AccessorySO>();
         foreach (var a in allAccessories)
-            if (a) candidates.Add(a);
+        {
+            if (!a) continue;
+
+            if (!a.stackable && equipped.Exists(e => e && e.type == a.type))
+                continue;
+
+            candidates.Add(a);
+        }
+
+        if (candidates.Count == 0) return result;
 
         int need = Mathf.Min(count, candidates.Count);
-        bool bootsUsed = false;
 
-        while (result.Count < need && candidates.Count > 0)
+        for (int i = 0; i < need; i++)
         {
             int idx = Random.Range(0, candidates.Count);
-            var pick = candidates[idx];
-
-            if (pick.type == AccessoryType.Boots && bootsUsed)
-            {
-                candidates.RemoveAt(idx);
-                continue;
-            }
-
-            result.Add(pick);
-            if (pick.type == AccessoryType.Boots) bootsUsed = true;
-
+            result.Add(candidates[idx]);
             candidates.RemoveAt(idx);
         }
 
         return result;
+    }
+
+    public AccessorySO DrawOneRandomAllowDupExceptNonStackableOwned()
+    {
+        var candidates = new List<AccessorySO>();
+        foreach (var a in allAccessories)
+        {
+            if (!a) continue;
+            if (!a.stackable && equipped.Exists(e => e && e.type == a.type))
+                continue;
+            candidates.Add(a);
+        }
+
+        if (candidates.Count == 0) return null;
+        int idx = Random.Range(0, candidates.Count);
+        return candidates[idx];
     }
 
     public void Equip(AccessorySO acc)
