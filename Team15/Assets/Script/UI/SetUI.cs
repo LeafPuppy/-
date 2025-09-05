@@ -126,6 +126,7 @@ public class SetUI : UIBase
 
     public void OnClickExit()
     {
+        AudioManager.Instance.PlaySFX("BtnSFX");
         Hide();
         if(SceneLoadManager.Instance.NowSceneName == "TitleScene")
             UIManager.Instance.Show<TitleUI>();

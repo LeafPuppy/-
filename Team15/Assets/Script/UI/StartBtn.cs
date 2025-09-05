@@ -9,6 +9,7 @@ public class StartBtn : MonoBehaviour
 {
     public void OnClickBtn()
     {
+        AudioManager.Instance.PlaySFX("BtnSFX");
         if (!File.Exists(Application.persistentDataPath + "/PlayerData.json"))
         {
             DataManager.Instance.data = new DataManager.PlayerData();

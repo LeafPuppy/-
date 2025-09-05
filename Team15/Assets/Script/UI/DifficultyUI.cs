@@ -62,6 +62,11 @@ public class DifficultyUI : MonoBehaviour
 
         // 입장
         Time.timeScale = 1f;
-        SceneManager.LoadScene(dungeonSceneName);
+
+        SceneLoadManager.Instance.ChangeScene(dungeonSceneName, () =>
+        {
+            AudioManager.Instance.BGMSource.clip = ResourceManager.Instance.LoadAsset<AudioClip>("MapSelectBGM", eAssetType.Audio, eCategoryType.BGM);
+            AudioManager.Instance.BGMSource.Play();
+        });
     }
 }
