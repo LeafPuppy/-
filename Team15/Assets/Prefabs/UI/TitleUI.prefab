@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e12a367a629e04ebf060d63a82c191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveUI: {fileID: 0}
 --- !u!1 &2440169136218253540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,6 +1157,7 @@ GameObject:
   - component: {fileID: 7743075976886823697}
   - component: {fileID: 8716990980050112858}
   - component: {fileID: 5793797610160154244}
+  - component: {fileID: 8555650527589687012}
   m_Layer: 5
   m_Name: LoadBtn
   m_TagString: Untagged
@@ -1277,6 +1279,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8555650527589687012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042658931643466519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cafc2a007b8a50e4ea17575803021a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8724975795077310523
 GameObject:
   m_ObjectHideFlags: 0

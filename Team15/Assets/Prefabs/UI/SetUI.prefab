@@ -294,8 +294,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 541222323540826332}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: -30}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1123,6 +1123,7 @@ GameObject:
   - component: {fileID: 2512868567214373303}
   - component: {fileID: 2819903913693249888}
   - component: {fileID: 1905018106946071067}
+  - component: {fileID: 4893255961538936888}
   m_Layer: 5
   m_Name: SaveBtn
   m_TagString: Untagged
@@ -1244,6 +1245,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4893255961538936888}
+        m_TargetAssemblyTypeName: SaveBtn, Assembly-CSharp
+        m_MethodName: OnClickSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4893255961538936888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3684725808490642027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078fd70e2f0e6f84396638fb0c7b33e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3859283602450917764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,7 +1287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5659457322328847152
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1333,6 +1358,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7e292736a154d40a5f6e1acfe787dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmSlider: {fileID: 3814577950769150917}
+  sfxSlider: {fileID: 2599277720141480038}
+  bgmMute: {fileID: 4392925358022726175}
+  sfxMute: {fileID: 9079082491186064945}
 --- !u!1 &3917958782678173163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1939,7 +1968,7 @@ RectTransform:
   m_Father: {fileID: 2856584573201345653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2630,7 +2659,7 @@ RectTransform:
   m_Father: {fileID: 7484918431489869811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2704,8 +2733,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7538417757695440127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: -30}
   m_Pivot: {x: 0.5, y: 0.5}
