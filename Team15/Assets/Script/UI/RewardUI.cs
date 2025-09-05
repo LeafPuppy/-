@@ -305,12 +305,18 @@ public class RewardUI : MonoBehaviour
         isOpen = false;
         inputLocked = false;
 
-        panel.SetActive(false);
+        if (panel)
+        {
+            Debug.Log("[RewardUI] Close() 실행 - 끄는 대상: " + panel.name);
+            panel.SetActive(false);  // 다시 살림
+        }
+
         Time.timeScale = 1f;
 
-        // if (openMapOnClose && mapSelectUI) mapSelectUI.SetActive(true);
-
-        OnFinished?.Invoke();
+        if (DungeonMapManager.Instance != null)
+            DungeonMapManager.Instance.StartCoroutine(InvokeFinishedNextFrame());
+        else
+            Debug.LogWarning("[RewardUI] DungeonMapManager.Instance 없음 - OnFinished 바로 호출");
     }
 
     void Finish() => Close();
@@ -337,5 +343,12 @@ public class RewardUI : MonoBehaviour
         if (!img) return;
         img.sprite = spr;
         img.enabled = enable && spr != null;
+    }
+
+    IEnumerator InvokeFinishedNextFrame()
+    {
+        yield return null; // 한 프레임 대기
+        Debug.Log("[RewardUI] OnFinished 호출");
+        OnFinished?.Invoke();
     }
 }

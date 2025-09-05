@@ -35,23 +35,65 @@ public class MapSelectUI : MonoBehaviour
         if (panel) panel.SetActive(false);
 
         nodeMap = new Dictionary<string, MapNodeButton>();
-        foreach (var n in nodes) if (n) nodeMap[n.nodeId] = n;
+
+        Debug.Log("[MapSelectUI] Awake 시작 - nodes.Count = " + nodes.Count);
+
+        int i = 0;
+        foreach (var n in nodes)
+        {
+            if (n == null)
+            {
+                Debug.LogError($"[MapSelectUI] nodes[{i}] 이 null입니다! 인스펙터 확인 필요");
+                i++;
+                continue;
+            }
+
+            if (string.IsNullOrEmpty(n.nodeId))
+                Debug.LogError($"[MapSelectUI] {n.name} 의 nodeId 비어있음!");
+
+            if (nodeMap.ContainsKey(n.nodeId))
+                Debug.LogError($"[MapSelectUI] nodeId 중복됨: {n.nodeId}");
+
+            nodeMap[n.nodeId] = n;
+            Debug.Log($"[MapSelectUI] 등록된 노드[{i}]: {n.name}, nodeId={n.nodeId}, type={n.type}");
+            i++;
+        }
 
         adj = new Dictionary<string, List<string>>();
         foreach (var e in edges)
         {
             if (!adj.ContainsKey(e.from)) adj[e.from] = new List<string>();
             adj[e.from].Add(e.to);
+
+            if (!nodeMap.ContainsKey(e.from))
+                Debug.LogError("[MapSelectUI] Edge.from 존재 안함: " + e.from);
+            if (!nodeMap.ContainsKey(e.to))
+                Debug.LogError("[MapSelectUI] Edge.to 존재 안함: " + e.to);
         }
 
         currentNodeId = startNodeId;
         visited.Add(currentNodeId);
+
+        Debug.Log("[MapSelectUI] Awake 완료. 시작 노드: " + currentNodeId);
     }
 
     public void Open(int floor = 1)
     {
-        if (panel) panel.SetActive(true);
-        if (floorText) floorText.text = $"{floor:00}층";
+        if (panel)
+        {
+            panel.SetActive(true);
+            Debug.Log("[MapSelectUI] panel 활성화됨: " + panel.name + ", activeSelf=" + panel.activeSelf);
+        }
+        else
+        {
+            Debug.LogWarning("[MapSelectUI] panel 참조 없음!");
+        }
+
+        if (floorText)
+            floorText.text = $"{floor:00}층";
+
+        Debug.Log("[MapSelectUI] FloorText 세팅됨: " + floorText?.text);
+
         Time.timeScale = 0f;
         Refresh();
     }
@@ -73,7 +115,7 @@ public class MapSelectUI : MonoBehaviour
 
     public void SelectNode(MapNodeButton node)
     {
-        // 1) 현재 노드 클리어 처리(되돌리기 금지)
+        // 1) 현재 노드 클리어 처리
         cleared.Add(currentNodeId);
 
         // 2) 실제 맵 로드
@@ -83,7 +125,9 @@ public class MapSelectUI : MonoBehaviour
         currentNodeId = node.nodeId;
         visited.Add(currentNodeId);
 
-        // 4) 지도 닫고 전투로
+        Time.timeScale = 1f;
+
+        // 4) 지도 닫기
         Close();
     }
 
@@ -101,19 +145,28 @@ public class MapSelectUI : MonoBehaviour
 
     void Refresh()
     {
+        Debug.Log("=== [MapSelectUI.Refresh] 시작 === nodeMap.Count=" + (nodeMap?.Count ?? -1));
+
         foreach (var kv in nodeMap)
         {
             string id = kv.Key;
             var n = kv.Value;
 
+            if (n == null)
+            {
+                Debug.LogError("[MapSelectUI] nodeMap[" + id + "] 이 null입니다!");
+                continue;
+            }
+
             bool isCurrent = (id == currentNodeId);
             bool isCleared = cleared.Contains(id);
             bool canGoNext = CanEnter(id);
 
+            Debug.Log($"[MapSelectUI.Refresh] 처리중: id={id}, isCurrent={isCurrent}, isCleared={isCleared}, canGoNext={canGoNext}");
+
             n.SetCurrent(isCurrent);
             n.SetCleared(isCleared);
 
-            // 다음 노드만 활성화, 그 외는 전부 잠금
             bool interactable = (!isCurrent && canGoNext);
             n.SetInteractable(interactable);
         }

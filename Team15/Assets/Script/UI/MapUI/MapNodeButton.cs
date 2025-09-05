@@ -7,7 +7,7 @@ public class MapNodeButton : MonoBehaviour
 {
     [Header("ID / 로드 정보")]
     public string nodeId = "Start";
-    public MapType type = MapType.Normal;
+    public MapType type;
     public int prefabIndex = -1;
     public string spawnId = null;
 
@@ -35,8 +35,12 @@ public class MapNodeButton : MonoBehaviour
     public void SetInteractable(bool v)
     {
         if (btn) btn.interactable = v;
-        if (lockOverlay) lockOverlay.alpha = v ? 0f : 0.6f;
-        if (lockOverlay) lockOverlay.blocksRaycasts = !v;
+
+        if (lockOverlay != null)
+        {
+            lockOverlay.alpha = v ? 0f : 0.6f;
+            lockOverlay.blocksRaycasts = !v;
+        }
     }
     public void SetCurrent(bool v) { if (currentMarker) currentMarker.SetActive(v); }
     public void SetCleared(bool v) { if (clearedMark) clearedMark.SetActive(v); }

@@ -11,5 +11,9 @@ public class RewardToMapBinder : MonoBehaviour
     void OnEnable() { if (rewardUI) rewardUI.OnFinished += OpenMap; }
     void OnDisable() { if (rewardUI) rewardUI.OnFinished -= OpenMap; }
 
-    void OpenMap() => mapUI.Open(floor);
+    void OpenMap()
+    {
+        Debug.Log("[Binder] OpenMap 호출됨");
+        mapUI.Open(floor);
+    }
 }
