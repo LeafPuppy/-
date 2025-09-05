@@ -4,12 +4,34 @@ using UnityEngine;
 
 public class RoomMonsterManager : MonoBehaviour
 {
+    [Header("전멸 감시 대상 루트")]
     [SerializeField] Transform monstersRoot;
+
+    [Header("보상 UI 연결")]
     [SerializeField] RewardUI rewardUI;
+
+    [Header("현재 방 정보(보상 분기용)")]
+    [SerializeField] MapType roomType = MapType.Normal;
+    [SerializeField] bool hasNextStage = true;
+
     int alive;
+    bool opened;
 
     void Start()
     {
+        if (!rewardUI)
+        {
+            return;
+        }
+
+        rewardUI.Configure(roomType, hasNextStage);
+
+        if (!monstersRoot)
+        {
+            ShowIfNotOpened();
+            return;
+        }
+
         var monsters = monstersRoot.GetComponentsInChildren<MonsterCondition>(true);
         alive = 0;
 
@@ -19,6 +41,9 @@ public class RoomMonsterManager : MonoBehaviour
             alive++;
             m.OnDie += HandleDie;
         }
+
+        if (alive <= 0)
+            ShowIfNotOpened();
     }
 
     void OnDestroy()
@@ -33,6 +58,13 @@ public class RoomMonsterManager : MonoBehaviour
         alive--;
         if (alive <= 0)
             rewardUI.Show();
+    }
+
+    void ShowIfNotOpened()
+    {
+        if (opened) return;
+        opened = true;
+        rewardUI.Show();
     }
 }
 
