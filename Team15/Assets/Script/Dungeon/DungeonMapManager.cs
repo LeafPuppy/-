@@ -23,6 +23,15 @@ public class DungeonMapManager : MonoBehaviour
     [SerializeField] string wallTag = "MapEndWall";
     [SerializeField] string fallbackSpawnName = "SpawnPoint";
 
+    [Header("Auto-load first room (testing)")]
+    [SerializeField] bool loadFirstRoomOnStart = true;
+    [SerializeField] MapType firstRoomType = MapType.Normal;
+    [SerializeField] int firstRoomIndex = 0;
+    [SerializeField] string firstSpawnId = null;
+
+    [SerializeField] bool spawnMarkerIsFeet = true;
+    [SerializeField] float spawnLift = 0.02f;
+
     GameObject currentMap;
     public GameObject CurrentMap => currentMap;
 
@@ -30,6 +39,15 @@ public class DungeonMapManager : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
+    }
+
+    void Start()
+    {
+        if (loadFirstRoomOnStart)
+        {
+            Time.timeScale = 1f;
+            LoadMap(firstRoomType, firstRoomIndex, firstSpawnId);
+        }
     }
 
     public void LoadMap(MapType type) => LoadMap(type, -1, null);
@@ -80,18 +98,44 @@ public class DungeonMapManager : MonoBehaviour
         if (!spawn)
         {
             var t = map.transform.Find(fallbackSpawnName);
-            if (t) spawn = t;
         }
 
-        if (spawn)
+        if (!spawn)
         {
-            var rb = player.GetComponent<Rigidbody2D>();
-            if (rb) rb.velocity = Vector2.zero;
-            player.transform.position = spawn.position;
+            return;
+        }
+
+        Vector3 pos = spawn.position;
+        pos.z = player.transform.position.z;
+
+        if (spawnMarkerIsFeet)
+        {
+            var col = player.GetComponent<Collider2D>();
+            if (col) pos.y += col.bounds.extents.y + spawnLift;
+        }
+
+        var rb = player.GetComponent<Rigidbody2D>();
+        if (rb)
+        {
+            rb.velocity = Vector2.zero;
+            rb.position = pos;
+            Physics2D.SyncTransforms();
+            StartCoroutine(ReSnapNextFixed(rb, pos));
         }
         else
         {
-            Debug.LogWarning("[DungeonMapManager] Spawn point not found.");
+            player.transform.position = pos;
         }
+
+        Debug.Log($"[Spawn] {(string.IsNullOrEmpty(spawnId) ? "default/fallback" : $"id='{spawnId}'")} → {pos}");
+    }
+
+    IEnumerator ReSnapNextFixed(Rigidbody2D rb, Vector3 pos)
+    {
+        yield return new WaitForFixedUpdate();
+        rb.position = pos;
+        rb.velocity = Vector2.zero;
+        Physics2D.SyncTransforms();
     }
 }
+

@@ -17,11 +17,24 @@ public class RoomMonsterManager : MonoBehaviour
     int alive;
     bool opened;
 
+    void Awake()
+    {
+        if (!rewardUI) rewardUI = FindObjectOfType<RewardUI>(true);
+
+        if (!monstersRoot) monstersRoot = transform.Find("Monster");
+    }
+
     void Start()
     {
         if (!rewardUI)
         {
             return;
+        }
+
+        if (MapSelectUI.Instance != null)
+        {
+            roomType = MapSelectUI.Instance.GetCurrentNodeTypeSafe();
+            hasNextStage = MapSelectUI.Instance.HasNextFromCurrent();
         }
 
         rewardUI.Configure(roomType, hasNextStage);

@@ -118,6 +118,22 @@ public class MapSelectUI : MonoBehaviour
             n.SetInteractable(interactable);
         }
     }
+
+    public MapType GetCurrentNodeTypeSafe()
+    {
+        if (nodeMap != null && nodeMap.TryGetValue(currentNodeId, out var btn) && btn != null)
+            return btn.type;
+        return MapType.Normal;
+    }
+
+    public bool HasNextFromCurrent()
+    {
+        if (!adj.TryGetValue(currentNodeId, out var nexts)) return false;
+
+        foreach (var id in nexts)
+            if (!cleared.Contains(id)) return true;
+        return false;
+    }
 }
 
 [System.Serializable]

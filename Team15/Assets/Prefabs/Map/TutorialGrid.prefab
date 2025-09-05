@@ -611,6 +611,45 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &2008130409305953241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2078358333657425250}
+  m_Layer: 0
+  m_Name: Monster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2078358333657425250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008130409305953241}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 871435818649342715}
+  - {fileID: 8031403003329181382}
+  - {fileID: 6994080980251036105}
+  - {fileID: 1831294336580767137}
+  - {fileID: 1229354389461027119}
+  - {fileID: 1919399626015500460}
+  - {fileID: 5671255845697237968}
+  - {fileID: 6463502031542185093}
+  m_Father: {fileID: 6491305797386873091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2157513502579893814
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +1035,37 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!1 &3707425482447569658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3774398530718977984}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3774398530718977984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3707425482447569658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.51, y: -3.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6491305797386873091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6124748430532293650
 GameObject:
   m_ObjectHideFlags: 0
@@ -4757,6 +4827,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6491305797386873091}
   - component: {fileID: 7117238245026392582}
+  - component: {fileID: 6291647673676903806}
   m_Layer: 0
   m_Name: TutorialGrid
   m_TagString: Untagged
@@ -4783,14 +4854,9 @@ Transform:
   - {fileID: 2640870317796423402}
   - {fileID: 8052153250813854395}
   - {fileID: 7313541184555111594}
-  - {fileID: 871435818649342715}
-  - {fileID: 8031403003329181382}
-  - {fileID: 6994080980251036105}
-  - {fileID: 1831294336580767137}
-  - {fileID: 1229354389461027119}
-  - {fileID: 1919399626015500460}
-  - {fileID: 5671255845697237968}
-  - {fileID: 6463502031542185093}
+  - {fileID: 3774398530718977984}
+  - {fileID: 42497742658607205}
+  - {fileID: 2078358333657425250}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &7117238245026392582
@@ -4805,6 +4871,19 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &6291647673676903806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561510810879173723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5606f82a2c1a5114ab6eb35fa4fb4675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSpawn: {fileID: 3774398530718977984}
 --- !u!1 &7630119654008526675
 GameObject:
   m_ObjectHideFlags: 0
@@ -6076,6 +6155,54 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &8666944241430340926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 42497742658607205}
+  - component: {fileID: 555282771826981920}
+  m_Layer: 0
+  m_Name: RoomMonsterManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &42497742658607205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666944241430340926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6491305797386873091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &555282771826981920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666944241430340926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 145e3bc0c357b894e80d20d42373a1b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monstersRoot: {fileID: 2078358333657425250}
+  rewardUI: {fileID: 0}
+  roomType: 0
+  hasNextStage: 1
 --- !u!1 &8750099112100526172
 GameObject:
   m_ObjectHideFlags: 0
@@ -6338,7 +6465,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6491305797386873091}
+    m_TransformParent: {fileID: 2078358333657425250}
     m_Modifications:
     - target: {fileID: 2609437484690927728, guid: 73a36d9e44352c446b3d67fe75976cc2, type: 3}
       propertyPath: m_SortingLayer
@@ -6408,7 +6535,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6491305797386873091}
+    m_TransformParent: {fileID: 2078358333657425250}
     m_Modifications:
     - target: {fileID: 2609437484690927728, guid: 73a36d9e44352c446b3d67fe75976cc2, type: 3}
       propertyPath: m_SortingLayer
@@ -6478,7 +6605,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6491305797386873091}
+    m_TransformParent: {fileID: 2078358333657425250}
     m_Modifications:
     - target: {fileID: 2609437484690927728, guid: 73a36d9e44352c446b3d67fe75976cc2, type: 3}
       propertyPath: m_SortingLayer
@@ -6548,7 +6675,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6491305797386873091}
+    m_TransformParent: {fileID: 2078358333657425250}
     m_Modifications:
     - target: {fileID: 2162531560138162288, guid: 75edde954f2e89343b9700f62dffe272, type: 3}
       propertyPath: m_SortingLayer
@@ -6618,7 +6745,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6491305797386873091}
+    m_TransformParent: {fileID: 2078358333657425250}
     m_Modifications:
     - target: {fileID: 2162531560138162288, guid: 6c7412822ba1cfc44b16d37ab3bf0b23, type: 3}
       propertyPath: m_SortingLayer
@@ -6688,7 +6815,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6491305797386873091}
+    m_TransformParent: {fileID: 2078358333657425250}
     m_Modifications:
     - target: {fileID: 2162531560138162288, guid: 75edde954f2e89343b9700f62dffe272, type: 3}
       propertyPath: m_SortingLayer
@@ -6758,7 +6885,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6491305797386873091}
+    m_TransformParent: {fileID: 2078358333657425250}
     m_Modifications:
     - target: {fileID: 2162531560138162288, guid: 6c7412822ba1cfc44b16d37ab3bf0b23, type: 3}
       propertyPath: m_SortingLayer
@@ -6828,7 +6955,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6491305797386873091}
+    m_TransformParent: {fileID: 2078358333657425250}
     m_Modifications:
     - target: {fileID: 2609437484690927728, guid: 73a36d9e44352c446b3d67fe75976cc2, type: 3}
       propertyPath: m_SortingLayer
