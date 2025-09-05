@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class MonsterCondition : MonoBehaviour, IDamageable
 {
@@ -38,6 +39,19 @@ public class MonsterCondition : MonoBehaviour, IDamageable
             currentHealth -= damage / 2;
         else 
             monster.condition.currentHealth -= damage;
+
+        switch(monster.data.type)
+        {
+            case MonsterType.Melee: case MonsterType.Range:
+                AudioManager.Instance.PlaySFX("NormalDamageSFX");
+                break;
+            case MonsterType.Special:
+                AudioManager.Instance.PlaySFX("SpecialDamageSFX");
+                break;
+            case MonsterType.Boss:
+                AudioManager.Instance.PlaySFX("BossDamageSFX");
+                break;
+        }
 
         monster.animationController.ChangeAnimation(AnimationState.Damage);
 

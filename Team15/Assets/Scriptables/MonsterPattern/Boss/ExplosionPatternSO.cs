@@ -16,6 +16,7 @@ public class ExplosionPatternSO : PatternDataSO
         isHard = GameState.Instance.currentDifficulty == Difficulty.Hard ? true : false;
         if (isHard)
         {
+            AudioManager.Instance.PlaySFX("StampingSFX");
             monster.inPattern = true;
             //랜덤 위치에 폭발지점 표시
             exPosX = Random.Range(-3f, 12f);

@@ -22,4 +22,8 @@ public class AudioManager : Singleton<AudioManager>
         SFXSource.clip = ResourceManager.Instance.LoadAsset<AudioClip>(clipName, eAssetType.Audio, eCategoryType.SFX);
         SFXSource.Play();
     }
+    public void StopSFX()
+    {
+        SFXSource.Stop();
+    }
 }
