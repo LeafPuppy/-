@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: MobSpawn
   m_EditorClassIdentifier: 
   damage: 0
+  isHard: 0
   spawnCount: 2
   spawnTime: 3
   spawnPool:
   - {fileID: 8794621045914476496, guid: 6c7412822ba1cfc44b16d37ab3bf0b23, type: 3}
   - {fileID: 8794621045914476496, guid: 75edde954f2e89343b9700f62dffe272, type: 3}
   spawnPositions:
-  - {x: -6, y: 1.4}
-  - {x: -3, y: -0.6}
-  - {x: 3, y: -0.6}
-  - {x: 6, y: 1.4}
+  - {x: -5, y: 3.7}
+  - {x: -1.5, y: 0.7}
+  - {x: 10, y: 0.7}
+  - {x: 13, y: 3.7}

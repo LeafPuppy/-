@@ -10,6 +10,8 @@ public class AudioManager : Singleton<AudioManager>
     public AudioSource BGMSource;
     public AudioSource SFXSource;
 
+    public AudioClip SFXClip;
+
     protected override void Awake()
     {
         base.Awake();
@@ -24,12 +26,22 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySFX(string clipName)
     {
-        SFXSource.clip = ResourceManager.Instance.LoadAsset<AudioClip>(clipName, eAssetType.Audio, eCategoryType.SFX);
-        SFXSource.Play();
+        if(clipName == "MonsterDashSFX")
+        {
+            SFXSource.clip = ResourceManager.Instance.LoadAsset<AudioClip>(clipName, eAssetType.Audio, eCategoryType.SFX);
+            SFXSource.Play();
+            return;
+        }
+
+        SFXClip = ResourceManager.Instance.LoadAsset<AudioClip>(clipName, eAssetType.Audio, eCategoryType.SFX);
+        SFXSource.PlayOneShot(SFXClip);
     }
+
+
     public void StopSFX()
     {
         SFXSource.Stop();
+        SFXSource.clip = null;
     }
 
     private void CreateAudioSource()
