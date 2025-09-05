@@ -328,6 +328,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            Time.timeScale = 0f;
+
+        }
+    }
+
     IInteractable GetNearestInteractable()
     {
         var hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, interactMask);
