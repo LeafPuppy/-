@@ -1197,18 +1197,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: PlaySFX
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 4893255961538936888}
         m_TargetAssemblyTypeName: SaveBtn, Assembly-CSharp
         m_MethodName: OnClickSave
@@ -1322,6 +1310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7e292736a154d40a5f6e1acfe787dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   bgmSlider: {fileID: 3814577950769150917}
   sfxSlider: {fileID: 2599277720141480038}
   bgmMute: {fileID: 4392925358022726175}

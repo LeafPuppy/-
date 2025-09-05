@@ -127,6 +127,9 @@ public class SetUI : UIBase
     public void OnClickExit()
     {
         Hide();
-        UIManager.Instance.Show<TitleUI>();
+        if(SceneLoadManager.Instance.NowSceneName == "TitleScene")
+            UIManager.Instance.Show<TitleUI>();
+        else
+            UIManager.Instance.Show<PauseUI>();
     }
 }

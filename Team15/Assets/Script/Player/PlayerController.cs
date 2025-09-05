@@ -333,7 +333,7 @@ public class PlayerController : MonoBehaviour
         if(context.started)
         {
             Time.timeScale = 0f;
-
+            UIManager.Instance.Show<PauseUI>();
         }
     }
 

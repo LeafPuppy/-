@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PauseUI : UIBase
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnClickResumeBtn()
     {
-        
+        Hide();
+        Time.timeScale = 1f;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickSetBtn()
     {
-        
+        Hide();
+        UIManager.Instance.Show<SetUI>();
+    }
+
+    public void OnClickDungeonExitBtn()
+    {
+        Hide();
+        SceneLoadManager.Instance.ChangeScene("VillageScene");
     }
 }
