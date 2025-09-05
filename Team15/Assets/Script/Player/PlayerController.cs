@@ -304,6 +304,7 @@ public class PlayerController : MonoBehaviour
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
             Vector2 throwDir = (mouseWorldPos - transform.position).normalized;
 
+            AudioManager.Instance.PlaySFX("ThrowSFX");
             rb2d.AddForce(throwDir * weaponThrowSpeed, ForceMode2D.Impulse);
             rb2d.AddTorque(5f, ForceMode2D.Impulse);
 
