@@ -36,6 +36,7 @@ public class JumpPatternSO : PatternDataSO
             {
                 if (ground.CompareTag("Ground"))
                 {
+                    AudioManager.Instance.PlaySFX("JumpSFX");
                     if (monster.stateMachine.Player.transform.position.y < 2)
                     {
                         Debug.Log("플레이어 데미지");

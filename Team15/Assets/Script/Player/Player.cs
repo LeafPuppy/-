@@ -34,6 +34,7 @@ public class Player : Entity
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        AudioManager.Instance.PlaySFX("PlayerDamageSFX");
         condition.state = AnimationState.Damage;
     }
 }

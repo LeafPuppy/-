@@ -11,6 +11,7 @@ public class WeaponSpawnSO : PatternDataSO
     {
         monster.inPattern = true;
         monster.stateMachine.ChangeState(monster.stateMachine.SturnState);
+        AudioManager.Instance.PlaySFX("SwaySFX");
         for (int i = 0; i < spawnNum; i++)
         {
             var go = Instantiate(weaponPrefabs[Random.Range(0, weaponPrefabs.Length)], monster.transform.position + new Vector3(0, 1, 0), Quaternion.identity);

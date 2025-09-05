@@ -9,5 +9,4 @@ public class PowerAttackSO : PatternDataSO
     {
         throw new System.NotImplementedException();
     }
-
 }

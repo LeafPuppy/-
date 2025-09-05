@@ -15,6 +15,7 @@ public class MobSpawnPatternSO : PatternDataSO
 
     public override IEnumerator Execute(Monster monster)
     {
+        AudioManager.Instance.PlaySFX("GrowlSFX");
         for(int i = 0; i < positions.Length; i++)
         {
             positions[i] = spawnPositions[Random.Range(0, spawnPositions.Length)];

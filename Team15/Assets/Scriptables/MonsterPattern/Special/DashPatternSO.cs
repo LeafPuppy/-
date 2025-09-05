@@ -22,6 +22,7 @@ public class DashPatternSO : PatternDataSO
         {
             monster.animationController.ChangeAnimation(AnimationState.Move);
             yield return new WaitForSeconds(1.5f);
+            AudioManager.Instance.PlaySFX("MonsterDashSFX");
             while (monster.isMaintain)
             {
                 if (round == 1)
@@ -48,6 +49,7 @@ public class DashPatternSO : PatternDataSO
                 }
                 if (monster.transform.position.x >= 12.5f && round == 1 || monster.transform.position.x <= -3.5f && round == 2)
                 {
+                    AudioManager.Instance.StopSFX();
                     if (!isHard)
                     {
                         monster.isMaintain = false;
@@ -82,6 +84,7 @@ public class DashPatternSO : PatternDataSO
         {
             monster.animationController.ChangeAnimation(AnimationState.Move);
             yield return new WaitForSeconds(1.5f);
+            AudioManager.Instance.PlaySFX("MonsterDashSFX");
             while (monster.isMaintain)
             {
                 if (round == 1)
@@ -107,6 +110,7 @@ public class DashPatternSO : PatternDataSO
                 }
                 if (monster.transform.position.x >= 12.5f && round == 2 || monster.transform.position.x <= -3.5f && round == 1)
                 {
+                    AudioManager.Instance.StopSFX();
                     if (!isHard)
                     {
                         monster.isMaintain = false;

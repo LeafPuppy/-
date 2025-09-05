@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 5092058366361563353}
   - component: {fileID: 9176022298906647448}
   - component: {fileID: 7405146166453858927}
+  - component: {fileID: 3990942708454321372}
   - component: {fileID: 2380420131909178842}
+  - component: {fileID: 147109974156999988}
   m_Layer: 10
   m_Name: bow_0
   m_TagString: Untagged
@@ -95,7 +97,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 369751313752602142}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1936a67f08a9fd749bfbc6c9f668ceff, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -121,6 +123,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.12}
   m_Size: {x: 0.375, y: 0.85}
   m_Direction: 0
+--- !u!114 &3990942708454321372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369751313752602142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d84821fa1ef3c074c8a099f446f5a6f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 147109974156999988}
 --- !u!114 &2380420131909178842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,10 +148,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69233c31697608b4fb3590adf142f637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponAnimationController: {fileID: 3990942708454321372}
   canAttack: 0
   damage: 10
   attackRange: 1.5
   attackDamage: 10
+--- !u!95 &147109974156999988
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369751313752602142}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c7935ed889558341bd2706ba7dfe6a9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1565887724206363577
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +664,7 @@ Transform:
   m_GameObject: {fileID: 7126737995402094272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 9.27, y: -2.9815934, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

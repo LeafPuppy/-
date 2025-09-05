@@ -203,6 +203,7 @@ public class PlayerController : MonoBehaviour
 
         if (context.performed && !isDashing && Time.time >= lastDashTime + dashCooldown)
         {
+            AudioManager.Instance.PlaySFX("DashSFX");
             Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
             Vector2 direction = (mouseWorldPos - transform.position);
@@ -261,6 +262,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (nearest.isEquipable)
                 {
+                    AudioManager.Instance.PlaySFX("GetWeaponSFX");
                     nearest.objectUI.SetActive(false);
                     nearest.isEquipable = false;
                     nearest.transform.SetParent(weaponHolder.transform);
@@ -302,6 +304,7 @@ public class PlayerController : MonoBehaviour
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
             Vector2 throwDir = (mouseWorldPos - transform.position).normalized;
 
+            AudioManager.Instance.PlaySFX("ThrowSFX");
             rb2d.AddForce(throwDir * weaponThrowSpeed, ForceMode2D.Impulse);
             rb2d.AddTorque(5f, ForceMode2D.Impulse);
 
