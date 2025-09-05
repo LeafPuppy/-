@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4068673562247042218}
   - component: {fileID: 1478230225807056601}
   - component: {fileID: 9163113642454861636}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: sword_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029434930155801086}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.41, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2253688309146324319}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1478230225807056601
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 7899328515798077492}
   - component: {fileID: 7551350267387708199}
   - component: {fileID: 6599097208375855876}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 3512668509718166892}
   - component: {fileID: 3304747263384222853}
   - component: {fileID: 4507530504593454460}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 7617556747083034442}
   - component: {fileID: 176024171457317821}
   - component: {fileID: 9046670283881509813}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: EquipUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: -3156727263428383078}
   - component: {fileID: 4570095752333625792}
   - component: {fileID: 6933630493727329537}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ Transform:
   m_GameObject: {fileID: 5017775031717342345}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.16, y: -2.9815934, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 4065896721528138911}
   - component: {fileID: 5210329723069648551}
   - component: {fileID: 5563875876750978636}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

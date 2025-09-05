@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1907165988077690197}
   - component: {fileID: 3247367116175914608}
   - component: {fileID: 8126970443771956918}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 7639060569896407843}
   - component: {fileID: 8448221058387037506}
   - component: {fileID: 2238086457920750364}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 1911749747641018843}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.83, y: -2.9815934, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 7305356450675948256}
   - component: {fileID: 9201491942169215195}
   - component: {fileID: 1378223543383582076}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: EquipUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 5889364750510370003}
   - component: {fileID: 7383968985996632181}
   - component: {fileID: 3618552504186706677}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 6722760140993186538}
   - component: {fileID: 4964914824001443917}
   - component: {fileID: 1515916713915272425}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 4627377758106456120}
   - component: {fileID: 6789228735188864831}
   - component: {fileID: 3738077808255888475}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: staff_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,13 +612,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9080688872182969152}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.84, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1153783995705945754}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4627377758106456120
 SpriteRenderer:
   m_ObjectHideFlags: 0

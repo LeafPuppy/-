@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class WeaponObject : MonoBehaviour
 {
+    [SerializeField] WeaponAnimationController weaponAnimationController;
     [Header("Weapon Settings")]
     public bool canAttack = false;
     public float damage = 10f;
@@ -10,8 +11,7 @@ public class WeaponObject : MonoBehaviour
 
     public void TakeAttack(Vector2 attackOrigin, Vector2 attackDirection)
     {
-        // 1. 애니메이션 출력 (여기서는 Debug로 대체)
-        Debug.Log($"{gameObject.name} 공격 애니메이션 출력");
+       weaponAnimationController.ChangeAnimation(WeaponState.Attack);
 
         // 2. 범위 내 공격 판정
         RaycastHit2D[] hits = Physics2D.CircleCastAll(attackOrigin, attackRange, attackDirection, attackRange);

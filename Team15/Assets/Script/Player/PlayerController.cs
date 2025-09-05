@@ -62,13 +62,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // 대화 UI가 열려있으면 이동만 멈춤
         if (DialogueUI.Instance && DialogueUI.Instance.IsOpen)
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
             return;
         }
 
-        // 대쉬 처리 (대쉬는 Update에서 유지)
+        // 대쉬 처리 (정해진 거리만큼)
         if (isDashing)
         {
             dashTime += Time.deltaTime;
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour
         // 플레이어 스프라이트 뒤집기
         transform.localScale = new Vector3(flip * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 
+        // 무기(손) 위치와 회전 처리
         if (weaponHolder != null)
         {
             Vector2 dir = (mouseWorldPos - transform.position);
@@ -113,6 +115,7 @@ public class PlayerController : MonoBehaviour
                 weaponHolder.rotation = Quaternion.Euler(0f, 0f, angleDeg);
         }
     }
+
 
     void FixedUpdate()
     {
@@ -219,7 +222,8 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && weaponHolder.childCount > 0)
         {
-            var weaponObj = weaponHolder.GetChild(0).GetComponent<WeaponObject>();
+            var weaponObj = weaponHolder.GetComponentInChildren<WeaponObject>();
+            Debug.Log(weaponObj);
             if (weaponObj == null) return;
 
             // 공격 방향: 마우스 방향
@@ -231,7 +235,6 @@ public class PlayerController : MonoBehaviour
             weaponObj.TakeAttack(transform.position, attackDir);
         }
     }
-
 
     public void OnPickWeapon(InputAction.CallbackContext context)
     {

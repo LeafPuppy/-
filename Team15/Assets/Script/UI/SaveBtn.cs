@@ -6,6 +6,7 @@ public class SaveBtn : MonoBehaviour
 {
     public void OnClickSave()
     {
+        AudioManager.Instance.PlaySFX("BtnSFX");
         //DataManager.Instance.data.dungeonClearCount = CharacterManager.Instance.Player.condition.dungeonClearCount;
         //DataManager.Instance.data.jem = CharacterManager.Instance.Player.condition.jem;
         DataManager.Instance.setting.bgmVolume = AudioManager.Instance.BGMSource.volume;
