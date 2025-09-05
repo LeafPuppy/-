@@ -203,6 +203,7 @@ public class PlayerController : MonoBehaviour
 
         if (context.performed && !isDashing && Time.time >= lastDashTime + dashCooldown)
         {
+            AudioManager.Instance.PlaySFX("DashSFX");
             Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
             Vector2 direction = (mouseWorldPos - transform.position);
@@ -261,6 +262,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (nearest.isEquipable)
                 {
+                    AudioManager.Instance.PlaySFX("GetWeaponSFX");
                     nearest.objectUI.SetActive(false);
                     nearest.isEquipable = false;
                     nearest.transform.SetParent(weaponHolder.transform);
