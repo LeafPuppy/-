@@ -17,8 +17,9 @@ public class AudioManager : Singleton<AudioManager>
         BGMSource.loop = true;
     }
 
-    public void PlaySFX()
+    public void PlaySFX(string clipName)
     {
+        SFXSource.clip = ResourceManager.Instance.LoadAsset<AudioClip>(clipName, eAssetType.Audio, eCategoryType.SFX);
         SFXSource.Play();
     }
 }

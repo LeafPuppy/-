@@ -6,7 +6,8 @@ public class TitleUI : UIBase
 {
     public void OnClickBtn(string str)
     {
-        switch(str)
+        AudioManager.Instance.PlaySFX("BtnSFX");
+        switch (str)
         {
             case "PauseUI":
                 UIManager.Instance.Show<PauseUI>();
