@@ -27,11 +27,12 @@ public class HUD : UIBase
 
     public void UpdateWeapon()
     {
-        if (CharacterManager.Instance.Player.controller.weaponHolder.gameObject.name != "Hand")
+        if (CharacterManager.Instance.Player.controller.weaponHolder.gameObject.transform.childCount != 0)
         {
             weapon.enabled = true;
             get.SetActive(false);
-            var name = CharacterManager.Instance.Player.controller.weaponHolder.gameObject.name;
+            var name = CharacterManager.Instance.Player.controller.weaponHolder.transform.GetChild(0).name;
+            name = name.Replace("(Clone)", "");
             weapon.sprite = ResourceManager.Instance.LoadAsset<Sprite>(name, eAssetType.Sprite, eCategoryType.Weapon);
         }
         else
