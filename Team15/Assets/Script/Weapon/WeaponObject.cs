@@ -11,7 +11,7 @@ public class WeaponObject : MonoBehaviour
 
     public void TakeAttack(Vector2 attackOrigin, Vector2 attackDirection)
     {
-       weaponAnimationController.ChangeAnimation(WeaponState.Attack);
+        weaponAnimationController.ChangeAnimation(WeaponState.Attack);
 
         // 2. 범위 내 공격 판정
         RaycastHit2D[] hits = Physics2D.CircleCastAll(attackOrigin, attackRange, attackDirection, attackRange);
@@ -35,19 +35,23 @@ public class WeaponObject : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Damageable"))
         {
-            // IDamageable 인터페이스 구현체가 있으면 데미지 처리
             var damageable = collision.gameObject.GetComponent<IDamageable>();
             if (damageable != null)
             {
                 damageable.TakeDamage(damage);
             }
-            // 추가적으로 데미지 이펙트, 사운드 등 처리 가능
         }
     }
 
-    // 공격 가능 상태를 외부에서 제어할 수 있도록 메서드 제공
     public void SetAttackState(bool state)
     {
         canAttack = state;
+    }
+
+    // 공격 판정 범위 Gizmo 표시
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
