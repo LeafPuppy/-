@@ -20,6 +20,22 @@ public class MonsterAttackState : MonsterBaseState
 
     public override void Update()
     {
+        Collider2D[] objs = Physics2D.OverlapCircleAll(stateMachine.Monster.transform.position, 100, LayerMask.GetMask("Weapon"));
+             
+        if(objs.Length == 0)
+        {
+            stateMachine.Monster.canSpawn = true;
+        }
+        else if(objs.Length == 1)
+        {
+            if (objs[0].gameObject.transform.parent.name == "Hand")
+                stateMachine.Monster.canSpawn = true;
+        }
+        else
+        {
+            stateMachine.Monster.canSpawn = false;
+        }
+
         if (stateMachine.Player != null)
         {
             if (stateMachine.Monster.patterns.Length != 0 && !stateMachine.Monster.inPattern)
@@ -30,11 +46,19 @@ public class MonsterAttackState : MonsterBaseState
                     stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[stateMachine.Monster.patterns.Length - 1].Execute(stateMachine.Monster));
 
                 //맵에 무기가 있다면 기타 패턴 실행
-                if(!stateMachine.Monster.canSpawn)
-                    stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[Random.Range(0, stateMachine.Monster.patterns.Length - 1)].Execute(stateMachine.Monster));
+                if (!stateMachine.Monster.canSpawn)
+                {
+                    int id = Random.Range(0, stateMachine.Monster.patterns.Length - 1);
+                    Debug.Log(id);
+                    stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[id].Execute(stateMachine.Monster));
+                }
 
             }
-            if (stateMachine.Player == null) stateMachine.ChangeState(stateMachine.IdleState);
+            if (stateMachine.Player == null)
+            {
+                stateMachine.ChangeState(stateMachine.IdleState);
+                return;
+            }
 
             if (Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) > stateMachine.Monster.attackRange)
             {

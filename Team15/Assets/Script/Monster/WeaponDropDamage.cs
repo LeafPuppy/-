@@ -1,4 +1,5 @@
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponDropDamage : MonoBehaviour
@@ -18,6 +19,10 @@ public class WeaponDropDamage : MonoBehaviour
         else if (collision.gameObject.CompareTag("Ground"))
         {
             canDamage = false;
+        }
+        else if(collision.gameObject.CompareTag("Spikes"))
+        {
+            Destroy(this.gameObject);
         }
     }
 }

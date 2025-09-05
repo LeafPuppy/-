@@ -140,7 +140,7 @@ MonoBehaviour:
   speed: 0
   inPattern: 0
   isMaintain: 0
-  canSpawn: 1
+  canSpawn: 0
   attackRange: 3
 --- !u!114 &1637271423518181946
 MonoBehaviour:
