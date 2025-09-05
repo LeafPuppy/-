@@ -5,14 +5,13 @@ using UnityEngine;
 public class JumpPatternSO : PatternDataSO
 {
     public float jumpPower;
-    public Vector2 hitBox;
 
     public override IEnumerator Execute(Monster monster)
     {
         yield return Jump(monster);
 
         //50퍼센트 확률로 2타 실행
-        if(Random.Range(0, 2) == 1)
+        if (Random.Range(0, 2) == 1)
         {
             monster.StopCoroutine(monster.co);
             yield return Jump(monster);
@@ -31,22 +30,18 @@ public class JumpPatternSO : PatternDataSO
         while (monster.isMaintain)
         {
             //점프 후 착지 체크
-            Collider2D[] objects = Physics2D.OverlapBoxAll(monster.transform.position, hitBox, 0);
-            foreach (var ground in objects)
+            if (monster.transform.position.y < 2)
             {
-                if (ground.CompareTag("Ground"))
+                AudioManager.Instance.PlaySFX("JumpSFX");
+                if (monster.stateMachine.Player.transform.position.y < 1)
                 {
-                    AudioManager.Instance.PlaySFX("JumpSFX");
-                    if (monster.stateMachine.Player.transform.position.y < 2)
-                    {
-                        Debug.Log("플레이어 데미지");
-                        monster.stateMachine.Player.TryGetComponent<IDamageable>(out IDamageable damageable);
-                        damageable.TakeDamage(damage);
-                    }
-                    monster.isMaintain = false;
-
-                    monster.co = monster.StartCoroutine(monster.CheckInPattern());
+                    Debug.Log("플레이어 데미지");
+                    monster.stateMachine.Player.TryGetComponent<IDamageable>(out IDamageable damageable);
+                    damageable.TakeDamage(damage);
                 }
+                monster.isMaintain = false;
+
+                monster.co = monster.StartCoroutine(monster.CheckInPattern());
             }
             yield return null;
         }
