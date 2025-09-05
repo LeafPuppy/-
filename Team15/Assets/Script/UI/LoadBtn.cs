@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class LoadBtn : MonoBehaviour
@@ -14,7 +15,7 @@ public class LoadBtn : MonoBehaviour
     }
     public void Load()
     {
-        if(File.Exists(Application.persistentDataPath + "/PlayerData.json"))
+        if (File.Exists(Application.persistentDataPath + "/PlayerData.json"))
         {
             DataManager.Instance.LoadData();
             //CharacterManager.Instance.Player.condition.jem = DataManager.Instance.data.jem;
@@ -29,8 +30,10 @@ public class LoadBtn : MonoBehaviour
             AudioManager.Instance.SFXSource.mute = DataManager.Instance.setting.sfxMute;
         }
 
-        SceneLoadManager.Instance.ChangeScene("VillageScene");
-        AudioManager.Instance.BGMSource.clip = ResourceManager.Instance.LoadAsset<AudioClip>("VillageBGM", eAssetType.Audio, eCategoryType.BGM);
-        AudioManager.Instance.BGMSource.Play();
+        SceneLoadManager.Instance.ChangeScene("VillageScene", () =>
+        {
+            AudioManager.Instance.BGMSource.clip = ResourceManager.Instance.LoadAsset<AudioClip>("VillageBGM", eAssetType.Audio, eCategoryType.BGM);
+            AudioManager.Instance.BGMSource.Play();
+        });
     }
 }

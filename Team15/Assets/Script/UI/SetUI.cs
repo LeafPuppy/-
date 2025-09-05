@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SetUI : MonoBehaviour
+public class SetUI : UIBase
 {
     public Slider bgmSlider;
     public Slider sfxSlider;
@@ -12,8 +12,26 @@ public class SetUI : MonoBehaviour
     public GameObject bgmMute;
     public GameObject sfxMute;
 
+    public Button bgmOff;
+    public Button bgmOn;
+    public Button sfxOff;
+    public Button sfxOn;
+
+    private AudioSource bgmSource;
+    private AudioSource sfxSource;
+
     private void Awake()
     {
+        bgmSource = AudioManager.Instance.BGMSource;
+        sfxSource = AudioManager.Instance.SFXSource;
+
+        bgmSlider.onValueChanged.AddListener(ChangeBGMVolume);
+        sfxSlider.onValueChanged.AddListener(ChangeSFXVolume);
+        bgmOff.onClick.AddListener(BGMOff);
+        sfxOff.onClick.AddListener(SFXOff);
+        bgmOn.onClick.AddListener(BGMOn);
+        sfxOn.onClick.AddListener(SFXOn);
+
         if (File.Exists(Application.persistentDataPath + "/Setting.json"))
         {
             DataManager.Instance.LoadSetting();
@@ -35,8 +53,6 @@ public class SetUI : MonoBehaviour
             bgmSlider.value = 1;
             sfxSlider.value = 1;
         }
-
-        this.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -71,5 +87,49 @@ public class SetUI : MonoBehaviour
         DataManager.Instance.setting.bgmMute = AudioManager.Instance.BGMSource.mute;
         DataManager.Instance.setting.sfxMute = AudioManager.Instance.SFXSource.mute;
         DataManager.Instance.SaveSetting();
+    }
+
+    private void OnDestroy()
+    {
+        DataManager.Instance.setting.bgmVolume = AudioManager.Instance.BGMSource.volume;
+        DataManager.Instance.setting.sfxVolume = AudioManager.Instance.SFXSource.volume;
+        DataManager.Instance.setting.bgmMute = AudioManager.Instance.BGMSource.mute;
+        DataManager.Instance.setting.sfxMute = AudioManager.Instance.SFXSource.mute;
+        DataManager.Instance.SaveSetting();
+    }
+
+    private void ChangeBGMVolume(float value)
+    {
+        bgmSource.volume = value;
+    }
+
+    private void ChangeSFXVolume(float value)
+    {
+        sfxSource.volume = value;
+    }
+    private void BGMOff()
+    {
+        bgmSource.mute = true;
+    }
+    private void SFXOff()
+    {
+        sfxSource.mute = true;
+    }
+    private void BGMOn()
+    {
+        bgmSource.mute = false;
+    }
+    private void SFXOn()
+    {
+        sfxSource.mute = false;
+    }
+
+    public void OnClickExit()
+    {
+        Hide();
+        if(SceneLoadManager.Instance.NowSceneName == "TitleScene")
+            UIManager.Instance.Show<TitleUI>();
+        else
+            UIManager.Instance.Show<PauseUI>();
     }
 }
