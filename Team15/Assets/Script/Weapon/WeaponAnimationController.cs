@@ -27,4 +27,8 @@ public class WeaponAnimationController : MonoBehaviour
                 break;
         }
     }
+    public void OnAttackAnimationEnd()
+    {
+        animator.SetBool(isAttack, false);
+    }
 }

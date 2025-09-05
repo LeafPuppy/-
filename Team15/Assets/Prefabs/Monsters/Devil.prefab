@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 7059738886352853213}
   m_Layer: 12
   m_Name: Devil
-  m_TagString: Untagged
+  m_TagString: Damageable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
