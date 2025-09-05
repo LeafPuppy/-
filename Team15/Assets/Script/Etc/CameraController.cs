@@ -33,6 +33,8 @@ public class CameraController : MonoBehaviour
         transform.position = new Vector3(clampX, centerY, -10f);
     }
 
+    public void RecalculateBounds() => CalculateMapBounds();
+
     void CalculateMapBounds()
     {
         GameObject mapObject = GameObject.FindGameObjectWithTag(mapTag);
