@@ -14,11 +14,20 @@ public class TitleUI : UIBase
             case "SetUI":
                 UIManager.Instance.Show<SetUI>();
                 break;
-            case "HUD":
-                UIManager.Instance.Show<HUD>();
+            case "Exit":
+                ExitBtn();
                 break;
         }
 
         Hide();
+    }
+
+    public void ExitBtn()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
