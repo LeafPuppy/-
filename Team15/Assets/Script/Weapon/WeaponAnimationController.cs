@@ -15,16 +15,6 @@ public class WeaponAnimationController : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
-
-    void Update()
-    {
-        //테스트 코드
-        if (Input.GetMouseButton(0))
-            ChangeAnimation(WeaponState.Attack);
-        else if(Input.GetMouseButtonUp(0))
-            ChangeAnimation(WeaponState.Idle);
-    }
-
     public void ChangeAnimation(WeaponState state)
     {
         switch (state)
