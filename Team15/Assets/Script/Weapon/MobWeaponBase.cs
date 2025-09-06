@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class MobWeaponBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public WeaponAnimationController animController;
+    public float damage;
+    public bool canDamage;
+
+
+    public virtual void Attack()
     {
-        
+        animController.ChangeAnimation(WeaponState.Attack);
+        canDamage = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Attack(Transform target)
     {
-        
+        Debug.Log("원공");
+        animController.ChangeAnimation(WeaponState.Attack);
     }
 }

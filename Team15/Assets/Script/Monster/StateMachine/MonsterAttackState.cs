@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterAttackState : MonsterBaseState
@@ -38,9 +39,19 @@ public class MonsterAttackState : MonsterBaseState
 
         if (stateMachine.Player != null)
         {
-            if(stateMachine.Monster.weapon)
+
+            if (stateMachine.Monster.weapon)
             {
-                stateMachine.Monster.weapon.Attack();
+                switch(stateMachine.Monster.data.type)
+                {
+                    case MonsterType.Melee:
+                        stateMachine.Monster.weapon.Attack();
+                        break;
+                    case MonsterType.Range:
+                        Debug.Log("원거리");
+                        stateMachine.Monster.weapon.Attack(stateMachine.Player.transform);
+                        break;
+                }
             }
 
             if (stateMachine.Monster.patterns.Length != 0 && !stateMachine.Monster.inPattern)

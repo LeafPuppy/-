@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobMeleeWeapon : MonoBehaviour
+public class MobMeleeWeapon : MobWeaponBase
 {
-    public WeaponAnimationController animController;
-    public float damage;
-    public bool canDamage;
 
-    public void Attack()
+    public override void Attack()
     {
         animController.ChangeAnimation(WeaponState.Attack);
         canDamage = true;
