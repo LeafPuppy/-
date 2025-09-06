@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class DungeonMapManager : MonoBehaviour
@@ -54,13 +55,20 @@ public class DungeonMapManager : MonoBehaviour
 
     public void LoadMap(MapType type, int index, string spawnId)
     {
+        StartCoroutine(LoadMapRoutine(type, index, spawnId));
+    }
+
+    //로드맵이 비동기여서 파괴되기 전 맵의 MapEndWall오브젝트 참조해서 오류
+    public IEnumerator LoadMapRoutine(MapType type, int index, string spawnId)
+    {
         if (currentMap != null) Destroy(currentMap);
+        yield return null;
 
         var prefab = PickPrefab(type, index);
-        if (!prefab) { Debug.LogWarning($"[DungeonMapManager] No prefab for {type}"); return; }
-
+        if (!prefab) { Debug.LogWarning($"[DungeonMapManager] No prefab for {type}"); yield break; }
         currentMap = Instantiate(prefab, mapRoot);
         currentMap.transform.localPosition = Vector3.zero;
+        yield return null;
 
         // 1) 플레이어 스폰 이동
         SnapPlayerToSpawn(currentMap, spawnId);

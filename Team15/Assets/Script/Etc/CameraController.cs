@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour
             maxPosition = Vector2.zero;
             return;
         }
-
+        Debug.Log(tilemapCol);
         Bounds bounds = tilemapCol.bounds;
         minPosition = new Vector2(bounds.min.x, bounds.min.y);
         maxPosition = new Vector2(bounds.max.x, bounds.max.y);
