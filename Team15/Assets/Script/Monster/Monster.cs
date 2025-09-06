@@ -14,6 +14,7 @@ public class Monster : MonoBehaviour
     public BoxCollider2D back;
     public Rigidbody2D rg;
     public MonsterCondition condition;
+    public MobMeleeWeapon weapon;
 
     public float speed;
     public bool inPattern;

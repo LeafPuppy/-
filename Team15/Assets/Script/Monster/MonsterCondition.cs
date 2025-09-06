@@ -35,7 +35,7 @@ public class MonsterCondition : MonoBehaviour, IDamageable
     {
         if (isDead) return;
 
-        if (this.gameObject.name != "Back")
+        if (this.gameObject.name != "Back" && monster.data.type == MonsterType.Special)
             currentHealth -= damage / 2;
         else 
             monster.condition.currentHealth -= damage;
@@ -70,15 +70,15 @@ public class MonsterCondition : MonoBehaviour, IDamageable
         monster.animationController.ChangeAnimation(AnimationState.Die);
 
         OnDie?.Invoke(this);
-
-        yield return new WaitForSeconds(1f);
-
-        Destroy(gameObject);
-
         // 사망시 무기 드롭
         if (dropWeapon != null)
         {
-            Instantiate(dropWeapon, dropPosition);
+            Debug.Log("무기드랍");
+            Instantiate(dropWeapon, dropPosition.position, Quaternion.identity);
         }
+
+        yield return new WaitForSeconds(.5f);
+
+        Destroy(monster.gameObject);
     }
 }

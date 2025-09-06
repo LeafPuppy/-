@@ -93,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3037647185880126745
 RectTransform:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919bf2e355ee54b4284a036d865bbe73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomType: 1
+  roomType: 0
   hasNextStage: 1
   panel: {fileID: 1594789356753166794}
   cardLeft: {fileID: 1815665448318941214}
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC545\uC138\uC0AC\uB9AC 3\uAC1C \uC911 1\uAC1C \uC120\uD0DD"
+  m_text: "\uB79C\uB364 \uC545\uC138\uC0AC\uB9AC 1\uAC1C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ee2a1eb41c14734fa01b03efa8dadac, type: 2}
   m_sharedMaterial: {fileID: 2082395537694153907, guid: 9ee2a1eb41c14734fa01b03efa8dadac, type: 2}
@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCCB4\uB825 \uD68C\uBCF5 (40%)"
+  m_text: "\uCCB4\uB825 \uD68C\uBCF5 (20%)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ee2a1eb41c14734fa01b03efa8dadac, type: 2}
   m_sharedMaterial: {fileID: 2082395537694153907, guid: 9ee2a1eb41c14734fa01b03efa8dadac, type: 2}

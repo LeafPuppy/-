@@ -38,6 +38,11 @@ public class MonsterAttackState : MonsterBaseState
 
         if (stateMachine.Player != null)
         {
+            if(stateMachine.Monster.weapon)
+            {
+                stateMachine.Monster.weapon.Attack();
+            }
+
             if (stateMachine.Monster.patterns.Length != 0 && !stateMachine.Monster.inPattern)
             {
                 //맵에 무기가 없으면(플레이어 소유무기 제외) 스폰패턴 실행
@@ -63,6 +68,8 @@ public class MonsterAttackState : MonsterBaseState
             if (Vector2.Distance(stateMachine.Player.transform.position, stateMachine.Monster.transform.position) > stateMachine.Monster.attackRange)
             {
                 stateMachine.ChangeState(stateMachine.MoveState);
+                stateMachine.Monster.weapon.animController.ChangeAnimation(WeaponState.Idle);
+                stateMachine.Monster.weapon.canDamage = false;
             }
         }
         else
