@@ -106,20 +106,25 @@ public class PlayerController : MonoBehaviour
         // 플레이어 스프라이트 뒤집기
         transform.localScale = new Vector3(flip * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 
-        // 무기(손) 위치와 회전 처리
+        // 애니메이션(스프라이트) flip 처리
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+            spriteRenderer.flipX = (flip == -1);
+
         if (weaponHolder != null)
         {
             Vector2 dir = (mouseWorldPos - transform.position);
             float angleRad = Mathf.Atan2(dir.y, dir.x);
             float angleDeg = angleRad * Mathf.Rad2Deg;
 
-            // 원 궤도 위치 계산 (마우스 방향 기준, flip과 무관)
             Vector2 offset = new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * handRadius;
             weaponHolder.position = (Vector2)transform.position + offset;
 
-            // 핸드 회전: flip에 따라 Y축 180도, Z축 각도 반전
+            // flip에 따라 무기 localScale.x도 뒤집기
+            weaponHolder.localScale = new Vector3(flip, 1f, 1f);
+
             if (flip == -1)
-                weaponHolder.rotation = Quaternion.Euler(0f, 180f, -angleDeg);
+                weaponHolder.rotation = Quaternion.Euler(180f, 0f, -angleDeg);
             else
                 weaponHolder.rotation = Quaternion.Euler(0f, 0f, angleDeg);
         }
@@ -402,7 +407,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if (context.started)
         {
             Time.timeScale = 0f;
             UIManager.Instance.Show<PauseUI>();

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DungeonEntrance" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABgAAIAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Dungeon\DungeonEntrance.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DungeonEntrancePrompt" Collapsed="true">
+    <Position X="17.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAKCAACAAAAAAEAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Dungeon\DungeonEntrancePrompt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DungeonMapManager" Collapsed="true">
+    <Position X="15.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAIAAEBAGAQAAAAABAAAAEAAEAgAggBQAEAAgQFAEI=</HashCode>
+      <FileName>Assets\Script\Dungeon\DungeonMapManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DungeonRoom" Collapsed="true">
+    <Position X="17.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Dungeon\DungeonRoom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="MapType" Collapsed="true">
+    <Position X="15.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAQAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Dungeon\MapType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

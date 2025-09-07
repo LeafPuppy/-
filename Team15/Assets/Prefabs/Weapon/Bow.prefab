@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 369751313752602142}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -153,6 +153,7 @@ MonoBehaviour:
   damage: 10
   attackRange: 1.5
   attackDamage: 10
+  weaponType: 1
 --- !u!95 &147109974156999988
 Animator:
   serializedVersion: 5
@@ -664,7 +665,7 @@ Transform:
   m_GameObject: {fileID: 7126737995402094272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.27, y: -2.9815934, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

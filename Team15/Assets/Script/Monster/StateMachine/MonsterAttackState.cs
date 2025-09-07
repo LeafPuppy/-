@@ -65,7 +65,6 @@ public class MonsterAttackState : MonsterBaseState
                 if (!stateMachine.Monster.canSpawn)
                 {
                     int id = Random.Range(0, stateMachine.Monster.patterns.Length - 1);
-                    Debug.Log(id);
                     stateMachine.Monster.StartCoroutine(stateMachine.Monster.patterns[id].Execute(stateMachine.Monster));
                 }
 

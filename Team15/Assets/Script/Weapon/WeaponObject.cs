@@ -1,7 +1,14 @@
 using UnityEngine;
 
+public enum WeaponType
+{
+    Sword,
+    Bow,
+    Staff,
+}
 public class WeaponObject : MonoBehaviour
 {
+    [SerializeField] private GameObject arrowPrefab;
     [SerializeField] WeaponAnimationController weaponAnimationController;
     [Header("Weapon Settings")]
     public bool canAttack = false;
@@ -9,23 +16,95 @@ public class WeaponObject : MonoBehaviour
     public float attackRange = 1.5f;
     public float attackDamage = 10f;
 
+    public WeaponType weaponType = WeaponType.Sword;
+
+    // [추가] 발사 쿨타임 변수
+    [Header("Attack Cooldown")]
+    public float attackCooldown = 0.5f;
+    private float lastAttackTime = -999f;
+
     public void TakeAttack(Vector2 attackOrigin, Vector2 attackDirection)
     {
+        // [추가] 쿨타임 체크
+        if (Time.time < lastAttackTime + attackCooldown)
+            return;
+
+        lastAttackTime = Time.time;
         weaponAnimationController.ChangeAnimation(WeaponState.Attack);
 
-        // 2. 범위 내 공격 판정
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(attackOrigin, attackRange, attackDirection, attackRange);
-        foreach (var hit in hits)
+        switch (weaponType)
         {
-            if (hit.collider != null && hit.collider.CompareTag("Damageable"))
-            {
-                var damageable = hit.collider.GetComponent<IDamageable>();
-                if (damageable != null)
+            case WeaponType.Sword:
                 {
-                    damageable.TakeDamage(attackDamage);
-                    Debug.Log($"{hit.collider.name}에게 {attackDamage} 데미지!");
+                    Vector2 attackDir = (transform.right + transform.up).normalized;
+                    Collider2D[] hits = Physics2D.OverlapCircleAll(attackOrigin, attackRange);
+                    float halfAngle = 45f;
+                    foreach (var hit in hits)
+                    {
+                        if (hit == null || !hit.CompareTag("Damageable")) continue;
+                        Vector2 toTarget = ((Vector2)hit.transform.position - attackOrigin).normalized;
+                        float angle = Vector2.Angle(attackDir, toTarget);
+                        if (angle <= halfAngle)
+                        {
+                            var damageable = hit.GetComponent<IDamageable>();
+                            if (damageable != null)
+                                damageable.TakeDamage(attackDamage);
+                        }
+                    }
                 }
-            }
+                break;
+
+            case WeaponType.Bow:
+                {
+                    float arrowOffset = 0.5f;
+                    Vector2 spawnPos = transform.position + (Vector3)(attackDirection.normalized * arrowOffset);
+
+                    float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
+                    GameObject arrow = Instantiate(
+                        arrowPrefab,
+                        spawnPos,
+                        Quaternion.Euler(0, 0, angle)
+                    );
+                    var arrowScript = arrow.GetComponent<Arrow>();
+                    if (arrowScript != null)
+                    {
+                        arrowScript.Init(attackDirection.normalized, attackDamage);
+                    }
+                }
+                break;
+
+            case WeaponType.Staff:
+                {
+                    Collider2D[] hits = Physics2D.OverlapCircleAll(attackOrigin, attackRange);
+                    foreach (var hit in hits)
+                    {
+                        if (hit == null || !hit.CompareTag("Damageable")) continue;
+                        var damageable = hit.GetComponent<IDamageable>();
+                        if (damageable != null)
+                            damageable.TakeDamage(attackDamage);
+                    }
+                }
+                break;
+
+            default:
+                {
+                    Vector2 attackDir = (transform.right + transform.up).normalized;
+                    Collider2D[] hits = Physics2D.OverlapCircleAll(attackOrigin, attackRange);
+                    float halfAngle = 45f;
+                    foreach (var hit in hits)
+                    {
+                        if (hit == null || !hit.CompareTag("Damageable")) continue;
+                        Vector2 toTarget = ((Vector2)hit.transform.position - attackOrigin).normalized;
+                        float angle = Vector2.Angle(attackDir, toTarget);
+                        if (angle <= halfAngle)
+                        {
+                            var damageable = hit.GetComponent<IDamageable>();
+                            if (damageable != null)
+                                damageable.TakeDamage(attackDamage);
+                        }
+                    }
+                }
+                break;
         }
     }
 
@@ -46,12 +125,5 @@ public class WeaponObject : MonoBehaviour
     public void SetAttackState(bool state)
     {
         canAttack = state;
-    }
-
-    // 공격 판정 범위 Gizmo 표시
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

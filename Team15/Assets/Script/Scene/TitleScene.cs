@@ -9,6 +9,7 @@ public class TitleScene : SceneBase
     {
         base.Awake();
 
+        Debug.Log(Application.persistentDataPath);
         if (File.Exists(Application.persistentDataPath + "/Setting.json"))
         {
             DataManager.Instance.LoadSetting();
