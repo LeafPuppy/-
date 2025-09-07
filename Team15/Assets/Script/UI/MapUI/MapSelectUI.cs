@@ -131,6 +131,14 @@ public class MapSelectUI : MonoBehaviour
         Close();
     }
 
+    public void OnReturnFromRoomCleared(int floor = 1)
+    {
+        if (!cleared.Contains(currentNodeId))
+            cleared.Add(currentNodeId);
+
+        Open(floor); // 패널 열고 Refresh()
+    }
+
     public void ResetProgress(string newStartId = null)
     {
         cleared.Clear();
@@ -165,7 +173,8 @@ public class MapSelectUI : MonoBehaviour
             Debug.Log($"[MapSelectUI.Refresh] 처리중: id={id}, isCurrent={isCurrent}, isCleared={isCleared}, canGoNext={canGoNext}");
 
             n.SetCurrent(isCurrent);
-            n.SetCleared(isCleared);
+
+            n.SetCleared(isCleared && !isCurrent);
 
             bool interactable = (!isCurrent && canGoNext);
             n.SetInteractable(interactable);

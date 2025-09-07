@@ -20,6 +20,8 @@ public class RoomMonsterManager : MonoBehaviour
     int alive;
     bool opened;
 
+    bool rewardSubscribed = false;
+
     void Awake()
     {
         if (!rewardUI) rewardUI = FindObjectOfType<RewardUI>(true);
@@ -53,9 +55,17 @@ public class RoomMonsterManager : MonoBehaviour
 
     void OnDestroy()
     {
-        if (monstersRoot == null) return;
-        foreach (var m in monstersRoot.GetComponentsInChildren<MonsterCondition>(true))
-            if (m != null) m.OnDie -= HandleDie;
+        if (monstersRoot != null)
+        {
+            foreach (var m in monstersRoot.GetComponentsInChildren<MonsterCondition>(true))
+                if (m != null) m.OnDie -= HandleDie;
+        }
+
+        if (rewardUI != null)
+        {
+            rewardUI.OnFinished -= HandleRewardFinished;
+            rewardSubscribed = false;
+        }
     }
 
     void SetupSubscriptions()
@@ -99,8 +109,20 @@ public class RoomMonsterManager : MonoBehaviour
             return;
         }
 
+        if (!rewardSubscribed)
+        {
+            rewardUI.OnFinished -= HandleRewardFinished;
+            rewardUI.OnFinished += HandleRewardFinished;
+            rewardSubscribed = true;
+        }
+
         rewardUI.Configure(roomType, hasNextStage);
         rewardUI.Show();
+    }
+
+    void HandleRewardFinished()
+    {
+        MapSelectUI.Instance?.OnReturnFromRoomCleared();
     }
 
     IEnumerator OpenRewardAfterDelayRealtime()
