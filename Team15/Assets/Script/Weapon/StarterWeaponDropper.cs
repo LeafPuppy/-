@@ -74,6 +74,51 @@ public class StarterWeaponDropper : Singleton<StarterWeaponDropper>
         spawnedByThis.Clear();
     }
 
+    public void EquipCurrentToPlayer()
+    {
+        var gs = GameState.Instance;
+        if (gs == null) return;
+
+        var kind = gs.currentStarterWeapon;
+        if (kind == StarterWeaponKind.None) return;
+
+        var player = FindObjectOfType<PlayerController>();
+        if (!player || !player.weaponHolder) return;
+
+        // 손에 기존 무기 제거
+        var holder = player.weaponHolder;
+        if (holder.childCount > 0)
+            Destroy(holder.GetChild(0).gameObject);
+
+        // 프리팹 인스턴스 생성 후 장착
+        var prefab = GetPrefab(kind);
+        if (!prefab) return;
+
+        var inst = Instantiate(prefab);
+
+        // 즉시 장착 상태
+        inst.isEquipable = false;
+        if (inst.objectUI) inst.objectUI.SetActive(false);
+
+        inst.transform.SetParent(holder);
+        inst.transform.localPosition = Vector3.zero;
+
+        // 좌우 반전/회전 정리
+        float flip = Mathf.Sign(player.transform.localScale.x);
+        inst.transform.localScale = new Vector3(
+            flip * Mathf.Abs(inst.transform.localScale.x),
+            inst.transform.localScale.y,
+            inst.transform.localScale.z
+        );
+        inst.transform.localRotation = flip < 0
+            ? Quaternion.Euler(0f, 180f, 0f)
+            : Quaternion.identity;
+
+        // 물리 비활성
+        var rb2d = inst.GetComponent<Rigidbody2D>();
+        if (rb2d) rb2d.simulated = false;
+    }
+
     private EquipableObject GetPrefab(StarterWeaponKind k)
     {
         switch (k)

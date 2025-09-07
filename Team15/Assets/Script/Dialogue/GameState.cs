@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum RunOutcome { None, Cleared, Died, Quit }
 public enum StarterWeaponKind { None, Sword, Bow, Staff }
@@ -36,8 +37,28 @@ public class GameState : Singleton<GameState>
         Instance != null && Instance.currentDifficulty == Difficulty.Hard ? 1.5f : 1f;
 
     [Header("대화 재진입 쿨다운")]
-    public float talkReentryDelay = 0.35f;
+    public float talkReentryDelay = 1f;
     [HideInInspector] public float talkReentryBlockedUntil = 0f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (inDungeon)
+        {
+            StarterWeaponDropper.Instance?.EquipCurrentToPlayer();
+        }
+    }
 
     public void OnTalkedToMerchantFirstTime() { hasMetMerchant = true; }
 

@@ -27,6 +27,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float interactRadius = 1f;
     [SerializeField] LayerMask interactMask;
 
+    [Header("Weapon Swap (Dungeon)")]
+    [SerializeField] Vector2 swapDropOffset = new Vector2(0.4f, 0.2f);
+    [SerializeField] float swapDropImpulse = 3.5f;
+    [SerializeField] float swapDropTorque = 5f;
+
+    [Header("Pickup Settings")]
+    [SerializeField] LayerMask pickupMask = ~0;
+    [SerializeField] float pickMaxDist = 1.25f;
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
@@ -237,56 +246,114 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnPickWeapon(InputAction.CallbackContext context)
+    void DropCurrentWeaponToGround(Vector2 preferredDir)
     {
-        if (context.performed)
+        if (weaponHolder == null || weaponHolder.childCount == 0) return;
+
+        var old = weaponHolder.GetChild(0);
+        old.SetParent(null);
+
+        // 위치 살짝 옆/위
+        old.position = (Vector2)transform.position + swapDropOffset;
+
+        // 픽업 가능 켜기
+        var oldEq = old.GetComponent<EquipableObject>();
+        if (oldEq)
         {
-            EquipableObject[] equipables = FindObjectsOfType<EquipableObject>();
-            if (equipables.Length == 0) return;
+            oldEq.isEquipable = true;
+            if (oldEq.objectUI) oldEq.objectUI.SetActive(true);
+        }
 
-            EquipableObject nearest = null;
-            float minDist = float.MaxValue;
-            Vector3 playerPos = transform.position;
+        var rb2d = old.GetComponent<Rigidbody2D>();
+        if (rb2d)
+        {
+            rb2d.simulated = true;
+            rb2d.velocity = Vector2.zero;
+            rb2d.angularVelocity = 0f;
 
-            foreach (var obj in equipables)
-            {
-                float dist = Vector3.Distance(playerPos, obj.transform.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    nearest = obj;
-                }
-            }
+            Vector2 dir = preferredDir.sqrMagnitude > 0.0001f
+                ? preferredDir.normalized
+                : Vector2.right * Mathf.Sign(transform.localScale.x);
 
-            if (nearest != null)
-            {
-                if (nearest.isEquipable)
-                {
-                    AudioManager.Instance.PlaySFX("GetWeaponSFX");
-                    nearest.objectUI.SetActive(false);
-                    nearest.isEquipable = false;
-                    nearest.transform.SetParent(weaponHolder.transform);
-                    nearest.transform.localPosition = Vector3.zero;
-
-                    // flip 상태에 따라 무기 회전/스케일 초기화
-                    float flip = Mathf.Sign(transform.localScale.x);
-                    nearest.transform.localScale = new Vector3(flip * Mathf.Abs(nearest.transform.localScale.x), nearest.transform.localScale.y, nearest.transform.localScale.z);
-
-                    // 무기 회전도 flip에 맞게 초기화
-                    nearest.transform.localRotation = flip < 0
-                        ? Quaternion.Euler(0f, 180f, 0f)
-                        : Quaternion.identity;
-
-                    nearest.GetComponent<Rigidbody2D>().simulated = false;
-
-                    isWeaponThrown = false;
-                    currentWeapon = nearest.transform;
-                }
-            }
+            rb2d.AddForce((dir * 0.6f + Vector2.up * 0.8f) * swapDropImpulse, ForceMode2D.Impulse);
+            rb2d.AddTorque(swapDropTorque, ForceMode2D.Impulse);
         }
     }
 
-    //todo. 마찰계수같은걸 넣어서 던진 무기가 천천히 멈추게 하기
+    public void OnPickWeapon(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        var hits = Physics2D.OverlapCircleAll(transform.position, pickMaxDist, pickupMask);
+
+        EquipableObject nearest = null;
+        float minSqr = float.MaxValue;
+
+        foreach (var h in hits)
+        {
+            if (!h) continue;
+            var eq = h.GetComponentInParent<EquipableObject>();
+            if (eq == null) continue;
+
+            if (weaponHolder && eq.transform.IsChildOf(weaponHolder)) continue;
+
+            if (!eq.isEquipable) continue;
+
+            float sqr = ((Vector2)eq.transform.position - (Vector2)transform.position).sqrMagnitude;
+            if (sqr < minSqr)
+            {
+                minSqr = sqr;
+                nearest = eq;
+            }
+        }
+
+        if (nearest == null)
+        {
+            // [ADDED] 디버그: 마스크/레이어/Collider 누락 시 확인
+            Debug.Log("[OnPickWeapon] 주울 무기를 찾지 못함. pickupMask/레이어/Collider2D 확인 필요");
+            return;
+        }
+
+        var gs = GameState.Instance;
+        bool inDungeon = gs != null && gs.inDungeon;
+
+        if (weaponHolder.childCount > 0)
+        {
+            if (inDungeon)
+            {
+                Vector2 preferDir = (nearest.transform.position - transform.position);
+                DropCurrentWeaponToGround(preferDir);
+            }
+            else
+            {
+                Destroy(weaponHolder.GetChild(0).gameObject);
+            }
+        }
+
+        AudioManager.Instance.PlaySFX("GetWeaponSFX");
+
+        if (nearest.objectUI) nearest.objectUI.SetActive(false);
+        nearest.isEquipable = false;
+        nearest.transform.SetParent(weaponHolder.transform);
+        nearest.transform.localPosition = Vector3.zero;
+
+        float scaleSign = Mathf.Sign(transform.localScale.x);
+        nearest.transform.localScale = new Vector3(
+            scaleSign * Mathf.Abs(nearest.transform.localScale.x),
+            nearest.transform.localScale.y,
+            nearest.transform.localScale.z
+        );
+        nearest.transform.localRotation = scaleSign < 0
+            ? Quaternion.Euler(0f, 180f, 0f)
+            : Quaternion.identity;
+
+        var rb2d = nearest.GetComponent<Rigidbody2D>();
+        if (rb2d) rb2d.simulated = false;
+
+        isWeaponThrown = false;
+        currentWeapon = nearest.transform;
+    }
+
     public void OnThrowWeapon(InputAction.CallbackContext context)
     {
         if (context.performed && !isWeaponThrown && weaponHolder.childCount > 0)
@@ -311,7 +378,6 @@ public class PlayerController : MonoBehaviour
             isWeaponThrown = true;
             weaponThrowTime = 0f;
 
-            // 던진 후 currentWeapon 참조 해제 (필요시)
             currentWeapon = null;
         }
     }

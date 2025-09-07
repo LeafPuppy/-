@@ -450,6 +450,13 @@ MonoBehaviour:
   interactMask:
     serializedVersion: 2
     m_Bits: 512
+  swapDropOffset: {x: 0.4, y: 0.2}
+  swapDropImpulse: 3.5
+  swapDropTorque: 5
+  pickupMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  pickMaxDist: 1.25
   isDashing: 0
   weaponHolder: {fileID: 8568070011853009719}
   handRadius: 0.3
