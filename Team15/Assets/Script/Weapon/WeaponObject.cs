@@ -9,6 +9,7 @@ public enum WeaponType
 public class WeaponObject : MonoBehaviour
 {
     [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private GameObject magicPrefab; // [추가] Magic 프리팹 Inspector에서 할당
     [SerializeField] WeaponAnimationController weaponAnimationController;
     [Header("Weapon Settings")]
     public bool canAttack = false;
@@ -18,18 +19,30 @@ public class WeaponObject : MonoBehaviour
 
     public WeaponType weaponType = WeaponType.Sword;
 
-    // [추가] 발사 쿨타임 변수
     [Header("Attack Cooldown")]
     public float attackCooldown = 0.5f;
     private float lastAttackTime = -999f;
 
+    [Header("Staff Settings")]
+    public float staffCooldown = 1f;
+    private float lastStaffTime = -999f;
+    public float staffExplosionRadius = 2f;
+
     public void TakeAttack(Vector2 attackOrigin, Vector2 attackDirection)
     {
-        // [추가] 쿨타임 체크
-        if (Time.time < lastAttackTime + attackCooldown)
-            return;
+        if (weaponType == WeaponType.Staff)
+        {
+            if (Time.time < lastStaffTime + staffCooldown)
+                return;
+            lastStaffTime = Time.time;
+        }
+        else
+        {
+            if (Time.time < lastAttackTime + attackCooldown)
+                return;
+            lastAttackTime = Time.time;
+        }
 
-        lastAttackTime = Time.time;
         weaponAnimationController.ChangeAnimation(WeaponState.Attack);
 
         switch (weaponType)
@@ -72,16 +85,21 @@ public class WeaponObject : MonoBehaviour
                     }
                 }
                 break;
-
             case WeaponType.Staff:
                 {
-                    Collider2D[] hits = Physics2D.OverlapCircleAll(attackOrigin, attackRange);
-                    foreach (var hit in hits)
+                    float orbOffset = 0.5f;
+                    Vector2 spawnPos = transform.position + (Vector3)(attackDirection.normalized * orbOffset);
+
+                    float angle = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
+                    GameObject orb = Instantiate(
+                        magicPrefab,
+                        spawnPos,
+                        Quaternion.Euler(0, 0, angle)
+                    );
+                    var magicScript = orb.GetComponent<Magic>();
+                    if (magicScript != null)
                     {
-                        if (hit == null || !hit.CompareTag("Damageable")) continue;
-                        var damageable = hit.GetComponent<IDamageable>();
-                        if (damageable != null)
-                            damageable.TakeDamage(attackDamage);
+                        magicScript.Init(attackDirection.normalized, attackDamage, staffExplosionRadius);
                     }
                 }
                 break;

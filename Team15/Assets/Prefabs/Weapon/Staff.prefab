@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 1911749747641018843}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.83, y: -2.9815934, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -733,12 +733,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69233c31697608b4fb3590adf142f637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 0}
+  magicPrefab: {fileID: 3363931855608843285, guid: 17d539e328506524fa26d05c8e187210, type: 3}
   weaponAnimationController: {fileID: 6746357359145237040}
   canAttack: 0
   damage: 10
   attackRange: 1.5
   attackDamage: 10
   weaponType: 2
+  attackCooldown: 0.5
+  staffCooldown: 1
+  staffExplosionRadius: 2
 --- !u!95 &939837672414552590
 Animator:
   serializedVersion: 5

@@ -767,10 +767,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2380420131909178842, guid: f9135090a3ae8c34c8496d027b5c5440, type: 3}
-      propertyPath: arrowPrefab
-      value: 
-      objectReference: {fileID: 5656377428585420331, guid: c14437174b5ba6043bee74f1cd4f869f, type: 3}
     - target: {fileID: 7126737995402094272, guid: f9135090a3ae8c34c8496d027b5c5440, type: 3}
       propertyPath: m_Name
       value: Bow
@@ -1899,6 +1895,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Devil
       objectReference: {fileID: 0}
+    - target: {fileID: 6545094622123773267, guid: de487955f967adf4a837ad730e5a3ba5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7038507843667327952, guid: de487955f967adf4a837ad730e5a3ba5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.715
@@ -2042,7 +2042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3433422431691623969, guid: 73a36d9e44352c446b3d67fe75976cc2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6910449917122015089, guid: 73a36d9e44352c446b3d67fe75976cc2, type: 3}
       propertyPath: m_LocalPosition.x

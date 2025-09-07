@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919bf2e355ee54b4284a036d865bbe73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   roomType: 0
   hasNextStage: 1
   panel: {fileID: 1594789356753166794}

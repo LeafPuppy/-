@@ -10,7 +10,6 @@ public class Arrow : MonoBehaviour
     {
         direction = dir;
         damage = dmg;
-        // 방향에 따라 회전
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
@@ -22,11 +21,12 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            // 플레이어는 무시
+        // Weapon 레이어는 무시
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Weapon"))
             return;
-        }
+
+        if (collision.CompareTag("Player"))
+            return;
 
         if (collision.CompareTag("Damageable"))
         {
@@ -39,8 +39,8 @@ public class Arrow : MonoBehaviour
         }
         else if (!collision.isTrigger)
         {
-            // 벽 등 맞으면 파괴
             Destroy(gameObject);
         }
     }
 }
+
