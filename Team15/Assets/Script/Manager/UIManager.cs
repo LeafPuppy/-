@@ -14,7 +14,7 @@ public class UIManager : Singleton<UIManager>
 
     public T Show<T>() where T : UIBase
     {
-        string uiName = typeof(T).ToString();
+        string uiName = typeof(T).Name;
 
         ui_List.TryGetValue(uiName, out UIBase ui);
 
@@ -57,7 +57,7 @@ public class UIManager : Singleton<UIManager>
 
     public T Get<T>() where T : UIBase
     {
-        string uiName = typeof(T).ToString();
+        string uiName = typeof(T).Name;
         ui_List.TryGetValue(uiName, out UIBase ui);
 
         if (ui == null)
@@ -72,7 +72,7 @@ public class UIManager : Singleton<UIManager>
 
     public void Hide<T>()
     {
-        string uiName = typeof (T).ToString();
+        string uiName = typeof (T).Name;
 
         Hide(uiName);
     }

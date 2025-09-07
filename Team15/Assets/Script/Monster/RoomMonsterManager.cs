@@ -14,21 +14,27 @@ public class RoomMonsterManager : MonoBehaviour
     [SerializeField] MapType roomType = MapType.Normal;
     [SerializeField] bool hasNextStage = true;
 
+    [Header("연출 딜레이")]
+    [SerializeField] float rewardOpenDelay = 0.0f;
+
     int alive;
     bool opened;
 
     void Awake()
     {
         if (!rewardUI) rewardUI = FindObjectOfType<RewardUI>(true);
-
-        if (!monstersRoot) monstersRoot = transform.Find("Monster");
     }
 
     void Start()
     {
-        if (!rewardUI)
+        if (!monstersRoot)
         {
-            return;
+            var map = DungeonMapManager.Instance ? DungeonMapManager.Instance.CurrentMap : null;
+            if (map)
+            {
+                monstersRoot = map.transform.Find("Monster")
+                             ?? map.transform.Find("Monsters");
+            }
         }
 
         if (MapSelectUI.Instance != null)
@@ -37,26 +43,12 @@ public class RoomMonsterManager : MonoBehaviour
             hasNextStage = MapSelectUI.Instance.HasNextFromCurrent();
         }
 
-        rewardUI.Configure(roomType, hasNextStage);
-
-        if (!monstersRoot)
-        {
-            ShowIfNotOpened();
-            return;
-        }
-
-        var monsters = monstersRoot.GetComponentsInChildren<MonsterCondition>(true);
-        alive = 0;
-
-        foreach (var m in monsters)
-        {
-            if (m == null) continue;
-            alive++;
-            m.OnDie += HandleDie;
-        }
+        SetupSubscriptions();
 
         if (alive <= 0)
-            ShowIfNotOpened();
+            OpenRewardSafe();
+
+        StartCoroutine(FallbackWatch());
     }
 
     void OnDestroy()
@@ -66,18 +58,93 @@ public class RoomMonsterManager : MonoBehaviour
             if (m != null) m.OnDie -= HandleDie;
     }
 
+    void SetupSubscriptions()
+    {
+        alive = 0;
+
+        if (!monstersRoot) return;
+
+        var monsters = monstersRoot.GetComponentsInChildren<MonsterCondition>(true);
+        foreach (var m in monsters)
+        {
+            if (m == null) continue;
+            alive++;
+            m.OnDie += HandleDie;
+        }
+    }
+
     void HandleDie(MonsterCondition _)
     {
         alive--;
         if (alive <= 0)
-            rewardUI.Show();
+            StartCoroutine(OpenRewardAfterDelayRealtime());
+    }
+
+    void OpenRewardSafe()
+    {
+        if (opened) return;
+        opened = true;
+
+        if (!rewardUI)
+        {
+            if (UIManager.Instance != null)
+                rewardUI = UIManager.Instance.Show<RewardUI>();
+            else
+                rewardUI = FindObjectOfType<RewardUI>(true);
+        }
+
+        if (!rewardUI)
+        {
+            Debug.LogWarning("[RoomMonsterManager] RewardUI를 찾을 수 없어 열지 못했습니다.");
+            return;
+        }
+
+        rewardUI.Configure(roomType, hasNextStage);
+        rewardUI.Show();
+    }
+
+    IEnumerator OpenRewardAfterDelayRealtime()
+    {
+        if (rewardOpenDelay > 0f)
+            yield return new WaitForSecondsRealtime(rewardOpenDelay);
+        else
+            yield return null;
+
+        OpenRewardSafe();
+    }
+
+    IEnumerator FallbackWatch()
+    {
+        while (!opened)
+        {
+            yield return new WaitForSecondsRealtime(0.25f);
+
+            if (!monstersRoot)
+            {
+                OpenRewardSafe();
+                yield break;
+            }
+
+            int activeCount = 0;
+            var monsters = monstersRoot.GetComponentsInChildren<MonsterCondition>(true);
+            foreach (var m in monsters)
+            {
+                if (!m) continue;
+                if (m.gameObject.activeInHierarchy) activeCount++;
+            }
+
+            if (activeCount == 0)
+            {
+                OpenRewardSafe();
+                yield break;
+            }
+        }
     }
 
     void ShowIfNotOpened()
     {
         if (opened) return;
-        opened = true;
-        rewardUI.Show();
+        OpenRewardSafe();
     }
 }
 

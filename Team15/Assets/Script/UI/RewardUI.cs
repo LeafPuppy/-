@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class RewardUI : MonoBehaviour
+public class RewardUI : UIBase
 {
     [Header("Room Type (현재 방 타입)")]
     [SerializeField] MapType roomType = MapType.Normal;   // 인스펙터에서 설정
@@ -47,6 +47,8 @@ public class RewardUI : MonoBehaviour
 
     void Awake()
     {
+        if (!panel) panel = gameObject;
+
         if (panel) panel.SetActive(false);
     }
 
@@ -71,6 +73,7 @@ public class RewardUI : MonoBehaviour
     {
         if (!panel) return;
 
+        ActivateParents(panel.transform);
         ResetCards();
         ExitAccessoryMode();
 
@@ -166,6 +169,18 @@ public class RewardUI : MonoBehaviour
                     }
                 });
                 break;
+        }
+    }
+
+    static void ActivateParents(Transform t)
+    {
+        while (t != null)
+        {
+            if (!t.gameObject.activeSelf)
+                t.gameObject.SetActive(true);
+
+            if (t.GetComponent<Canvas>() != null) break;
+            t = t.parent;
         }
     }
 
