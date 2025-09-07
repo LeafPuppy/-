@@ -18,10 +18,12 @@ public class DialogueNPC : MonoBehaviour, IInteractable
 
         if (!DialogueUI.Instance.IsOpen)
         {
+            var gs = GameState.Instance;
+            if (gs != null && Time.unscaledTime < gs.talkReentryBlockedUntil)
+                return;
+
             var start = ResolveStartNode();
             if (start == null) return;
-
-            var gs = GameState.Instance;
 
             if (!gs.hasMetMerchant && start == firstMeet)
                 gs.OnTalkedToMerchantFirstTime();

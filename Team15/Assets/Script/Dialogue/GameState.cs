@@ -7,9 +7,11 @@ public enum StarterWeaponKind { None, Sword, Bow, Staff }
 
 public enum Difficulty { Normal, Hard}
 
-public class GameState : MonoBehaviour
+public class GameState : Singleton<GameState>
 {
-    public static GameState Instance { get; private set; }
+    [Header("LifeCycle")]
+    [SerializeField] private bool destroyOnLoad = false;
+    protected override bool isDestroy => destroyOnLoad;
 
     [Header("분기")]
     public bool hasMetMerchant;          // 게임 시작 후 상인과 첫 만남 대화 했는가
@@ -30,13 +32,12 @@ public class GameState : MonoBehaviour
 
     [Header("던전 난이도")]
     public Difficulty currentDifficulty = Difficulty.Normal;
+    public static float EnemyHpMul =>
+        Instance != null && Instance.currentDifficulty == Difficulty.Hard ? 1.5f : 1f;
 
-    void Awake()
-    {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+    [Header("대화 재진입 쿨다운")]
+    public float talkReentryDelay = 0.35f;
+    [HideInInspector] public float talkReentryBlockedUntil = 0f;
 
     public void OnTalkedToMerchantFirstTime() { hasMetMerchant = true; }
 
@@ -50,8 +51,6 @@ public class GameState : MonoBehaviour
     public void OnDungeonCleared() { lastRunOutcome = RunOutcome.Cleared; }
     public void OnPlayerDied() { lastRunOutcome = RunOutcome.Died; }
     public void OnPlayerQuitRun() { lastRunOutcome = RunOutcome.Quit; }
-    public static float EnemyHpMul =>
-        Instance != null && Instance.currentDifficulty == Difficulty.Hard ? 1.5f : 1f;
 
     // 마을로 돌아왔을 때(마을 씬 로드 시 호출)
     public void OnReturnToVillage()

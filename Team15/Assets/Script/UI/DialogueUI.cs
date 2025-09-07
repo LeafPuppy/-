@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class DialogueUI : MonoBehaviour
+public class DialogueUI : Singleton<DialogueUI>
 {
-    public static DialogueUI Instance;
+    [Header("LifeCycle")]
+    [SerializeField] private bool destroyOnLoad = false;
+    protected override bool isDestroy => destroyOnLoad;
 
     [Header("참조")]
     [SerializeField] GameObject panel;
@@ -29,9 +31,7 @@ public class DialogueUI : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-        Instance = this;
-
+        base.Awake();
         if (panel) panel.SetActive(false);
         if (choicesRoot) choicesRoot.gameObject.SetActive(false);
     }
@@ -179,6 +179,10 @@ public class DialogueUI : MonoBehaviour
             Time.timeScale = (prevTimeScale <= 0f) ? 1f : prevTimeScale;
             pausedByDialogue = false;
         }
+
+        var gs = GameState.Instance;
+        if (gs != null)
+            gs.talkReentryBlockedUntil = Time.unscaledTime + gs.talkReentryDelay;
     }
 
     private void Update()
