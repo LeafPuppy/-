@@ -58,10 +58,12 @@ public class DungeonMapManager : MonoBehaviour
         StartCoroutine(LoadMapRoutine(type, index, spawnId));
     }
 
-    //로드맵이 비동기여서 파괴되기 전 맵의 MapEndWall오브젝트 참조해서 오류
     public IEnumerator LoadMapRoutine(MapType type, int index, string spawnId)
     {
         if (currentMap != null) Destroy(currentMap);
+        yield return null;
+
+        CleanupLooseEquipables();
         yield return null;
 
         var prefab = PickPrefab(type, index);
@@ -144,6 +146,37 @@ public class DungeonMapManager : MonoBehaviour
         rb.position = pos;
         rb.velocity = Vector2.zero;
         Physics2D.SyncTransforms();
+    }
+
+    void CleanupLooseEquipables()
+    {
+        Transform holder = null;
+        var player = CharacterManager.Instance ? CharacterManager.Instance.Player : null;
+        if (player)
+        {
+            var pc = player.GetComponent<PlayerController>();
+            if (pc) holder = pc.weaponHolder;
+        }
+
+        var all = FindObjectsOfType<EquipableObject>(true);
+        int removed = 0, kept = 0;
+
+        foreach (var eq in all)
+        {
+            if (eq == null) continue;
+
+            if (holder && eq.transform.IsChildOf(holder))
+            {
+                kept++;
+                continue;
+            }
+
+            Destroy(eq.gameObject);
+            removed++;
+        }
+
+        if (removed > 0)
+            Debug.Log($"[DungeonMapManager] CleanupLooseEquipables: removed={removed}, kept(in hand)={kept}");
     }
 }
 
