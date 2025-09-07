@@ -9,11 +9,11 @@ public class DialogueUI : MonoBehaviour
 {
     public static DialogueUI Instance;
 
-    [Header("¬¸¡∂")]
+    [Header("Ï∞∏Ï°∞")]
     [SerializeField] GameObject panel;
     [SerializeField] TMP_Text bodyText;
 
-    [Header("º±≈√UI")]
+    [Header("ÏÑ†ÌÉùUI")]
     [SerializeField] RectTransform choicesRoot;
     [SerializeField] Button choiceButtonPrefab;
 
@@ -141,6 +141,8 @@ public class DialogueUI : MonoBehaviour
                         gs.currentStarterWeapon = toCommit;
                         gs.pendingStarterWeapon = StarterWeaponKind.None;
                         lastPickedWeapon = StarterWeaponKind.None;
+
+                        StarterWeaponDropper.Instance?.DropNew(gs.currentStarterWeapon);
                     }
                 }
             }

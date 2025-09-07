@@ -325,6 +325,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RewardPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 1594789356753166794, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3037647185880126745, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -404,6 +408,38 @@ PrefabInstance:
     - target: {fileID: 3037647185880126745, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006365423383425610, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006365423383425610, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006365423383425610, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006365423383425610, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636152515448413240, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636152515448413240, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636152515448413240, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636152515448413240, guid: 20c746cdc6d10c747ba1c3d007133d55, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -487,7 +523,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -829,7 +865,7 @@ PrefabInstance:
       objectReference: {fileID: 1158258410}
     - target: {fileID: 8725561802354119007, guid: 9a85a967a6b4ee34c99f38306b1a20cf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9220599765174301397, guid: 9a85a967a6b4ee34c99f38306b1a20cf, type: 3}
       propertyPath: clearedMark
