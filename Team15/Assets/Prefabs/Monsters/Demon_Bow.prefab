@@ -298,8 +298,16 @@ PrefabInstance:
       value: MobBow
       objectReference: {fileID: 0}
     - target: {fileID: 1468426854704534264, guid: 9b4f1cedfc2efba469e25ce810f3543f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1468426854704534264, guid: 9b4f1cedfc2efba469e25ce810f3543f, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1468426854704534264, guid: 9b4f1cedfc2efba469e25ce810f3543f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1934946595
       objectReference: {fileID: 0}
     - target: {fileID: 4836981849887513935, guid: 9b4f1cedfc2efba469e25ce810f3543f, type: 3}
       propertyPath: m_LocalPosition.x

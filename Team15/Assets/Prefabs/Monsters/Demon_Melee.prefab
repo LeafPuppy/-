@@ -282,7 +282,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc86136cf2157174db3f105d18318588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropPosition: {fileID: 6910449917122015089}
   currentHealth: 0
   monster: {fileID: 312164711122136108}
   dropWeapon: {fileID: 5017775031717342345, guid: d35968d0ad15114438683d7aca6a7a29, type: 3}
@@ -294,6 +293,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1905381533098776556}
     m_Modifications:
+    - target: {fileID: 3325065012118706849, guid: c5df9ab812c45db459abc1705bbe649d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3325065012118706849, guid: c5df9ab812c45db459abc1705bbe649d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1934946595
+      objectReference: {fileID: 0}
     - target: {fileID: 5508905199039835963, guid: c5df9ab812c45db459abc1705bbe649d, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
