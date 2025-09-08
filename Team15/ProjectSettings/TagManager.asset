@@ -9,6 +9,7 @@ TagManager:
   - MapEndWall
   - Damageable
   - Spikes
+  - DashWall
   layers:
   - Default
   - TransparentFX
